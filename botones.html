@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página con Botones Responsivos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f9;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    .button-container {
+      display: flex;
+      flex-wrap: wrap; /* Permite que los botones se ajusten en varias filas */
+      justify-content: center; /* Centra los botones horizontalmente */
+      gap: 15px; /* Espacio entre los botones */
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 15px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+      width: 100%; /* Por defecto ocupa todo el ancho */
+      max-width: 200px; /* Máximo ancho del botón */
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    /* Diseño responsivo */
+    @media (max-width: 768px) {
+      button {
+        font-size: 14px; /* Reduce el tamaño del texto en pantallas más pequeñas */
+        padding: 12px 15px;
+      }
+    }
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 18px; /* Reduce el tamaño del título */
+      }
+      button {
+        font-size: 12px; /* Ajuste adicional en dispositivos pequeños */
+        padding: 10px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Selecciona un botón</h1>
+  <div class="button-container">
+    <!-- Botones con enlaces -->
+    <button onclick="window.location.href='videos.html'">Ver Videos</button>
+    
+  </div>
+</body>
+</html>

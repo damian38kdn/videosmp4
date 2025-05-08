@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Encuentros Ardientes</title>
+
+
+<!-- Solo la imagen para WhatsApp -->
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/chat-0-c9ef9.appspot.com/o/imagen33.png?alt=media&token=3936bf00-81a9-424c-b15b-5245b08392ca">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+    <style>
+        /* Estilos generales y de estructura */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #111;
+            color: #fff;
+            padding: 20px;
+        }
+
+        /* Estilo para el botón "Regresar" */
+        .back-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #e60000;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .back-button:hover {
+            background-color: #ff1a1a;
+            transform: scale(1.05);
+        }
+
+        h1 {
+            color: #e60000;
+            text-align: center;
+            margin-top: 60px;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        /* Botón de categorías */
+        .categories-button {
+            display: block;
+            margin: 0 auto;
+            background-color: #e60000;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .categories-button:hover {
+            background-color: #ff1a1a;
+        }
+
+        /* Lista de categorías (oculta inicialmente) */
+        .categories-list {
+            display: none;
+            margin: 10px auto;
+            text-align: center;
+        }
+
+        .category-item {
+            display: block;
+            margin: 5px 0;
+            padding: 8px 15px;
+            background-color: #333;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+
+        .category-item:hover {
+            background-color: #555;
+        }
+
+        /* Estilos de la cuadrícula de videos */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .video-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .download-button {
+            display: block;
+            background-color: #e60000;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+            margin-top: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .download-button:hover {
+            background-color: #ff1a1a;
+            transform: scale(1.05);
+        }
+
+        .load-more-button {
+            display: block;
+            background-color: #ff4d4d;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            text-align: center;
+            margin: 20px auto;
+            width: 200px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .load-more-button:hover {
+            background-color: #ff1a1a;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .video-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="back-button" onclick="window.location.href='https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732';">Regresar</button>
+    <h1>🔥Encuentros Ardientes</h1>
+
+    
+
+    <!-- Botón de Categorías -->
+    <button class="categories-button" onclick="toggleCategories()">Categorías</button>
+    
+    <!-- Lista de Categorías -->
+    <div class="categories-list" id="categoriesList">
+        <a href="https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732" class="category-item" target="_blank">Maduras</a>
+        <a href="https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732" class="category-item" target="_blank">Teen(18+)</a>
+        <a href="https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732" class="category-item" target="_blank">MILF</a>
+        <a href="https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732" class="category-item" target="_blank">Negras</a>
+        <a href="https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732" class="category-item" target="_blank">Anal</a>
+        <a href="https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732" class="category-item" target="_blank">Jovencitas/Viejos(18+)</a>
+        <a href="https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732" class="category-item" target="_blank">Lesbianas</a>
+        <a href="https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732" class="category-item" target="_blank">Trios</a>
+        <a href="https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732" class="category-item" target="_blank">Japonesas</a>
+        <a href="https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732" class="category-item" target="_blank">Hentai</a>
+        <a href="https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732" class="category-item" target="_blank">Asiaticas</a>
+        <a href="https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732" class="category-item" target="_blank">Latinas</a>
+
+    </div>
+
+   
+    <div class="video-grid" id="videoGrid">
+        <!-- Los videos se generarán aquí por JavaScript -->
+    </div>
+
+
+    
+
+    <button class="load-more-button" id="loadMoreBtn" onclick="loadMoreVideos()">Ver más</button>
+
+    <script>
+        // Función para mostrar u ocultar las categorías
+        function toggleCategories() {
+            const categoriesList = document.getElementById("categoriesList");
+            categoriesList.style.display = categoriesList.style.display === "none" || categoriesList.style.display === "" ? "block" : "none";
+        }
+    </script>
+
+
+    
+
+    <script>
+        // Lista de videos
+        const videos = [
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },    
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },    
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },    
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },    
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },    
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },    
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },    
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },    
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },    
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },    
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },    
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },    
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },    
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },
+        { src: 'xxxxxxxxx', title: 'Título del Video 1', downloadUrl: 'https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732' },        
+            
+
+            // Agrega más videos según sea necesario
+        ];
+
+        let videosDisplayed = 0;
+        const videosPerLoad = 2;
+
+        // Función para revolver (barajar) los videos
+        function shuffleVideos(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        // Revolver los videos al cargar la página
+        shuffleVideos(videos);
+
+        // Función para mostrar los videos
+        function loadMoreVideos() {
+            const videoGrid = document.getElementById('videoGrid');
+            const nextVideos = videos.slice(videosDisplayed, videosDisplayed + videosPerLoad);
+
+            nextVideos.forEach(video => {
+                const videoItem = document.createElement('div');
+                videoItem.className = 'video-item';
+                videoItem.innerHTML = `
+                    <video controls>
+                        <source src="${video.src}" type="video/mp4">
+                        Tu navegador no soporta la reproducción de video.
+                    </video>
+                    <button class="download-button" onclick="window.open('${video.downloadUrl}', '_blank')">Mas videos Similares</button>
+                `;
+                videoGrid.appendChild(videoItem);
+            });
+
+            videosDisplayed += nextVideos.length;
+
+            // Ocultar el botón "Ver más" si no hay más videos que cargar
+            if (videosDisplayed >= videos.length) {
+                document.getElementById('loadMoreBtn').style.display = 'none';
+            }
+        }
+
+        // Cargar los primeros videos al inicio
+        loadMoreVideos();
+    </script>
+
+
+    
+
+
+
+</body>
+</html>

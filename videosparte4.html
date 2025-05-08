@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<!-- En el <head> de tu HTML -->
+    <meta property="og:title" content="Título de tu sitio web">
+    <meta property="og:description" content="Descripción breve de tu sitio web">
+    <meta property="og:image" content="https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen6lekrlke.png">
+    <meta property="og:url" content="URL_COMPLETA_DE_TU_SITIO_WEB">
+    <meta property="og:type" content="website">
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contenido Exclusivo</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a;
+            color: #fff;
+            overflow: hidden;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .btn-ver-mas {
+            padding: 15px 40px;
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 0 auto 20px;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(255, 75, 43, 0.4);
+            transition: all 0.3s ease;
+        }
+        .btn-ver-mas:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 75, 43, 0.6);
+        }
+        .video-container {
+            flex: 1;
+            min-height: 0;
+            width: 100%;
+            border: 3px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .banners {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            height: 150px;
+        }
+        .banner {
+            width: 300px;
+            height: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid #333;
+            position: relative;
+        }
+        .banner:hover {
+            transform: scale(1.05);
+            border-color: #ff416c;
+        }
+        .banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .banner::after {
+            
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            text-align: center;
+            padding: 8px;
+            font-size: 14px;
+        }
+        .logo {
+            color: #ff416c;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(255, 65, 108, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo"></div>
+            <button class="btn-ver-mas" onclick="window.open('videos parte 3.html', '_blank')">
+                VER MÁS VIDEOS
+            </button>
+        </div>
+        
+        <div class="video-container">
+            <iframe id="randomVideo" allowfullscreen></iframe>
+        </div>
+        
+        <div class="banners">
+            <div class="banner" id="banner1" onclick="window.open('https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732', '_blank')">
+                <!-- Imagen aleatoria se insertará aquí via JS -->
+            </div>
+            <div class="banner" id="banner2" onclick="window.open('https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732', '_blank')">
+                <!-- Imagen aleatoria se insertará aquí via JS -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Lista de videos
+        const videos = [
+            "https://www.cumlouder.com/es/embed/4481",
+                "https://www.cumlouder.com/es/embed/9678",
+                "https://www.cumlouder.com/es/embed/2956",
+                "https://www.cumlouder.com/es/embed/3217",
+                "https://www.cumlouder.com/es/embed/3203",
+                "https://www.cumlouder.com/es/embed/3692",
+                "https://www.cumlouder.com/es/embed/3790",
+                "https://www.cumlouder.com/es/embed/2942",
+                "https://www.cumlouder.com/es/embed/5863",
+                "https://www.cumlouder.com/es/embed/6458",
+                "https://www.cumlouder.com/es/embed/3711",
+                "https://www.cumlouder.com/es/embed/2991",
+                "https://www.cumlouder.com/es/embed/3020",
+                "https://www.cumlouder.com/es/embed/46827",
+                "https://www.cumlouder.com/es/embed/59441",
+                "https://www.cumlouder.com/es/embed/4605",
+                "https://www.cumlouder.com/es/embed/3420",
+                "https://www.cumlouder.com/es/embed/2964",
+                "https://www.cumlouder.com/es/embed/2897",
+                "https://www.cumlouder.com/es/embed/2876",
+                "https://www.cumlouder.com/es/embed/4210",
+                "https://www.cumlouder.com/es/embed/21109",
+                "https://www.cumlouder.com/es/embed/4546",
+                "https://www.cumlouder.com/es/embed/6301",
+                "https://www.cumlouder.com/es/embed/9564",
+                "https://www.cumlouder.com/es/embed/2769",
+                "https://www.cumlouder.com/es/embed/23126",
+                "https://www.cumlouder.com/es/embed/3563",
+                "https://www.cumlouder.com/es/embed/4073",
+                "https://www.cumlouder.com/es/embed/5427",
+                "https://www.cumlouder.com/es/embed/3061",
+                "https://www.cumlouder.com/es/embed/3332",
+                "https://www.cumlouder.com/es/embed/3012",
+                "https://www.cumlouder.com/es/embed/30800",
+                "https://www.cumlouder.com/es/embed/2692",
+                "https://www.cumlouder.com/es/embed/5269",
+                "https://www.cumlouder.com/es/embed/3810",
+                "https://www.cumlouder.com/es/embed/4581",
+                "https://www.cumlouder.com/es/embed/3331",
+                "https://www.cumlouder.com/es/embed/4222",
+                "https://www.cumlouder.com/es/embed/25896",
+                "https://www.cumlouder.com/es/embed/3054",
+                "https://www.cumlouder.com/es/embed/4869",
+                "https://www.cumlouder.com/es/embed/2294",
+                "https://www.cumlouder.com/es/embed/5821",
+                "https://www.cumlouder.com/es/embed/3479",
+                "https://www.cumlouder.com/es/embed/5267",
+                "https://www.cumlouder.com/es/embed/32865",
+                "https://www.cumlouder.com/es/embed/3194",
+                "https://www.cumlouder.com/es/embed/2862",
+                "https://www.cumlouder.com/es/embed/9644",
+                "https://www.cumlouder.com/es/embed/52538",
+                "https://www.cumlouder.com/es/embed/2909",
+                "https://www.cumlouder.com/es/embed/6498",
+                "https://www.cumlouder.com/es/embed/20805",
+                "https://www.cumlouder.com/es/embed/9662",
+                "https://www.cumlouder.com/es/embed/3656",
+                "https://www.cumlouder.com/es/embed/3637",
+                "https://www.cumlouder.com/es/embed/9589",
+                "https://www.cumlouder.com/es/embed/3140",
+                "https://www.cumlouder.com/es/embed/3167",
+                "https://www.cumlouder.com/es/embed/5069",
+                "https://www.cumlouder.com/es/embed/57235",
+                "https://www.cumlouder.com/es/embed/5327",
+                "https://www.cumlouder.com/es/embed/58981",
+                "https://www.cumlouder.com/es/embed/5646",
+                "https://www.cumlouder.com/es/embed/21181",
+                "https://www.cumlouder.com/es/embed/6029",
+                "https://www.cumlouder.com/es/embed/9626",
+                "https://www.cumlouder.com/es/embed/3645",
+                "https://www.cumlouder.com/es/embed/56083",
+                "https://www.cumlouder.com/es/embed/3520",
+                "https://www.cumlouder.com/es/embed/9585",
+                "https://www.cumlouder.com/es/embed/6460",
+                "https://www.cumlouder.com/es/embed/3450",
+                "https://www.cumlouder.com/es/embed/4871",
+                "https://www.cumlouder.com/es/embed/56177",
+                "https://www.cumlouder.com/es/embed/4788",
+                "https://www.cumlouder.com/es/embed/2448",
+                "https://www.cumlouder.com/es/embed/5298",
+                "https://www.cumlouder.com/es/embed/5564",
+                "https://www.cumlouder.com/es/embed/2996",
+                "https://www.cumlouder.com/es/embed/50672",
+                "https://www.cumlouder.com/es/embed/5122",
+                "https://www.cumlouder.com/es/embed/3502",
+                "https://www.cumlouder.com/es/embed/21040",
+                "https://www.cumlouder.com/es/embed/2775",
+                "https://www.cumlouder.com/es/embed/6500",
+                "https://www.cumlouder.com/es/embed/29285",
+                "https://www.cumlouder.com/es/embed/29104",
+                "https://www.cumlouder.com/es/embed/5988",
+                "https://www.cumlouder.com/es/embed/5502",
+                "https://www.cumlouder.com/es/embed/3553",
+                "https://www.cumlouder.com/es/embed/5071",
+                "https://www.cumlouder.com/es/embed/4027",
+                "https://www.cumlouder.com/es/embed/3008",
+                "https://www.cumlouder.com/es/embed/3242",
+                "https://www.cumlouder.com/es/embed/4316",
+                "https://www.cumlouder.com/es/embed/3072",
+                "https://www.cumlouder.com/es/embed/3642",
+                "https://www.cumlouder.com/es/embed/5341",
+                "https://www.cumlouder.com/es/embed/4609",
+                "https://www.cumlouder.com/es/embed/3708",
+                "https://www.cumlouder.com/es/embed/9548",
+                "https://www.cumlouder.com/es/embed/2659",
+                "https://www.cumlouder.com/es/embed/20928",
+                "https://www.cumlouder.com/es/embed/5052",
+                "https://www.cumlouder.com/es/embed/3380",
+                "https://www.cumlouder.com/es/embed/2425",
+                "https://www.cumlouder.com/es/embed/3317",
+                "https://www.cumlouder.com/es/embed/2914",
+                "https://www.cumlouder.com/es/embed/2943",
+                "https://www.cumlouder.com/es/embed/2486",
+                "https://www.cumlouder.com/es/embed/2755",
+                "https://www.cumlouder.com/es/embed/6257",
+                "https://www.cumlouder.com/es/embed/2263",
+                "https://www.cumlouder.com/es/embed/3225",
+                "https://www.cumlouder.com/es/embed/27452",
+                "https://www.cumlouder.com/es/embed/3538",
+                "https://www.cumlouder.com/es/embed/2198",
+                "https://www.cumlouder.com/es/embed/5855",
+                "https://www.cumlouder.com/es/embed/3169",
+                "https://www.cumlouder.com/es/embed/6227",
+                "https://www.cumlouder.com/es/embed/2905",
+                "https://www.cumlouder.com/es/embed/3156",
+                "https://www.cumlouder.com/es/embed/4391",
+                "https://www.cumlouder.com/es/embed/4249",
+                "https://www.cumlouder.com/es/embed/3004",
+                "https://www.cumlouder.com/es/embed/2457",
+                "https://www.cumlouder.com/es/embed/2992",
+                "https://www.cumlouder.com/es/embed/4467",
+                "https://www.cumlouder.com/es/embed/127104",
+                "https://www.cumlouder.com/es/embed/3493",
+                "https://www.cumlouder.com/es/embed/4825",
+                "https://www.cumlouder.com/es/embed/3371",
+                "https://www.cumlouder.com/es/embed/3259",
+                "https://www.cumlouder.com/es/embed/124250",
+                "https://www.cumlouder.com/es/embed/124571",
+                "https://www.cumlouder.com/es/embed/122277",
+                "https://www.cumlouder.com/es/embed/5473",
+                "https://www.cumlouder.com/es/embed/5461",
+                "https://www.cumlouder.com/es/embed/116197",
+                "https://www.cumlouder.com/es/embed/5319",
+                "https://www.cumlouder.com/es/embed/3329",
+                "https://www.cumlouder.com/es/embed/3257",
+                "https://www.cumlouder.com/es/embed/3273",
+                "https://www.cumlouder.com/es/embed/111924",
+                "https://www.cumlouder.com/es/embed/6034",
+                "https://www.cumlouder.com/es/embed/111090",
+                "https://www.cumlouder.com/es/embed/5151",
+                "https://www.cumlouder.com/es/embed/5852",
+                "https://www.cumlouder.com/es/embed/4600",
+                "https://www.cumlouder.com/es/embed/4481",
+                "https://www.cumlouder.com/es/embed/3159",
+                "https://www.cumlouder.com/es/embed/30784",
+                "https://www.cumlouder.com/es/embed/5940",
+                "https://www.cumlouder.com/es/embed/2647",
+                "https://www.cumlouder.com/es/embed/9587",
+                "https://www.cumlouder.com/es/embed/5966",
+                "https://www.cumlouder.com/es/embed/5474",
+                "https://www.cumlouder.com/es/embed/5734",
+                "https://www.cumlouder.com/es/embed/6097",
+                "https://www.cumlouder.com/es/embed/3998",
+                "https://www.cumlouder.com/es/embed/6080",
+                "https://www.cumlouder.com/es/embed/5817",
+                "https://www.cumlouder.com/es/embed/5418",
+                "https://www.cumlouder.com/es/embed/5532",
+                "https://www.cumlouder.com/es/embed/4008",
+                "https://www.cumlouder.com/es/embed/95407",
+                "https://www.cumlouder.com/es/embed/4001",
+                "https://www.cumlouder.com/es/embed/79403",
+                "https://www.cumlouder.com/es/embed/3618",
+                "https://www.cumlouder.com/es/embed/5728",
+                "https://www.cumlouder.com/es/embed/6321",
+                "https://www.cumlouder.com/es/embed/6382",
+                "https://www.cumlouder.com/es/embed/6358",
+                "https://www.cumlouder.com/es/embed/2866",
+                "https://www.cumlouder.com/es/embed/61894",
+                "https://www.cumlouder.com/es/embed/59465",
+                "https://www.cumlouder.com/es/embed/55900",
+                "https://www.cumlouder.com/es/embed/42745",
+                "https://www.cumlouder.com/es/embed/30811",
+                "https://www.cumlouder.com/es/embed/29146",
+                "https://www.cumlouder.com/es/embed/29077",
+                "https://www.cumlouder.com/es/embed/29006",
+                "https://www.cumlouder.com/es/embed/25785",
+                "https://www.cumlouder.com/es/embed/25765",
+                "https://www.cumlouder.com/es/embed/25227",
+                "https://www.cumlouder.com/es/embed/24809",
+                "https://www.cumlouder.com/es/embed/22824",
+                "https://www.cumlouder.com/es/embed/22667",
+                "https://www.cumlouder.com/es/embed/21232",
+                "https://www.cumlouder.com/es/embed/21090",
+                "https://www.cumlouder.com/es/embed/21034",
+                "https://www.cumlouder.com/es/embed/21055",
+                "https://www.cumlouder.com/es/embed/20974",
+                "https://www.cumlouder.com/es/embed/20944",
+                "https://www.cumlouder.com/es/embed/20890",
+                "https://www.cumlouder.com/es/embed/20808",
+                "https://www.cumlouder.com/es/embed/20818",
+                "https://www.cumlouder.com/es/embed/19287",
+                "https://www.cumlouder.com/es/embed/9684",
+                "https://www.cumlouder.com/es/embed/9632",
+                "https://www.cumlouder.com/es/embed/9312",
+                "https://www.cumlouder.com/es/embed/6421",
+                "https://www.cumlouder.com/es/embed/6464",
+                "https://www.cumlouder.com/es/embed/6402",
+                "https://www.cumlouder.com/es/embed/6342",
+                "https://www.cumlouder.com/es/embed/6230",
+                "https://www.cumlouder.com/es/embed/6264",
+                "https://www.cumlouder.com/es/embed/6221",
+                "https://www.cumlouder.com/es/embed/6186",
+                "https://www.cumlouder.com/es/embed/6155",
+                "https://www.cumlouder.com/es/embed/6136",
+                "https://www.cumlouder.com/es/embed/6115",
+                "https://www.cumlouder.com/es/embed/6063",
+                "https://www.cumlouder.com/es/embed/6067",
+                "https://www.cumlouder.com/es/embed/6049",
+                "https://www.cumlouder.com/es/embed/6036",
+                "https://www.cumlouder.com/es/embed/6028",
+                "https://www.cumlouder.com/es/embed/6040",
+                "https://www.cumlouder.com/es/embed/6030",
+                "https://www.cumlouder.com/es/embed/5964",
+                "https://www.cumlouder.com/es/embed/5877",
+                "https://www.cumlouder.com/es/embed/5685",
+                "https://www.cumlouder.com/es/embed/5709",
+                "https://www.cumlouder.com/es/embed/5627",
+                "https://www.cumlouder.com/es/embed/5606",
+                "https://www.cumlouder.com/es/embed/5595",
+                "https://www.cumlouder.com/es/embed/5584",
+                "https://www.cumlouder.com/es/embed/5508",
+                "https://www.cumlouder.com/es/embed/5459",
+                "https://www.cumlouder.com/es/embed/5442",
+                "https://www.cumlouder.com/es/embed/5437",
+                "https://www.cumlouder.com/es/embed/5424",
+                "https://www.cumlouder.com/es/embed/5369",
+                "https://www.cumlouder.com/es/embed/5292",
+                "https://www.cumlouder.com/es/embed/5261",
+                "https://www.cumlouder.com/es/embed/5256",
+                "https://www.cumlouder.com/es/embed/5169",
+                "https://www.cumlouder.com/es/embed/5167",
+                "https://www.cumlouder.com/es/embed/5172",
+                "https://www.cumlouder.com/es/embed/5143",
+                "https://www.cumlouder.com/es/embed/5015",
+                "https://www.cumlouder.com/es/embed/5002",
+                "https://www.cumlouder.com/es/embed/4832",
+                "https://www.cumlouder.com/es/embed/4822",
+                "https://www.cumlouder.com/es/embed/2518",
+                "https://www.cumlouder.com/es/embed/5580",
+                "https://www.cumlouder.com/es/embed/4758",
+                "https://www.cumlouder.com/es/embed/4810",
+                "https://www.cumlouder.com/es/embed/5914",
+                "https://www.cumlouder.com/es/embed/5505",
+                "https://www.cumlouder.com/es/embed/4578",
+                "https://www.cumlouder.com/es/embed/5427",
+                "https://www.cumlouder.com/es/embed/5367",
+                "https://www.cumlouder.com/es/embed/5800",
+                "https://www.cumlouder.com/es/embed/5269",
+                "https://www.cumlouder.com/es/embed/4581",
+                "https://www.cumlouder.com/es/embed/6134",
+                "https://www.cumlouder.com/es/embed/4819",
+                "https://www.cumlouder.com/es/embed/5038",
+                "https://www.cumlouder.com/es/embed/5622",
+                "https://www.cumlouder.com/es/embed/4869",
+                "https://www.cumlouder.com/es/embed/5578",
+                "https://www.cumlouder.com/es/embed/5871",
+                "https://www.cumlouder.com/es/embed/5267",
+                "https://www.cumlouder.com/es/embed/21290",
+                "https://www.cumlouder.com/es/embed/6498",
+                "https://www.cumlouder.com/es/embed/40315",
+                "https://www.cumlouder.com/es/embed/5069",
+                "https://www.cumlouder.com/es/embed/5536",
+                "https://www.cumlouder.com/es/embed/5646",
+                "https://www.cumlouder.com/es/embed/3556",
+                "https://www.cumlouder.com/es/embed/6281",
+                "https://www.cumlouder.com/es/embed/9584",
+                "https://www.cumlouder.com/es/embed/3884",
+                "https://www.cumlouder.com/es/embed/31531",
+                "https://www.cumlouder.com/es/embed/42548",
+                "https://www.cumlouder.com/es/embed/4998",
+                "https://www.cumlouder.com/es/embed/5564",
+                "https://www.cumlouder.com/es/embed/5724",
+                "https://www.cumlouder.com/es/embed/5181",
+                "https://www.cumlouder.com/es/embed/9670",
+                "https://www.cumlouder.com/es/embed/5653",
+                "https://www.cumlouder.com/es/embed/25368",
+                "https://www.cumlouder.com/es/embed/4603",
+                "https://www.cumlouder.com/es/embed/5045",
+                "https://www.cumlouder.com/es/embed/5543",
+                "https://www.cumlouder.com/es/embed/5341",
+                "https://www.cumlouder.com/es/embed/21227",
+                "https://www.cumlouder.com/es/embed/2951",
+                "https://www.cumlouder.com/es/embed/3246",
+                "https://www.cumlouder.com/es/embed/29103",
+                "https://www.cumlouder.com/es/embed/2914",
+                "https://www.cumlouder.com/es/embed/2943",
+                "https://www.cumlouder.com/es/embed/3123",
+                "https://www.cumlouder.com/es/embed/5580",
+            "https://www.cumlouder.com/es/embed/29204",
+            "https://www.cumlouder.com/es/embed/5505",
+            "https://www.cumlouder.com/es/embed/3061",
+            "https://www.cumlouder.com/es/embed/5943",
+            "https://www.cumlouder.com/es/embed/3159",
+            "https://www.cumlouder.com/es/embed/3399",
+            "https://www.cumlouder.com/es/embed/2955",
+            "https://www.cumlouder.com/es/embed/2662",
+            "https://www.cumlouder.com/es/embed/2608",
+            "https://www.cumlouder.com/es/embed/5724",
+            "https://www.cumlouder.com/es/embed/5072",
+            "https://www.cumlouder.com/es/embed/6300",
+            "https://www.cumlouder.com/es/embed/3553",
+            "https://www.cumlouder.com/es/embed/2659",
+            "https://www.cumlouder.com/es/embed/3268",
+            "https://www.cumlouder.com/es/embed/2943",
+            "https://www.cumlouder.com/es/embed/5418",
+            "https://www.cumlouder.com/es/embed/2963",
+            "https://www.cumlouder.com/es/embed/127104",
+            "https://www.cumlouder.com/es/embed/124250",
+            "https://www.cumlouder.com/es/embed/5982",
+            "https://www.cumlouder.com/es/embed/109655",
+            "https://www.cumlouder.com/es/embed/5520",
+            "https://www.cumlouder.com/es/embed/4878",
+            "https://www.cumlouder.com/es/embed/5189",
+            "https://www.cumlouder.com/es/embed/100940",
+            "https://www.cumlouder.com/es/embed/5443",
+            "https://www.cumlouder.com/es/embed/6121",
+            "https://www.cumlouder.com/es/embed/6326",
+            "https://www.cumlouder.com/es/embed/6321",
+            "https://www.cumlouder.com/es/embed/5643",
+            "https://www.cumlouder.com/es/embed/67574",
+            "https://www.cumlouder.com/es/embed/65404",
+            "https://www.cumlouder.com/es/embed/59444",
+            "https://www.cumlouder.com/es/embed/55904",
+            "https://www.cumlouder.com/es/embed/55902",
+            "https://www.cumlouder.com/es/embed/55900",
+            "https://www.cumlouder.com/es/embed/50995",
+            "https://www.cumlouder.com/es/embed/50994",
+            "https://www.cumlouder.com/es/embed/50415",
+            "https://www.cumlouder.com/es/embed/43193",
+            "https://www.cumlouder.com/es/embed/40323",
+            "https://www.cumlouder.com/es/embed/40307",
+            "https://www.cumlouder.com/es/embed/39917",
+            "https://www.cumlouder.com/es/embed/39595",
+            "https://www.cumlouder.com/es/embed/38562",
+            "https://www.cumlouder.com/es/embed/37461",
+            "https://www.cumlouder.com/es/embed/36849",
+            "https://www.cumlouder.com/es/embed/36847",
+            "https://www.porn300.com/es/video/reventando-un-culo-con-locura/embed",
+            "https://www.porn300.com/es/video/tremendo-movimiento-de-culo/embed",
+            "https://www.porn300.com/es/video/policia-de-fronteras-se-tira-a-una-inmigrante/embed",
+            "https://www.porn300.com/es/video/adolescente-mamando-en-una-pelicula-vintage/embed",
+            "https://www.porn300.com/es/video/seleccion-con-brasilenas-lubricadas/embed",
+            "https://www.porn300.com/es/video/sacude-ese-inmenso-culazo/embed",
+            "https://www.porn300.com/es/video/belleza-muestra-su-cuerpo-a-la-camara/embed",
+            "https://www.porn300.com/es/video/intensa-follada-de-cara-con-madura/embed",
+            "https://www.porn300.com/es/video/un-folleteo-duro-con-amateurs/embed",
+            "https://www.porn300.com/es/video/castigo-con-polla-negra-grande-bbc/embed",
+            "https://www.porn300.com/es/video/los-musculos-no-importan-nada/embed",
+            "https://www.porn300.com/es/video/follandose-el-cono-con-piercing-de-una-sucia-latina/embed",
+            "https://www.porn300.com/es/video/como-puede-resistir-tanto/embed",
+            "https://www.porn300.com/es/video/cabalgando-suavemente-su-polla/embed",
+            "https://www.porn300.com/es/video/riete-de-eso-puta-xxxxxx/embed",
+            "https://www.porn300.com/es/video/negra-lista-para-chupar-rabos-y-cabalgarlos/embed",
+            "https://www.porn300.com/es/video/pareja-chilena-amateur-follando-ante-la-cam/embed",
+            "https://www.porn300.com/es/video/hindu-increiblemente-hermosa-masturbandose/embed",
+            "https://www.porn300.com/es/video/chica-latina-haciendo-un-espectaculo-para-la-camara/embed",
+            "https://www.porn300.com/es/video/trabajadores-de-la-construccion-follan-duro/embed",
+            "https://www.porn300.com/es/video/chica-cachonda-disfrutando-del-sexo-telefonico/embed",
+            "https://www.porn300.com/es/video/derrama-su-semen-en-su-cono/embed",
+            "https://www.porn300.com/es/video/penetrando-un-chocho-colombiano/embed",
+            "https://www.porn300.com/es/video/las-zorras-espanolas-saben-montarse-trios/embed",
+            "https://www.porn300.com/es/video/diosa-madura-goza-con-polla-enorme/embed",
+            "https://www.porn300.com/es/video/chica-tetona-acribillada-analmente/embed",
+            "https://www.porn300.com/es/video/autenticas-francesas-compartiendo-una-polla/embed",
+            "https://www.porn300.com/es/video/una-chupada-casera-feliz/embed",
+            "https://www.porn300.com/es/video/rubia-cachonda-follando-en-video-amateur/embed",
+            "https://www.porn300.com/es/video/excelente-sexo-interracial-amateur/embed",
+            "https://www.porn300.com/es/video/pelirroja-muy-joven-folla-fuerte/embed",
+            "https://www.porn300.com/es/video/polvo-caliente-colombiano/embed",
+            "https://www.porn300.com/es/video/swingers-alemanes-tirando-en-el-sofa/embed",
+            "https://www.porn300.com/es/video/muchacha-italiana-morena-pasandoselo-bien-en-grupo/embed",
+            "https://www.porn300.com/es/video/brasilena-en-sesion-interracial/embed",
+            "https://www.porn300.com/es/video/trio-con-tetonas-espanolas/embed",
+            "https://www.porn300.com/es/video/tres-jovenes-espanoles-follando-al-aire-libre/embed",
+            "https://www.porn300.com/es/video/latina-comiendose-una-polla-de-las-grandes/embed",
+            "https://www.porn300.com/es/video/polla-grande-para-una-nena-espanola/embed",
+            "https://www.porn300.com/es/video/milf-mexicana-enmascarada-follando-con-dos-jovenes/embed",
+            "https://www.porn300.com/es/video/amateurs-mexicanos-a-toda-marcha/embed",
+            "https://www.porn300.com/es/video/el-coche-es-demasiado-pequeno-para-follar/embed",
+            "https://www.porn300.com/es/video/penetracion-gentil-y-embestidas-brutales/embed",
+            "https://www.porn300.com/es/video/webcamers-calientes-en-sesion-lesbica/embed",
+            "https://www.porn300.com/es/video/chica-alemana-rubia-taladrada/embed",
+            "https://www.porn300.com/es/video/un-polvo-romantico-en-el-sofa/embed",
+            "https://www.porn300.com/es/video/rubia-tetuda-cabalgando-polla/embed",
+            "https://www.porn300.com/es/video/un-playboy-frances-de-primera-se-folla-a-amas-de-casa/embed",
+            "https://www.porn300.com/es/video/encargada-de-tienda-follando-estilo-perrito/embed",
+            "https://www.porn300.com/es/video/zorra-barata-sube-a-coche-anonimo/embed",
+            "https://www.porn300.com/es/video/intentando-convertirse-en-estrella-de-porno/embed",
+            "https://www.porn300.com/es/video/lesbianas-amateurs-enmascaradas/embed",
+            "https://www.porn300.com/es/video/un-casting-con-la-hermosa-lucy/embed",
+            "https://www.porn300.com/es/video/seleccion-sexual-con-maduras-alemanas/embed",
+            "https://www.porn300.com/es/video/despliegue-de-pasion-espanola/embed",
+            "https://www.porn300.com/es/video/mexicana-morena-a-la-que-le-taladran-el-cono/embed",
+            "https://www.porn300.com/es/video/haz-un-69-rie-y-folla-duro/embed",
+            "https://www.porn300.com/es/video/hondurena-folla-con-repartidor-de-pizzas/embed",
+            "https://www.porn300.com/es/video/espanola-aficionada-con-un-bonito-culo/embed",
+            "https://www.porn300.com/es/video/chica-espanola-se-folla-dos-tipos/embed",
+            "https://www.porn300.com/es/video/follamigos-arabes-con-mascaras/embed",
+            "https://www.porn300.com/es/video/tetona-en-lenceria-lava-el-coche/embed",
+            "https://www.porn300.com/es/video/placeres-por-sexo-telefonico/embed",
+            "https://www.porn300.com/es/video/un-casting-porno-se-vuelve-muy-salvaje/embed",
+            "https://www.cumlouder.com/es/embed/41610",
+        "https://www.cumlouder.com/es/embed/65398",
+        "https://www.cumlouder.com/es/embed/93664",
+        "https://www.cumlouder.com/es/embed/89855",
+        "https://www.cumlouder.com/es/embed/65649",
+        "https://www.cumlouder.com/es/embed/59641",
+        "https://www.cumlouder.com/es/embed/53568",
+        "https://www.cumlouder.com/es/embed/49670",
+        "https://www.cumlouder.com/es/embed/27064",
+        "https://www.cumlouder.com/es/embed/95656",
+        "https://www.cumlouder.com/es/embed/89777",
+        "https://www.cumlouder.com/es/embed/90849",
+        "https://www.cumlouder.com/es/embed/89745",
+        "https://www.cumlouder.com/es/embed/65795",
+        "https://www.cumlouder.com/es/embed/66154",
+        "https://www.cumlouder.com/es/embed/65776",
+        "https://www.cumlouder.com/es/embed/49735",
+        "https://www.cumlouder.com/es/embed/65598",
+        "https://www.cumlouder.com/es/embed/61198",
+        "https://www.cumlouder.com/es/embed/39383",
+        "https://www.cumlouder.com/es/embed/49866",
+        "https://www.cumlouder.com/es/embed/18493",
+        "https://www.cumlouder.com/es/embed/36327",
+        "https://www.cumlouder.com/es/embed/28062",
+       "https://www.cumlouder.com/es/embed/24031",
+        "https://www.cumlouder.com/es/embed/30160",
+        "https://www.cumlouder.com/es/embed/16580",
+        "https://www.cumlouder.com/es/embed/24941",
+        "https://www.cumlouder.com/es/embed/24962",
+        "https://www.cumlouder.com/es/embed/24909",
+        "https://www.cumlouder.com/es/embed/8674",
+        "https://www.cumlouder.com/es/embed/6924",
+        "https://www.cumlouder.com/es/embed/7845",
+        "https://www.cumlouder.com/es/embed/6474",
+        "https://www.cumlouder.com/es/embed/37447",
+        "https://www.cumlouder.com/es/embed/32951",
+        "https://www.cumlouder.com/es/embed/5852",
+        "https://www.cumlouder.com/es/embed/29334",
+        "https://www.cumlouder.com/es/embed/54068",
+        "https://www.cumlouder.com/es/embed/5914",
+        "https://www.cumlouder.com/es/embed/3269",
+        "https://www.cumlouder.com/es/embed/5038",
+        "https://www.cumlouder.com/es/embed/6219",
+        "https://www.cumlouder.com/es/embed/3159",
+        "https://www.cumlouder.com/es/embed/20874",
+        "https://www.cumlouder.com/es/embed/33047",
+        "https://www.cumlouder.com/es/embed/5619",
+        "https://www.cumlouder.com/es/embed/30784",
+        "https://www.cumlouder.com/es/embed/49215",
+        "https://www.cumlouder.com/es/embed/4164",
+        "https://www.cumlouder.com/es/embed/5940",
+        "https://www.cumlouder.com/es/embed/6217",
+        "https://www.cumlouder.com/es/embed/36846",
+        "https://www.cumlouder.com/es/embed/2647",
+        "https://www.cumlouder.com/es/embed/9587",
+       "https://www.cumlouder.com/es/embed/5474",
+        "https://www.cumlouder.com/es/embed/5734",
+        "https://www.cumlouder.com/es/embed/6097",
+       "https://www.cumlouder.com/es/embed/3998",
+        "https://www.cumlouder.com/es/embed/3648",
+        "https://www.cumlouder.com/es/embed/2993",
+        "https://www.cumlouder.com/es/embed/6080",
+        "https://www.cumlouder.com/es/embed/3671",
+        "https://www.cumlouder.com/es/embed/3885",
+        "https://www.cumlouder.com/es/embed/118417",
+        "https://www.cumlouder.com/es/embed/3994",
+        "https://www.cumlouder.com/es/embed/4008",
+        "https://www.cumlouder.com/es/embed/5452",
+        "https://www.cumlouder.com/es/embed/6222",
+        "https://www.cumlouder.com/es/embed/3806",
+        "https://www.cumlouder.com/es/embed/5573",
+        "https://www.cumlouder.com/es/embed/5768",
+        "https://www.cumlouder.com/es/embed/95407",
+        "https://www.cumlouder.com/es/embed/3011",
+        "https://www.cumlouder.com/es/embed/93051",
+        "https://www.cumlouder.com/es/embed/5703",
+        "https://www.cumlouder.com/es/embed/4001",
+        "https://www.cumlouder.com/es/embed/79403",
+        "https://www.cumlouder.com/es/embed/3618",
+        "https://www.cumlouder.com/es/embed/4009",
+        "https://www.cumlouder.com/es/embed/4040",
+        "https://www.cumlouder.com/es/embed/6326",
+        "https://www.cumlouder.com/es/embed/78761",
+        "https://www.porn300.com/es/video/milf-follada-en-las-escaleras/embed",
+        "https://www.porn300.com/es/video/milf-morena-y-tetona-lo-quiere-lo-mas-profundo-posible/embed",
+        "https://www.porn300.com/es/video/ardiente-milf-chilena-se-folla-a-un-adolescente/embed",
+        "https://www.porn300.com/es/video/madura-australiana-adorando-polla-negra/embed",
+        "https://www.porn300.com/es/video/impresionante-milf-latina-con-medias-negras-follada/embed",
+        "https://www.porn300.com/es/video/guarra-irlandesa-recibe-una-follada-doble/embed",
+        "https://www.porn300.com/es/video/madura-en-bikini-se-masturba-en-el-sofa/embed",
+        "https://www.porn300.com/es/video/no-mas-excusas-paga-el-alquiler-o-follame/embed",
+        "https://www.porn300.com/es/video/nena-milf-con-el-ano-destrozado/embed",
+        "https://www.porn300.com/es/video/grande-y-monstruosa-polla-negra/embed",
+        "https://www.porn300.com/es/video/zorra-sexy-jugando-con-un-buen-rabo/embed",
+        "https://www.porn300.com/es/video/latina-pelirroja-con-botas-y-ganas-de-follar/embed",
+        "https://www.porn300.com/es/video/dandole-duro-a-una-bombera/embed",
+        "https://www.porn300.com/es/video/milf-flaca-siendo-penetrada-en-su-afeitado-cono/embed",
+        "https://www.porn300.com/es/video/milf-con-tetazas-follando-con-una-polla-dura/embed",
+        "https://www.porn300.com/es/video/milf-culona-se-pasa-la-noche-cabalgando/embed",
+        "https://www.porn300.com/es/video/taladran-el-cono-de-una-bella-tigresa-colombiana/embed",
+        "https://www.porn300.com/es/video/milf-chilena-enculada/embed",
+        "https://www.porn300.com/es/video/paja-con-unas-tetas-aceitosas/embed",
+        "https://www.porn300.com/es/video/espectacular-comida-de-cono/embed",
+        "https://www.porn300.com/es/video/mama-sexy-con-un-culo-grande-y-redondo/embed",
+        "https://www.porn300.com/es/video/milf-embarazada-follada-duro/embed",
+        "https://www.porn300.com/es/video/milf-negra-untada-de-aceite-follada-a-cuatro-patas/embed",
+        "https://www.porn300.com/es/video/follando-a-una-milf-morena/embed",
+        "https://www.porn300.com/es/video/anal-con-una-guapa-y-tetona-rusa/embed",
+        "https://www.porn300.com/es/video/hago-la-mitad-del-trabajo/embed",
+        "https://www.porn300.com/es/video/mqmf-espanola-follada-brutalmente/embed",
+        "https://www.porn300.com/es/video/milf-seductora-disfruta-de-un-trio-interracial/embed",
+        "https://www.porn300.com/es/video/una-milf-mexicana-zorrita/embed",
+        "https://www.porn300.com/es/video/esperanza-gomez-y-sus-melones-en-recopilacion-molona/embed",
+        "https://www.porn300.com/es/video/milf-mexicana-brutalmente-follada/embed",
+        "https://www.porn300.com/es/video/chica-con-curvas-perforada-por-detras/embed",
+        "https://www.porn300.com/es/video/la-doctora-rubia-es-una-tia-buena/embed",
+        "https://www.porn300.com/es/video/rubia-feliz-recibe-una-buena-dosis-de-negro/embed",
+        "https://www.porn300.com/es/video/milf-argentina-sexy-follada-por-hombre-caliente-y-joven/embed",
+        "https://www.porn300.com/es/video/milf-caliente-pajea-una-polla-gorda/embed",
+        "https://www.porn300.com/es/video/el-director-de-un-equipo-femenino-le-echa-un-buen-polvo-a-un-deportista-profesional-tras-despedirlo/embed",
+        "https://www.porn300.com/es/video/milf-morena-devora-una-polla-joven/embed",
+        "https://www.porn300.com/es/video/sensual-tigresa-polaca-hace-una-cabalgada-inversa/embed",
+        "https://www.porn300.com/es/video/ginebra-sigue-siendo-la-mejor-actriz-porno-de-alemania/embed",
+        "https://www.porn300.com/es/video/dos-bbc-para-una-sola-milf/embed",
+        "https://www.porn300.com/es/video/hora-del-recreo-para-esta-milf-de-cono-peludo/embed",
+        "https://tv.fakings.com/tools/player/?file=7-439-patricia-hd&src=tv&af=noalias&1742707980",
+        "https://tv.fakings.com/tools/player/?file=7-345-alba-hd&src=tv&af=noalias&1742708349",
+        "https://tv.fakings.com/tools/player/?file=18-126-astrid-hd&src=tv&af=noalias&1742708399",
+        "https://tv.fakings.com/tools/player/?file=10-198-astrid-hd&src=tv&af=noalias&1742708513",
+        "https://tv.fakings.com/tools/player/?file=7-439-patricia-hd&src=tv&af=noalias&1742708540",
+        "https://tv.fakings.com/tools/player/?file=17-7-clases-ingles-hd&src=tv&af=noalias&1742708581",
+        "https://tv.fakings.com/tools/player/?file=7-704-astrid-hd&src=tv&af=noalias&1742708636",
+        "https://tv.fakings.com/tools/player/?file=2-206-merakiycobos-hd&src=tv&af=noalias&1742709528",
+        "https://www.porn300.com/es/video/estudiante-latina-en-thriller-sexual/embed",
+        "https://www.porn300.com/es/video/fascinante-adolescente-latina-follada-en-clase/embed",
+        "https://www.porn300.com/es/video/ensenale-una-leccion-inolvidable/embed",
+        "https://www.porn300.com/es/video/colegiala-tetona-es-penetrada-profundo-y-quiere-mas/embed",
+        "https://www.porn300.com/es/video/sexy-hijastra-latina-follada/embed",
+        "https://www.porn300.com/es/video/cachas-frances-revienta-a-una-adolescente-japonesa/embed",
+        "https://www.porn300.com/es/video/reventando-a-una-animadora-culona/embed",
+        "https://www.porn300.com/es/video/una-colegiala-muy-traviesa/embed",
+        "https://www.porn300.com/es/video/profesor-de-escuela-se-folla-a-su-alumna/embed",
+        "https://www.porn300.com/es/video/quedarse-despues-de-clase/embed",
+        "https://www.porn300.com/es/video/profesora-y-colegiala-xxx/embed",
+        "https://www.porn300.com/es/video/ella-haria-cualquier-cosa-por-esa-polla-gigante/embed",
+        "https://www.porn300.com/es/video/estudiante-putilla-se-folla-al-profesor-en-clase/embed",
+        "https://www.porn300.com/es/video/un-cono-gordo-disfrutando-de-un-trio/embed",
+        "https://www.porn300.com/es/video/estudiante-castigada-por-sus-profesores/embed",
+        "https://www.porn300.com/es/video/colegiala-cachonda-en-un-trio-cochino/embed",
+        "https://www.porn300.com/es/video/nena-en-uniforme-cabalga-a-maduro-salido/embed",
+        "https://www.porn300.com/es/video/sucia-colegiala-follada-en-clase/embed",
+        "https://www.porn300.com/es/video/dos-traviesas-colegialas-inglesas/embed",
+        "https://www.porn300.com/es/video/unas-casi-identicas-lesbianas/embed",
+        "https://www.porn300.com/es/video/colegialas-cachondas-toqueteandose-sus-conitos/embed",
+        "https://www.porn300.com/es/video/la-follada-de-culo-mas-caliente/embed",
+        "https://www.porn300.com/es/video/sexo-con-una-colegiala-ecuatoriana/embed",
+        "https://www.porn300.com/es/video/colegiala-tetona-ante-la-cam/embed",
+        "https://www.porn300.com/es/video/zoe-doll-y-jordi-primera-escena-porn/embed",
+        "https://www.porn300.com/es/video/colegiala-adicta-al-hardcore-anal/embed",
+        "https://www.porn300.com/es/video/estudiante-francesa-entra-su-culo-a-su-profesor/embed",
+        "https://www.porn300.com/es/video/colegiala-argentina-follada/embed",
+        "https://www.porn300.com/es/video/las-colegialas-juguetonas-disfrutan-de-un-trio-lesbico-en-la-cocina/embed",
+        "https://www.porn300.com/es/video/esta-si-que-es-una-buena-chica/embed",
+        "https://www.porn300.com/es/video/colegiala-cabalgando-y-gozando/embed",
+        "https://www.porn300.com/es/video/votad-por-danny-d-danny-d-presidente/embed",
+        "https://www.porn300.com/es/video/dejaselo-todo-a-tu-gemela/embed",
+        "https://www.porn300.com/es/video/aprendiendo-en-escuela-francesa/embed",
+        "https://www.porn300.com/es/video/chica-colegiala-japonesa-esta-tan-cachonda/embed",
+        "https://www.porn300.com/es/video/lindas-jovencitas-comparten-la-polla-del-profesor/embed",
+        "https://www.porn300.com/es/video/doble-penetracion-de-zorra-tetona/embed",
+        "https://www.porn300.com/es/video/mi-alumno-no-necesita-manos/embed",
+
+        "https://www.porn300.com/es/video/jovencita-perfecta-taladrada/embed/",
+        "https://www.porn300.com/es/video/trio-anal-con-una-colegiala-polaca/embed/",
+        "https://www.porn300.com/es/video/ella-tiene-su-propio-estilo/embed/",
+        
+        ];
+
+        // Lista de imágenes para cada banner (¡cambia por tus URLs!)
+        const bannerImages1 = [
+            "https://ia600209.us.archive.org/24/items/imagen-13kwlkrl/Imagen10jeweiwoe.png",
+            "https://ia600209.us.archive.org/24/items/imagen-13kwlkrl/Imagen11kdlkrlkw.png",
+            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen12efpwoepow.png",
+            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen13kwlkrl.png",
+            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen14kfkrpwor.png",
+            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen15kefweoiow.png",
+            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen3efklwk.png",
+            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen4jdkweowie.png",
+            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen6lekrlke.png",
+            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen7jfdwklelw.png",
+        ];
+        
+        const bannerImages2 = [
+            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen8jldwkelk.png",
+            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen9kdlwkeow.png",
+            "https://ia601209.us.archive.org/12/items/imagen-14dkcks/Imagen13eklwkel.png.png",
+            "https://ia601209.us.archive.org/12/items/imagen-14dkcks/Imagen14dkcks.png",
+            "https://ia601209.us.archive.org/12/items/imagen-14dkcks/Imagen14dkjs.png",
+            "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagen15kdlskl.png",
+            "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagen16ndskl.png",
+            "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagen18fmvk%C3%B1.png",
+            "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagen19nfdsl.png",
+            "https://ia601209.us.archive.org/12/items/imagen-14dkcks/Imagen19njsak.png",
+            "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagensnoeiq.png",
+        ];
+
+        // Función para selección aleatoria
+        function getRandomItem(array) {
+            return array[Math.floor(Math.random() * array.length)];
+        }
+
+        // Cargar contenido aleatorio al iniciar
+        document.addEventListener('DOMContentLoaded', function() {
+            // Video aleatorio
+            document.getElementById('randomVideo').src = getRandomItem(videos);
+            
+            // Banners aleatorios
+            document.getElementById('banner1').innerHTML = `
+                <img src="${getRandomItem(bannerImages1)}" alt="Banner 1">
+            `;
+            
+            document.getElementById('banner2').innerHTML = `
+                <img src="${getRandomItem(bannerImages2)}" alt="Banner 2">
+            `;
+        });
+    </script>
+</body>
+</html>

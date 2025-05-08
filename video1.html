@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VER VIDEO</title>
+
+<!-- Solo la imagen para WhatsApp -->
+<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/chat-0-c9ef9.appspot.com/o/nuevo%20metodo%2Fkdl.png?alt=media&token=c67e1b61-d143-466f-86b8-28181cccdec2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #1a1a1a; /* Fondo oscuro */
+      color: #f1f1f1; /* Texto claro */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0 10px;
+    }
+
+    .more-videos-btn {
+      display: inline-block;
+      background-color: #d62828;
+      color: white;
+      text-decoration: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 25px;
+      margin: 15px 0;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    .more-videos-btn:hover {
+      background-color: #ad2020;
+      transform: scale(1.05);
+    }
+
+    .video-container {
+      width: 100%;
+      max-width: 480px;
+      position: relative;
+      text-align: center;
+    }
+
+    .video-container iframe {
+      width: 100%;
+      height: 240px;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6);
+    }
+
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin: 20px 0;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .image-grid a {
+      display: block;
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .image-grid a:hover {
+      transform: scale(1.05);
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.8);
+    }
+
+    .image-grid img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 2px solid #d62828; /* Bordes llamativos */
+    }
+  </style>
+</head>
+<body>
+  <a href="encuentros ardientes.html" class="more-videos-btn">Más Videos 🔥</a>
+
+  <div class="video-container">
+    <iframe 
+      src="https://firebasestorage.googleapis.com/v0/b/chat-0-c9ef9.appspot.com/o/nuevo%20metodo%2Fvideos%20metodo%20nuevo%2Fjekd.mp4?alt=media&token=bd8ea8e6-1555-45d0-b216-c57a3233dada" 
+      title="Video +18" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <!-- Cuadrícula de Imágenes -->
+  <div class="image-grid" id="imageGrid"></div>
+
+  <script>
+    // Lista de URLs de imágenes y enlaces
+    const images = [
+      { url: "https://firebasestorage.googleapis.com/v0/b/chat-0-c9ef9.appspot.com/o/ballina.png?alt=media&token=6fd8a30a-f339-4593-afc4-1a93f6b49105", link: "https://nearlynightingalebust.com/g2etat822?key=67e827ce7380f726747375b7d793e4d2" },
+      { url: "https://firebasestorage.googleapis.com/v0/b/chat-0-c9ef9.appspot.com/o/blanca.png?alt=media&token=e7adc82e-cc03-4246-a349-47542699c12d", link: "https://nearlynightingalebust.com/g2etat822?key=67e827ce7380f726747375b7d793e4d2" },
+      { url: "https://firebasestorage.googleapis.com/v0/b/chat-0-c9ef9.appspot.com/o/esperanza.png?alt=media&token=c5ed3c21-ff3c-46e2-a131-b81b43b4c6b5", link: "https://nearlynightingalebust.com/g2etat822?key=67e827ce7380f726747375b7d793e4d2" },
+      { url: "https://firebasestorage.googleapis.com/v0/b/chat-0-c9ef9.appspot.com/o/imagen31.png?alt=media&token=2944aa75-0cbb-415d-86c8-18c63fcd9038", link: "https://nearlynightingalebust.com/g2etat822?key=67e827ce7380f726747375b7d793e4d2" },
+      { url: "https://firebasestorage.googleapis.com/v0/b/chat-0-c9ef9.appspot.com/o/imagen32.png?alt=media&token=9434e67c-8ad0-4836-9df9-6b6143fcd010", link: "https://nearlynightingalebust.com/g2etat822?key=67e827ce7380f726747375b7d793e4d2" },
+      { url: "https://firebasestorage.googleapis.com/v0/b/chat-0-c9ef9.appspot.com/o/imagen33.png?alt=media&token=3936bf00-81a9-424c-b15b-5245b08392ca", link: "https://nearlynightingalebust.com/g2etat822?key=67e827ce7380f726747375b7d793e4d2" },
+      { url: "https://firebasestorage.googleapis.com/v0/b/chat-0-c9ef9.appspot.com/o/imagen34.png?alt=media&token=8ee328c5-7a63-47de-acbe-f5ad46be4d40", link: "https://nearlynightingalebust.com/g2etat822?key=67e827ce7380f726747375b7d793e4d2" },
+      { url: "https://firebasestorage.googleapis.com/v0/b/chat-0-c9ef9.appspot.com/o/imagen35.png?alt=media&token=4da4a889-d725-4057-8611-6acc18cca38c", link: "https://nearlynightingalebust.com/g2etat822?key=67e827ce7380f726747375b7d793e4d2" },
+      { url: "https://firebasestorage.googleapis.com/v0/b/chat-0-c9ef9.appspot.com/o/imagen38.png?alt=media&token=5681d881-73c4-481d-952d-c417dc7c2062", link: "https://nearlynightingalebust.com/g2etat822?key=67e827ce7380f726747375b7d793e4d2" },
+      { url: "https://firebasestorage.googleapis.com/v0/b/chat-0-c9ef9.appspot.com/o/imagen39.png?alt=media&token=9619d2f2-261b-4368-af4e-25fa2a5b77ba", link: "https://nearlynightingalebust.com/g2etat822?key=67e827ce7380f726747375b7d793e4d2" },
+      { url: "https://firebasestorage.googleapis.com/v0/b/chat-0-c9ef9.appspot.com/o/imagen40.png?alt=media&token=8f7c15e9-ee08-4ce1-8dae-8b8569f9c3b5", link: "https://nearlynightingalebust.com/g2etat822?key=67e827ce7380f726747375b7d793e4d2" },
+      { url: "https://firebasestorage.googleapis.com/v0/b/chat-0-c9ef9.appspot.com/o/imagen41.png?alt=media&token=c4b83d10-2dd0-4501-bb7b-24bfde43018c", link: "https://nearlynightingalebust.com/g2etat822?key=67e827ce7380f726747375b7d793e4d2" },
+      { url: "https://firebasestorage.googleapis.com/v0/b/chat-0-c9ef9.appspot.com/o/imagen42.png?alt=media&token=8d25ff4c-a815-4b47-b53e-99ec79544b6c", link: "https://nearlynightingalebust.com/g2etat822?key=67e827ce7380f726747375b7d793e4d2" },
+      { url: "https://firebasestorage.googleapis.com/v0/b/chat-0-c9ef9.appspot.com/o/imagen43.png?alt=media&token=73e202b4-681b-41d9-8c61-f2e2773a8499", link: "https://nearlynightingalebust.com/g2etat822?key=67e827ce7380f726747375b7d793e4d2" },
+      { url: "https://firebasestorage.googleapis.com/v0/b/chat-0-c9ef9.appspot.com/o/imagen44.png?alt=media&token=dfa63459-9f31-4a4f-b159-e2caa6ca0d5e", link: "https://nearlynightingalebust.com/g2etat822?key=67e827ce7380f726747375b7d793e4d2" },
+      { url: "https://firebasestorage.googleapis.com/v0/b/chat-0-c9ef9.appspot.com/o/imagen45.png?alt=media&token=bfbccd71-21d0-44bd-bd06-2cf18265f609", link: "https://nearlynightingalebust.com/g2etat822?key=67e827ce7380f726747375b7d793e4d2" },
+      { url: "https://firebasestorage.googleapis.com/v0/b/chat-0-c9ef9.appspot.com/o/imagen46.png?alt=media&token=2b32aa00-c601-432e-890a-b7278978a2e9", link: "https://nearlynightingalebust.com/g2etat822?key=67e827ce7380f726747375b7d793e4d2" },
+      { url: "https://firebasestorage.googleapis.com/v0/b/chat-0-c9ef9.appspot.com/o/imagen47.png?alt=media&token=da7002f8-c870-461e-b6a7-b5c55b56253a", link: "https://nearlynightingalebust.com/g2etat822?key=67e827ce7380f726747375b7d793e4d2" },
+      { url: "https://firebasestorage.googleapis.com/v0/b/chat-0-c9ef9.appspot.com/o/imagen48.png?alt=media&token=63e39f0e-0f47-4229-bc8f-99862e7228c5", link: "https://nearlynightingalebust.com/g2etat822?key=67e827ce7380f726747375b7d793e4d2" },
+      { url: "https://firebasestorage.googleapis.com/v0/b/chat-0-c9ef9.appspot.com/o/imagen49.png?alt=media&token=2e91d738-a2d0-4d85-891a-d7eb59593b03", link: "https://nearlynightingalebust.com/g2etat822?key=67e827ce7380f726747375b7d793e4d2" },
+      { url: "https://firebasestorage.googleapis.com/v0/b/chat-0-c9ef9.appspot.com/o/imagen50.png?alt=media&token=7063ba57-6a44-4a89-a5c1-643bbf9a8e12", link: "https://nearlynightingalebust.com/g2etat822?key=67e827ce7380f726747375b7d793e4d2" },
+      { url: "https://firebasestorage.googleapis.com/v0/b/chat-0-c9ef9.appspot.com/o/imagen51.png?alt=media&token=63269bf7-8ecb-4847-8682-d04b5dcfb1da", link: "https://nearlynightingalebust.com/g2etat822?key=67e827ce7380f726747375b7d793e4d2" },
+      { url: "https://firebasestorage.googleapis.com/v0/b/chat-0-c9ef9.appspot.com/o/imagen9.png?alt=media&token=c356e424-be8f-4e26-a00b-fc41c5a54542", link: "https://nearlynightingalebust.com/g2etat822?key=67e827ce7380f726747375b7d793e4d2" },
+      { url: "https://firebasestorage.googleapis.com/v0/b/chat-0-c9ef9.appspot.com/o/mia.png?alt=media&token=0239c667-8cc3-4c4b-bd5b-765e5a2e7c24", link: "https://nearlynightingalebust.com/g2etat822?key=67e827ce7380f726747375b7d793e4d2" },
+      { url: "https://firebasestorage.googleapis.com/v0/b/chat-0-c9ef9.appspot.com/o/Imagen1.png?alt=media&token=04fc80e9-f757-4063-baa4-53b78c4f4975", link: "https://nearlynightingalebust.com/g2etat822?key=67e827ce7380f726747375b7d793e4d2" },
+      { url: "https://firebasestorage.googleapis.com/v0/b/chat-0-c9ef9.appspot.com/o/Imagen3.png?alt=media&token=585e8079-72fb-49df-8c12-7a95c6c7013a", link: "https://nearlynightingalebust.com/g2etat822?key=67e827ce7380f726747375b7d793e4d2" },
+      
+      // Agrega aquí las 48 imágenes restantes
+    ];
+
+    // Función para seleccionar 4 imágenes aleatorias
+    function getRandomImages(imageArray, count) {
+      const shuffled = imageArray.sort(() => 0.5 - Math.random());
+      return shuffled.slice(0, count);
+    }
+
+    // Mostrar las imágenes en el DOM
+    function displayImages() {
+      const imageGrid = document.getElementById("imageGrid");
+      const selectedImages = getRandomImages(images, 4);
+
+      selectedImages.forEach(image => {
+        const anchor = document.createElement("a");
+        anchor.href = image.link;
+        anchor.target = "_blank";
+
+        const img = document.createElement("img");
+        img.src = image.url;
+        img.alt = "Publicidad atractiva";
+
+        anchor.appendChild(img);
+        imageGrid.appendChild(anchor);
+      });
+    }
+
+    // Ejecutar al cargar la página
+    displayImages();
+  </script>
+</body>
+</html>
