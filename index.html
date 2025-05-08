@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sígueme y te sigo en Facebook</title>
+    <style>
+        /* ESTILOS GENERALES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            color: #1877F2;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* TARJETAS DE USUARIOS */
+        .user-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .user-card {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            position: relative;
+            border-left: 4px solid transparent;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        /* Estilo para tarjetas ya seguidas */
+        .user-card.followed {
+            background-color: #f0f8ff;
+            border-left-color: #1877F2;
+        }
+        .user-card h3 {
+            color: #1877F2;
+            margin-bottom: 10px;
+        }
+        .follow-button {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            margin-top: 10px;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .follow-button:hover {
+            background: #e0e0e0;
+        }
+        /* Estilo para botón en estado "seguido" */
+        .user-card.followed .follow-button {
+            background: #25D366;
+            color: white;
+        }
+
+        /* BOTÓN DE WHATSAPP */
+        .whatsapp-cta {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .whatsapp-button {
+            display: inline-block;
+            background: #25D366;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* CONTADOR DE SEGUIDOS */
+        .counter {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 18px;
+        }
+
+        /* PAGINACIÓN */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        .page-btn {
+            padding: 8px 12px;
+            min-width: 40px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .page-btn:hover {
+            background: #f0f0f0;
+        }
+        .page-btn.active {
+            background: #1877F2;
+            color: white;
+            border-color: #1877F2;
+        }
+        .pagination-arrow {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .pagination-info {
+            margin: 0 15px;
+            font-size: 14px;
+        }
+        .pagination-dots {
+            padding: 8px 5px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .user-list {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (max-width: 480px) {
+            .user-list {
+                grid-template-columns: 1fr;
+            }
+            .pagination {
+                gap: 5px;
+            }
+            .page-btn, .pagination-arrow {
+                padding: 6px 8px;
+                min-width: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>¡Sígueme y te sigo en Facebook!</h1>
+        
+        <div class="whatsapp-cta">
+            <p>Envía tu enlace por WhatsApp para unirte a la lista: </p>
+            <a href="https://wa.me/+525531649636?text=Hola,%20quiero%20unirme%20a%20la%20lista%20Sígueme%20y%20te%20sigo" 
+               class="whatsapp-button">
+                📩 Enviar mi perfil
+            </a>
+        </div>
+
+        <div class="counter">
+            Has seguido: <span id="follow-count">0</span> perfiles
+        </div>
+
+        <div class="user-list" id="user-list">
+            <!-- Las tarjetas se cargarán dinámicamente -->
+        </div>
+
+        <div class="pagination">
+            <button class="pagination-arrow prev-btn">⬅ Anterior</button>
+            <div class="page-numbers" id="page-numbers"></div>
+            <button class="pagination-arrow next-btn">Siguiente ➡</button>
+            <span class="pagination-info" id="pagination-info"></span>
+        </div>
+    </div>
+
+    <!-- SDK DE FACEBOOK PARA EMBEDS -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" 
+            src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v18.0"></script>
+
+    <!-- SCRIPT PRINCIPAL -->
+    <script>
+        // Datos de ejemplo - REEMPLAZA ESTO CON TUS ENLACES REALES
+        const userData = [
+            {
+                id: "pagina1",
+                name: "peliculas",
+                url: "https://www.facebook.com/profile.php?id=61572732860468"
+            },
+            {
+                id: "pagina2",
+                name: "chicas hermosas",
+                url: "https://www.facebook.com/profile.php?id=61569061893089"
+            },
+            {
+                id: "pagina3",
+                name: "chicas hermosas",
+                url: "https://www.facebook.com/profile.php?id=61574254932963"
+            },
+            // Agrega más enlaces aquí según necesites
+            // Formato: {id: "unico1", name: "Nombre", url: "https://facebook.com/..."}
+        ];
+
+        // Configuración de paginación
+        const itemsPerPage = 10; // Cambia este número para mostrar más/menos tarjetas por página
+        let currentPage = 1;
+        let shuffledUsers = [];
+        let totalPages = 0;
+        const maxVisiblePages = 5; // Máximo de botones de página visibles
+
+        // Elementos DOM
+        const userList = document.getElementById('user-list');
+        const pageNumbers = document.getElementById('page-numbers');
+        const paginationInfo = document.getElementById('pagination-info');
+
+        // Función para mezclar aleatoriamente el array
+        function shuffleArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+
+        // Función para renderizar usuarios
+        function renderUsers(page) {
+            // Mezclar los usuarios si es la primera carga o si cambiamos de página
+            if (page === 1 || shuffledUsers.length === 0) {
+                shuffledUsers = shuffleArray(userData);
+                totalPages = Math.ceil(shuffledUsers.length / itemsPerPage);
+            }
+
+            userList.innerHTML = '';
+            const start = (page - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const paginatedUsers = shuffledUsers.slice(start, end);
+
+            paginatedUsers.forEach(user => {
+                const isFollowed = localStorage.getItem(`followed_${user.id}`);
+                const card = document.createElement('div');
+                card.className = `user-card ${isFollowed ? 'followed' : ''}`;
+                card.setAttribute('data-id', user.id);
+                card.innerHTML = `
+                    <h3>${user.name}</h3>
+                    <div class="fb-page" 
+                         data-href="${user.url}" 
+                         data-width="280" 
+                         data-show-facepile="false"></div>
+                    <button class="follow-button">
+                        ${isFollowed ? '✓ Seguido' : 'Ya seguí este perfil'}
+                    </button>
+                `;
+                userList.appendChild(card);
+            });
+
+            // Actualizar info de paginación
+            paginationInfo.textContent = `Página ${page} de ${totalPages}`;
+
+            // Recargar embeds de Facebook
+            if (window.FB) {
+                FB.XFBML.parse();
+            }
+
+            // Actualizar contador de seguidos
+            updateFollowedCount();
+        }
+
+        // Función para renderizar controles de paginación
+        function renderPagination() {
+            pageNumbers.innerHTML = '';
+            
+            // Calcular rango de páginas a mostrar
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+            
+            // Ajustar si estamos cerca del final
+            if (endPage - startPage + 1 < maxVisiblePages) {
+                startPage = Math.max(1, endPage - maxVisiblePages + 1);
+            }
+
+            // Botón para la primera página
+            if (startPage > 1) {
+                const firstBtn = document.createElement('button');
+                firstBtn.className = 'page-btn';
+                firstBtn.textContent = '1';
+                firstBtn.dataset.page = '1';
+                pageNumbers.appendChild(firstBtn);
+                
+                if (startPage > 2) {
+                    const dots = document.createElement('span');
+                    dots.className = 'pagination-dots';
+                    dots.textContent = '...';
+                    pageNumbers.appendChild(dots);
+                }
+            }
+
+            // Botones para el rango de páginas
+            for (let i = startPage; i <= endPage; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
+                pageBtn.textContent = i;
+                pageBtn.dataset.page = i;
+                pageNumbers.appendChild(pageBtn);
+            }
+
+            // Botón para la última página
+            if (endPage < totalPages) {
+                if (endPage < totalPages - 1) {
+                    const dots = document.createElement('span');
+                    dots.className = 'pagination-dots';
+                    dots.textContent = '...';
+                    pageNumbers.appendChild(dots);
+                }
+                
+                const lastBtn = document.createElement('button');
+                lastBtn.className = 'page-btn';
+                lastBtn.textContent = totalPages;
+                lastBtn.dataset.page = totalPages;
+                pageNumbers.appendChild(lastBtn);
+            }
+        }
+
+        // Función para actualizar el contador de seguidos
+        function updateFollowedCount() {
+            let count = 0;
+            userData.forEach(user => {
+                if (localStorage.getItem(`followed_${user.id}`)) {
+                    count++;
+                }
+            });
+            document.getElementById('follow-count').textContent = count;
+        }
+
+        // Event listeners
+        document.addEventListener('click', function(e) {
+            // Navegación por páginas
+            if (e.target.classList.contains('page-btn')) {
+                currentPage = parseInt(e.target.dataset.page);
+                renderUsers(currentPage);
+                renderPagination();
+            }
+            // Botón anterior
+            else if (e.target.classList.contains('prev-btn') && currentPage > 1) {
+                currentPage--;
+                renderUsers(currentPage);
+                renderPagination();
+            }
+            // Botón siguiente
+            else if (e.target.classList.contains('next-btn') && currentPage < totalPages) {
+                currentPage++;
+                renderUsers(currentPage);
+                renderPagination();
+            }
+            // Botón de seguir
+            else if (e.target.classList.contains('follow-button')) {
+                const card = e.target.closest('.user-card');
+                const cardId = card.getAttribute('data-id');
+                
+                if (localStorage.getItem(`followed_${cardId}`)) {
+                    localStorage.removeItem(`followed_${cardId}`);
+                    card.classList.remove('followed');
+                    e.target.textContent = 'Ya seguí este perfil';
+                } else {
+                    localStorage.setItem(`followed_${cardId}`, 'true');
+                    card.classList.add('followed');
+                    e.target.textContent = '✓ Seguido';
+                }
+                
+                updateFollowedCount();
+            }
+        });
+
+        // Inicializar
+        renderUsers(1);
+        renderPagination();
+    </script>
+</body>
+</html>
