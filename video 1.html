@@ -1,153 +1,151 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
+<!-- En el <head> de tu HTML -->
+    <meta property="og:title" content="">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="https://ia800509.us.archive.org/1/items/imagen-1_202505/Imagen1.png">
+    <meta property="og:url" content="">
+    <meta property="og:type" content="website">
+
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Videos</title>
+    <title>Contenido Exclusivo</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #121212;
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a;
             color: #fff;
-            text-align: center;
-            padding: 20px;
-        }
-
-        #carrusel {
-            margin: 20px auto;
-            max-width: 800px;
             overflow: hidden;
-            border-radius: 10px;
         }
-
-        #carrusel img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            transition: opacity 0.5s ease-in-out;
-            cursor: pointer;
-        }
-
-        #video-container {
+        .container {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
+            height: 100vh;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .btn-ver-mas {
+            padding: 15px 40px;
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 0 auto 20px;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(255, 75, 43, 0.4);
+            transition: all 0.3s ease;
+        }
+        .btn-ver-mas:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 75, 43, 0.6);
+        }
+        .video-container {
+            flex: 1;
+            min-height: 0;
+            width: 100%;
+            border: 3px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .banners {
+            display: flex;
             justify-content: center;
             gap: 20px;
             margin-top: 20px;
+            height: 150px;
         }
-
-        .video-box {
-            background: #1e1e1e;
-            padding: 10px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-            max-width: 560px;
-            width: 100%;
-        }
-
-        iframe {
-            width: 100%;
-            height: 315px;
-            border-radius: 10px;
-            border: none;
-        }
-
-        .boton {
-            background-color: #ff6600;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 18px;
-            border-radius: 5px;
+        .banner {
+            width: 300px;
+            height: 100%;
+            border-radius: 8px;
+            overflow: hidden;
             cursor: pointer;
-            margin-top: 20px;
-            display: inline-block;
+            transition: all 0.3s ease;
+            border: 2px solid #333;
+            position: relative;
         }
-
-        .boton:hover {
-            background-color: #e65c00;
+        .banner:hover {
+            transform: scale(1.05);
+            border-color: #ff416c;
         }
-
-        #categorias-container {
-            display: none;
-            margin-top: 10px;
+        .banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
-
-        .categoria-btn {
-            background-color: #333;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 5px;
-            display: inline-block;
+        .banner::after {
+            
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            text-align: center;
+            padding: 8px;
+            font-size: 14px;
         }
-
-        .categoria-btn:hover {
-            background-color: #555;
+        .logo {
+            color: #ff416c;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(255, 65, 108, 0.5);
         }
     </style>
 </head>
 <body>
-    <h1>🎬 Mejores Videos</h1>
-
-    
-
-    <button class="boton" id="categorias-btn">Categorías</button>
-
-    
-
-    <div id="categorias-container">
-        <button class="categoria-btn" onclick="cargarVideos()">Todas</button>
-        <button class="categoria-btn" onclick="cargarVideos('Jovencitas')">Jovencitas</button>
-        <button class="categoria-btn" onclick="cargarVideos('Maduras')">Maduras</button>
-        <button class="categoria-btn" onclick="cargarVideos('Orgasmos')">Orgasmos</button>
-        <button class="categoria-btn" onclick="cargarVideos('Amateur')">Amateur</button>
-        <button class="categoria-btn" onclick="cargarVideos('casero')">Casero</button>
-        <button class="categoria-btn" onclick="cargarVideos('Milfs')">Milfs</button>
-        <button class="categoria-btn" onclick="cargarVideos('Colegialas')">Colegialas</button>
-
-
-
-
+    <div class="container">
+        <div class="header">
+            <div class="logo"></div>
+            <button class="btn-ver-mas" onclick="window.open('https://nearlynightingalebust.com/evyr8f45?key=3cbdcab7bfe62bb26f807990d1ea8947', '_blank')">
+                VER MÁS VIDEOS
+            </button>
+        </div>
+        
+        <div class="video-container">
+            <iframe id="randomVideo" allowfullscreen></iframe>
+        </div>
+        
+        <div class="banners">
+            <div class="banner" id="banner1" onclick="window.open('https://nearlynightingalebust.com/evyr8f45?key=3cbdcab7bfe62bb26f807990d1ea8947', '_blank')">
+                <!-- Imagen aleatoria se insertará aquí via JS -->
+            </div>
+            <div class="banner" id="banner2" onclick="window.open('https://nearlynightingalebust.com/evyr8f45?key=3cbdcab7bfe62bb26f807990d1ea8947', '_blank')">
+                <!-- Imagen aleatoria se insertará aquí via JS -->
+            </div>
+        </div>
     </div>
 
-
-
-
- 
-
-
-
-
-
-
-
-    <div id="video-container"></div>
-
-<!-- Carrusel de imágenes -->
-<div id="carrusel">
-    <a id="carrusel-link" href="https://example.com" target="_blank">
-        <img id="carrusel-img" src="https://via.placeholder.com/800x300?text=Imagen+1" alt="Carrusel">
-    </a>
-</div>
-
-
-    <button class="boton" id="ver-mas">Ver más</button>
-
- 
-
-    
     <script>
-
-
-
-        
-        const videosPorCategoria = {
-            Jovencitas: [
-                "https://www.cumlouder.com/es/embed/4481",
+        // Lista de videos
+        const videos = [
+            "https://www.cumlouder.com/es/embed/4481",
                 "https://www.cumlouder.com/es/embed/9678",
                 "https://www.cumlouder.com/es/embed/2956",
                 "https://www.cumlouder.com/es/embed/3217",
@@ -297,12 +295,6 @@
                 "https://www.cumlouder.com/es/embed/6034",
                 "https://www.cumlouder.com/es/embed/111090",
                 "https://www.cumlouder.com/es/embed/5151",
-
-
-               
-
-            ],
-            Maduras: [
                 "https://www.cumlouder.com/es/embed/5852",
                 "https://www.cumlouder.com/es/embed/4600",
                 "https://www.cumlouder.com/es/embed/4481",
@@ -400,11 +392,6 @@
                 "https://www.cumlouder.com/es/embed/5002",
                 "https://www.cumlouder.com/es/embed/4832",
                 "https://www.cumlouder.com/es/embed/4822",
-               
-
-
-            ],
-            Orgasmos: [
                 "https://www.cumlouder.com/es/embed/2518",
                 "https://www.cumlouder.com/es/embed/5580",
                 "https://www.cumlouder.com/es/embed/4758",
@@ -455,10 +442,7 @@
                 "https://www.cumlouder.com/es/embed/2914",
                 "https://www.cumlouder.com/es/embed/2943",
                 "https://www.cumlouder.com/es/embed/3123",
-
-            ],
-            Amateur: [
-            "https://www.cumlouder.com/es/embed/5580",
+                "https://www.cumlouder.com/es/embed/5580",
             "https://www.cumlouder.com/es/embed/29204",
             "https://www.cumlouder.com/es/embed/5505",
             "https://www.cumlouder.com/es/embed/3061",
@@ -572,14 +556,7 @@
             "https://www.porn300.com/es/video/tetona-en-lenceria-lava-el-coche/embed",
             "https://www.porn300.com/es/video/placeres-por-sexo-telefonico/embed",
             "https://www.porn300.com/es/video/un-casting-porno-se-vuelve-muy-salvaje/embed",
-            
-
-
-
-        ],
-
-        casero: [
-        "https://www.cumlouder.com/es/embed/41610",
+            "https://www.cumlouder.com/es/embed/41610",
         "https://www.cumlouder.com/es/embed/65398",
         "https://www.cumlouder.com/es/embed/93664",
         "https://www.cumlouder.com/es/embed/89855",
@@ -613,9 +590,6 @@
         "https://www.cumlouder.com/es/embed/6924",
         "https://www.cumlouder.com/es/embed/7845",
         "https://www.cumlouder.com/es/embed/6474",
-    ],
-
-    Milfs: [
         "https://www.cumlouder.com/es/embed/37447",
         "https://www.cumlouder.com/es/embed/32951",
         "https://www.cumlouder.com/es/embed/5852",
@@ -707,258 +681,106 @@
         "https://www.porn300.com/es/video/ginebra-sigue-siendo-la-mejor-actriz-porno-de-alemania/embed",
         "https://www.porn300.com/es/video/dos-bbc-para-una-sola-milf/embed",
         "https://www.porn300.com/es/video/hora-del-recreo-para-esta-milf-de-cono-peludo/embed",
-        "https://tv.fakings.com/tools/player/?file=10-77-esperanza-hd&src=tv&af=noalias&1746602386",
-
-
-        
-
-
-    ],
-
-
-
-    Colegialas: [
         "https://tv.fakings.com/tools/player/?file=7-439-patricia-hd&src=tv&af=noalias&1742707980",
-       "https://tv.fakings.com/tools/player/?file=7-345-alba-hd&src=tv&af=noalias&1742708349",
-       "https://tv.fakings.com/tools/player/?file=18-126-astrid-hd&src=tv&af=noalias&1742708399",
-       "https://tv.fakings.com/tools/player/?file=10-198-astrid-hd&src=tv&af=noalias&1742708513",
-       "https://tv.fakings.com/tools/player/?file=7-439-patricia-hd&src=tv&af=noalias&1742708540",
-       "https://tv.fakings.com/tools/player/?file=17-7-clases-ingles-hd&src=tv&af=noalias&1742708581",
-       "https://tv.fakings.com/tools/player/?file=7-704-astrid-hd&src=tv&af=noalias&1742708636",
-       "https://tv.fakings.com/tools/player/?file=2-206-merakiycobos-hd&src=tv&af=noalias&1742709528",
-       "https://www.porn300.com/es/video/estudiante-latina-en-thriller-sexual/embed",
-       "https://www.porn300.com/es/video/fascinante-adolescente-latina-follada-en-clase/embed",
-       "https://www.porn300.com/es/video/ensenale-una-leccion-inolvidable/embed",
-       "https://www.porn300.com/es/video/colegiala-tetona-es-penetrada-profundo-y-quiere-mas/embed",
-       "https://www.porn300.com/es/video/sexy-hijastra-latina-follada/embed",
-       "https://www.porn300.com/es/video/cachas-frances-revienta-a-una-adolescente-japonesa/embed",
-       "https://www.porn300.com/es/video/reventando-a-una-animadora-culona/embed",
-       "https://www.porn300.com/es/video/una-colegiala-muy-traviesa/embed",
-       "https://www.porn300.com/es/video/profesor-de-escuela-se-folla-a-su-alumna/embed",
-       "https://www.porn300.com/es/video/quedarse-despues-de-clase/embed",
-       "https://www.porn300.com/es/video/profesora-y-colegiala-xxx/embed",
-       "https://www.porn300.com/es/video/ella-haria-cualquier-cosa-por-esa-polla-gigante/embed",
-       "https://www.porn300.com/es/video/estudiante-putilla-se-folla-al-profesor-en-clase/embed",
-       "https://www.porn300.com/es/video/un-cono-gordo-disfrutando-de-un-trio/embed",
-       "https://www.porn300.com/es/video/estudiante-castigada-por-sus-profesores/embed",
-       "https://www.porn300.com/es/video/colegiala-cachonda-en-un-trio-cochino/embed",
-       "https://www.porn300.com/es/video/nena-en-uniforme-cabalga-a-maduro-salido/embed",
-       "https://www.porn300.com/es/video/sucia-colegiala-follada-en-clase/embed",
-       "https://www.porn300.com/es/video/dos-traviesas-colegialas-inglesas/embed",
-       "https://www.porn300.com/es/video/unas-casi-identicas-lesbianas/embed",
-       "https://www.porn300.com/es/video/colegialas-cachondas-toqueteandose-sus-conitos/embed",
-       "https://www.porn300.com/es/video/la-follada-de-culo-mas-caliente/embed",
-       "https://www.porn300.com/es/video/sexo-con-una-colegiala-ecuatoriana/embed",
-       "https://www.porn300.com/es/video/colegiala-tetona-ante-la-cam/embed",
-       "https://www.porn300.com/es/video/zoe-doll-y-jordi-primera-escena-porn/embed",
-       "https://www.porn300.com/es/video/colegiala-adicta-al-hardcore-anal/embed",
-       "https://www.porn300.com/es/video/estudiante-francesa-entra-su-culo-a-su-profesor/embed",
-       "https://www.porn300.com/es/video/colegiala-argentina-follada/embed",
-       "https://www.porn300.com/es/video/las-colegialas-juguetonas-disfrutan-de-un-trio-lesbico-en-la-cocina/embed",
-       "https://www.porn300.com/es/video/esta-si-que-es-una-buena-chica/embed",
-       "https://www.porn300.com/es/video/colegiala-cabalgando-y-gozando/embed",
-       "https://www.porn300.com/es/video/votad-por-danny-d-danny-d-presidente/embed",
-       "https://www.porn300.com/es/video/dejaselo-todo-a-tu-gemela/embed",
-       "https://www.porn300.com/es/video/aprendiendo-en-escuela-francesa/embed",
-       "https://www.porn300.com/es/video/chica-colegiala-japonesa-esta-tan-cachonda/embed",
-       "https://www.porn300.com/es/video/lindas-jovencitas-comparten-la-polla-del-profesor/embed",
-       "https://www.porn300.com/es/video/doble-penetracion-de-zorra-tetona/embed",
-       "https://www.porn300.com/es/video/mi-alumno-no-necesita-manos/embed",
-       "https://tv.fakings.com/tools/player/?file=7-297-cloe-15m&src=tv&af=noalias&1746601888",
-      
+        "https://tv.fakings.com/tools/player/?file=7-345-alba-hd&src=tv&af=noalias&1742708349",
+        "https://tv.fakings.com/tools/player/?file=18-126-astrid-hd&src=tv&af=noalias&1742708399",
+        "https://tv.fakings.com/tools/player/?file=10-198-astrid-hd&src=tv&af=noalias&1742708513",
+        "https://tv.fakings.com/tools/player/?file=7-439-patricia-hd&src=tv&af=noalias&1742708540",
+        "https://tv.fakings.com/tools/player/?file=17-7-clases-ingles-hd&src=tv&af=noalias&1742708581",
+        "https://tv.fakings.com/tools/player/?file=7-704-astrid-hd&src=tv&af=noalias&1742708636",
+        "https://tv.fakings.com/tools/player/?file=2-206-merakiycobos-hd&src=tv&af=noalias&1742709528",
+        "https://www.porn300.com/es/video/estudiante-latina-en-thriller-sexual/embed",
+        "https://www.porn300.com/es/video/fascinante-adolescente-latina-follada-en-clase/embed",
+        "https://www.porn300.com/es/video/ensenale-una-leccion-inolvidable/embed",
+        "https://www.porn300.com/es/video/colegiala-tetona-es-penetrada-profundo-y-quiere-mas/embed",
+        "https://www.porn300.com/es/video/sexy-hijastra-latina-follada/embed",
+        "https://www.porn300.com/es/video/cachas-frances-revienta-a-una-adolescente-japonesa/embed",
+        "https://www.porn300.com/es/video/reventando-a-una-animadora-culona/embed",
+        "https://www.porn300.com/es/video/una-colegiala-muy-traviesa/embed",
+        "https://www.porn300.com/es/video/profesor-de-escuela-se-folla-a-su-alumna/embed",
+        "https://www.porn300.com/es/video/quedarse-despues-de-clase/embed",
+        "https://www.porn300.com/es/video/profesora-y-colegiala-xxx/embed",
+        "https://www.porn300.com/es/video/ella-haria-cualquier-cosa-por-esa-polla-gigante/embed",
+        "https://www.porn300.com/es/video/estudiante-putilla-se-folla-al-profesor-en-clase/embed",
+        "https://www.porn300.com/es/video/un-cono-gordo-disfrutando-de-un-trio/embed",
+        "https://www.porn300.com/es/video/estudiante-castigada-por-sus-profesores/embed",
+        "https://www.porn300.com/es/video/colegiala-cachonda-en-un-trio-cochino/embed",
+        "https://www.porn300.com/es/video/nena-en-uniforme-cabalga-a-maduro-salido/embed",
+        "https://www.porn300.com/es/video/sucia-colegiala-follada-en-clase/embed",
+        "https://www.porn300.com/es/video/dos-traviesas-colegialas-inglesas/embed",
+        "https://www.porn300.com/es/video/unas-casi-identicas-lesbianas/embed",
+        "https://www.porn300.com/es/video/colegialas-cachondas-toqueteandose-sus-conitos/embed",
+        "https://www.porn300.com/es/video/la-follada-de-culo-mas-caliente/embed",
+        "https://www.porn300.com/es/video/sexo-con-una-colegiala-ecuatoriana/embed",
+        "https://www.porn300.com/es/video/colegiala-tetona-ante-la-cam/embed",
+        "https://www.porn300.com/es/video/zoe-doll-y-jordi-primera-escena-porn/embed",
+        "https://www.porn300.com/es/video/colegiala-adicta-al-hardcore-anal/embed",
+        "https://www.porn300.com/es/video/estudiante-francesa-entra-su-culo-a-su-profesor/embed",
+        "https://www.porn300.com/es/video/colegiala-argentina-follada/embed",
+        "https://www.porn300.com/es/video/las-colegialas-juguetonas-disfrutan-de-un-trio-lesbico-en-la-cocina/embed",
+        "https://www.porn300.com/es/video/esta-si-que-es-una-buena-chica/embed",
+        "https://www.porn300.com/es/video/colegiala-cabalgando-y-gozando/embed",
+        "https://www.porn300.com/es/video/votad-por-danny-d-danny-d-presidente/embed",
+        "https://www.porn300.com/es/video/dejaselo-todo-a-tu-gemela/embed",
+        "https://www.porn300.com/es/video/aprendiendo-en-escuela-francesa/embed",
+        "https://www.porn300.com/es/video/chica-colegiala-japonesa-esta-tan-cachonda/embed",
+        "https://www.porn300.com/es/video/lindas-jovencitas-comparten-la-polla-del-profesor/embed",
+        "https://www.porn300.com/es/video/doble-penetracion-de-zorra-tetona/embed",
+        "https://www.porn300.com/es/video/mi-alumno-no-necesita-manos/embed",
+
+        "https://www.porn300.com/es/video/jovencita-perfecta-taladrada/embed/",
+        "https://www.porn300.com/es/video/trio-anal-con-una-colegiala-polaca/embed/",
+        "https://www.porn300.com/es/video/ella-tiene-su-propio-estilo/embed/",
         
+        ];
 
-
-
-
-
-
-    ],
-
-
-        };
-
-
+        // Lista de imágenes para cada banner (¡cambia por tus URLs!)
+        const bannerImages1 = [
+            "https://ia600209.us.archive.org/24/items/imagen-13kwlkrl/Imagen10jeweiwoe.png",
+            "https://ia600209.us.archive.org/24/items/imagen-13kwlkrl/Imagen11kdlkrlkw.png",
+            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen12efpwoepow.png",
+            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen13kwlkrl.png",
+            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen14kfkrpwor.png",
+            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen15kefweoiow.png",
+            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen3efklwk.png",
+            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen4jdkweowie.png",
+            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen6lekrlke.png",
+            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen7jfdwklelw.png",
+        ];
         
+        const bannerImages2 = [
+            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen8jldwkelk.png",
+            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen9kdlwkeow.png",
+            "https://ia601209.us.archive.org/12/items/imagen-14dkcks/Imagen13eklwkel.png.png",
+            "https://ia601209.us.archive.org/12/items/imagen-14dkcks/Imagen14dkcks.png",
+            "https://ia601209.us.archive.org/12/items/imagen-14dkcks/Imagen14dkjs.png",
+            "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagen15kdlskl.png",
+            "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagen16ndskl.png",
+            "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagen18fmvk%C3%B1.png",
+            "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagen19nfdsl.png",
+            "https://ia601209.us.archive.org/12/items/imagen-14dkcks/Imagen19njsak.png",
+            "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagensnoeiq.png",
+        ];
 
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
+        // Función para selección aleatoria
+        function getRandomItem(array) {
+            return array[Math.floor(Math.random() * array.length)];
         }
 
-        let videosActuales = [];
-        let index = 0;
-
-        function cargarVideos(categoria = null) {
-            if (categoria) {
-                videosActuales = [...videosPorCategoria[categoria]];
-            } else {
-                // Combinar todos los videos si no se selecciona una categoría
-                videosActuales = Object.values(videosPorCategoria).flat();
-            }
-            shuffleArray(videosActuales);
-            index = 0;
-            document.getElementById("video-container").innerHTML = "";
-            mostrarVideos();
-        }
-
-        function mostrarVideos() {
-            const container = document.getElementById("video-container");
-            let count = 0;
-            while (index < videosActuales.length && count < 2) {
-                const videoBox = document.createElement("div");
-                videoBox.classList.add("video-box");
-
-                const iframe = document.createElement("iframe");
-                iframe.src = videosActuales[index];
-                iframe.allowFullscreen = true;
-
-                videoBox.appendChild(iframe);
-                container.appendChild(videoBox);
-
-                index++;
-                count++;
-            }
-            document.getElementById("ver-mas").style.display = (index < videosActuales.length) ? "inline-block" : "none";
-        }
-
-        document.getElementById("ver-mas").addEventListener("click", mostrarVideos);
-        document.getElementById("categorias-btn").addEventListener("click", function() {
-            const container = document.getElementById("categorias-container");
-            container.style.display = (container.style.display === "none" || container.style.display === "") ? "block" : "none";
+        // Cargar contenido aleatorio al iniciar
+        document.addEventListener('DOMContentLoaded', function() {
+            // Video aleatorio
+            document.getElementById('randomVideo').src = getRandomItem(videos);
+            
+            // Banners aleatorios
+            document.getElementById('banner1').innerHTML = `
+                <img src="${getRandomItem(bannerImages1)}" alt="Banner 1">
+            `;
+            
+            document.getElementById('banner2').innerHTML = `
+                <img src="${getRandomItem(bannerImages2)}" alt="Banner 2">
+            `;
         });
-
-        // Cargar por defecto videos de todas las categorías
-        cargarVideos();
-
-
-
-
-        
     </script>
-
-
-    <script>
-        (function () {
-            const carouselData = [
-                {
-                    src: "https://ia600209.us.archive.org/24/items/imagen-13kwlkrl/Imagen10jeweiwoe.png",
-                    link: "https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732"
-                },
-                {
-                    src: "https://ia600209.us.archive.org/24/items/imagen-13kwlkrl/Imagen11kdlkrlkw.png",
-                    link: "https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732"
-                },
-                {
-                    src: "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen12efpwoepow.png",
-                    link: "https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732"
-                },
-                {
-                    src: "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen13kwlkrl.png",
-                    link: "https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732"
-                },
-                {
-                    src: "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen14kfkrpwor.png",
-                    link: "https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732"
-                },
-                {
-                    src: "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen15kefweoiow.png",
-                    link: "https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732"
-                },
-                {
-                    src: "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen3efklwk.png",
-                    link: "https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732"
-                },
-                {
-                    src: "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen4jdkweowie.png",
-                    link: "https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732"
-                },
-                {
-                    src: "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen6lekrlke.png",
-                    link: "https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732"
-                },
-                {
-                    src: "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen7jfdwklelw.png",
-                    link: "https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732"
-                },
-                {
-                    src: "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen8jldwkelk.png",
-                    link: "https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732"
-                },
-                {
-                    src: "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen9kdlwkeow.png",
-                    link: "https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732"
-                },
-                {
-                    src: "https://ia601209.us.archive.org/12/items/imagen-14dkcks/Imagen13eklwkel.png.png",
-                    link: "https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732"
-                },
-                {
-                    src: "https://ia601209.us.archive.org/12/items/imagen-14dkcks/Imagen14dkcks.png",
-                    link: "https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732"
-                },
-                {
-                    src: "https://ia601209.us.archive.org/12/items/imagen-14dkcks/Imagen14dkjs.png",
-                    link: "https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732"
-                },
-                {
-                    src: "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagen15kdlskl.png",
-                    link: "https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732"
-                },
-                {
-                    src: "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagen16ndskl.png",
-                    link: "https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732"
-                },
-                {
-                    src: "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagen18fmvk%C3%B1.png",
-                    link: "https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732"
-                },
-                {
-                    src: "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagen19nfdsl.png",
-                    link: "https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732"
-                },
-                {
-                    src: "https://ia601209.us.archive.org/12/items/imagen-14dkcks/Imagen19njsak.png",
-                    link: "https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732"
-                },
-                {
-                    src: "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagensnoeiq.png",
-                    link: "https://nearlynightingalebust.com/cr6ypdrgrv?key=a97c9b0baaac23557706797063cc9732"
-                },
-                
-
-
-            ];
-
-            // Mezclar las imágenes al azar
-            function shuffle(array) {
-                for (let i = array.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
-                    [array[i], array[j]] = [array[j], array[i]];
-                }
-                return array;
-            }
-
-            const shuffledCarousel = shuffle([...carouselData]);
-            let carouselIndex = 0;
-
-            function cambiarImagen() {
-                carouselIndex = (carouselIndex + 1) % shuffledCarousel.length;
-                document.getElementById('carrusel-img').src = shuffledCarousel[carouselIndex].src;
-                document.getElementById('carrusel-link').href = shuffledCarousel[carouselIndex].link;
-            }
-
-            // Inicial
-            document.getElementById('carrusel-img').src = shuffledCarousel[carouselIndex].src;
-            document.getElementById('carrusel-link').href = shuffledCarousel[carouselIndex].link;
-
-            setInterval(cambiarImagen, 6000);
-        })();
-    </script>
-    
-    
-
 </body>
 </html>
