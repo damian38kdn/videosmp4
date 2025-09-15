@@ -1,495 +1,156 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
+<!-- En el <head> de tu HTML -->
+    <meta property="og:title" content="">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="https://ia800509.us.archive.org/1/items/imagen-1_202505/Imagen1.png">
+    <meta property="og:url" content="">
+    <meta property="og:type" content="website">
+
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Videos </title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Contenido Exclusivo</title>
     <style>
-        * {
+        body, html {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a;
+            color: #fff;
+            overflow: hidden;
         }
-        
-        :root {
-            --primary-color: #ff5252;
-            --dark-bg: #0f0f0f;
-            --medium-bg: #1a1a1a;
-            --light-text: #f1f1f1;
-            --border-radius: 12px;
-            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-        }
-        
-        body {
-            background-color: var(--dark-bg);
-            color: var(--light-text);
-            line-height: 1.6;
-            min-height: 100vh;
+        .container {
             display: flex;
             flex-direction: column;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 1200px;
+            height: 100vh;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 0 15px;
-        }
-        
-        /* Header y Navegación */
-        header {
-            background-color: var(--dark-bg);
-            border-bottom: 1px solid #333;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            padding: 15px 0;
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary-color);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-        }
-        
-        .nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--light-text);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        
-        nav {
-            display: flex;
-            gap: 20px;
-        }
-        
-        nav a {
-            color: var(--light-text);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        nav a:hover {
-            color: var(--primary-color);
-        }
-        
-        /* Video Principal */
-        .video-container {
-            width: 100%;
-            margin: 20px 0;
-            background-color: #000;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--box-shadow);
-            aspect-ratio: 16/9;
-        }
-        
-        .video-container video {
-            width: 100%;
-            height: 100%;
-            display: block;
-            object-fit: cover;
-        }
-        
-        /* Direct Links - Modificado para estar en la misma línea */
-        .direct-links {
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-            margin: 25px 0;
-        }
-        
-        .direct-link {
-            flex: 1;
+            padding: 20px;
+            box-sizing: border-box;
             position: relative;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s;
-            aspect-ratio: 16/9;
-            max-width: 48%;
         }
-        
-        .direct-link:hover {
-            transform: scale(1.03);
+        .header {
+            text-align: center;
+            margin-bottom: 15px;
         }
-        
-        .direct-link img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        
-        .play-icon {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
-            background-color: rgba(255, 82, 82, 0.85);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .btn-ver-mas {
+            padding: 15px 40px;
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
             color: white;
-            font-size: 1.5rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
             cursor: pointer;
-        }
-        
-        /* Títulos de sección */
-        .section-title {
-            font-size: 1.5rem;
-            margin: 30px 0 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--primary-color);
-        }
-        
-        /* Grid de videos sugeridos */
-        .video-suggestions {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-        
-        .video-thumb {
+            margin: 0 auto 20px;
             display: block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(255, 75, 43, 0.4);
+            transition: all 0.3s ease;
+        }
+        .btn-ver-mas:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 75, 43, 0.6);
+        }
+        .video-container {
+            flex: 1;
+            min-height: 0;
+            width: 100%;
+            border: 3px solid #333;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-decoration: none;
-            color: var(--light-text);
-            background-color: var(--medium-bg);
-            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
         }
-        
-        .video-thumb:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-        }
-        
-        .thumb-img {
-            width: 100%;
-            aspect-ratio: 16/9;
-            object-fit: cover;
-            display: block;
-        }
-        
-        .video-thumb p {
-            padding: 10px;
-            font-size: 0.9rem;
-            text-align: center;
-            margin: 0;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-        }
-        
-        /* Publicidad */
-        .ad-container {
-            background-color: var(--medium-bg);
-            border-radius: var(--border-radius);
-            padding: 15px;
-            margin: 25px 0;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        
-        .ad-label {
-            display: block;
-            font-size: 0.75rem;
-            color: #888;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-        }
-        
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 20px 0;
-            margin-top: auto;
-            border-top: 1px solid #333;
-            font-size: 0.9rem;
-            color: #888;
-        }
-        
-        footer a {
-            color: var(--primary-color);
-            text-decoration: none;
-            margin: 0 10px;
-        }
-        
-        footer a:hover {
-            text-decoration: underline;
-        }
-        
-        /* Modal para video */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
+        iframe {
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
+            border: none;
         }
-        
-        .modal-content {
-            width: 90%;
-            max-width: 800px;
+        .banners {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            height: 150px;
+        }
+        .banner {
+            width: 300px;
+            height: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid #333;
             position: relative;
         }
-        
-        .modal-close {
-            position: absolute;
-            top: -40px;
-            right: 0;
-            color: white;
-            font-size: 30px;
-            cursor: pointer;
+        .banner:hover {
+            transform: scale(1.05);
+            border-color: #ff416c;
         }
-        
-        .modal-video {
+        .banner img {
             width: 100%;
-            aspect-ratio: 16/9;
+            height: 100%;
+            object-fit: cover;
         }
-        
-        /* Media Queries */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 15px;
-            }
+        .banner::after {
             
-            .nav-toggle {
-                display: block;
-                position: absolute;
-                right: 15px;
-                top: 15px;
-            }
-            
-            nav {
-                display: none;
-                width: 100%;
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            nav.active {
-                display: flex;
-            }
-            
-            .direct-links {
-                flex-direction: column;
-            }
-            
-            .direct-link {
-                max-width: 100%;
-            }
-            
-            .video-suggestions {
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            }
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            text-align: center;
+            padding: 8px;
+            font-size: 14px;
         }
-        
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 10px;
-            }
-            
-            .video-suggestions {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-            }
-            
-            .video-thumb p {
-                font-size: 0.8rem;
-                padding: 8px 5px;
-            }
-            
-            .section-title {
-                font-size: 1.3rem;
-            }
-            
-            .play-icon {
-                width: 50px;
-                height: 50px;
-                font-size: 1.2rem;
-            }
-        }
-        
-        @media (min-width: 1200px) {
-            .video-suggestions {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            }
+        .logo {
+            color: #ff416c;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(255, 65, 108, 0.5);
         }
     </style>
 </head>
 <body>
-    <!-- 
-<header>
     <div class="container">
-        <div class="header-content">
-            <a href="#" class="logo">
-                <i class="fas fa-play-circle"></i> VideosMP4
-            </a>
-            <button class="nav-toggle" id="navToggle">
-                <i class="fas fa-bars"></i>
-            </button>
-            <nav id="mainNav">
-                <a href="#">Inicio</a>
-                <a href="#">Categorías</a>
-                <a href="#">Nuevos</a>
-                <a href="#">Populares</a>
-                <a href="#">Favoritos</a>
-            </nav>
-        </div>
-    </div>
-</header>
+        <div class="header">
+            <div class="logo"></div>
+            <!--
+<button class="btn-ver-mas" onclick="window.open('video 1.html', '_blank')">
+    VER MÁS VIDEOS
+</button>
 -->
 
-    
-    <main class="container">
-        <!-- Video Principal -->
+        </div>
+        
         <div class="video-container">
-            <video controls poster="">
-                <source src="" type="video/mp4">
-                Tu navegador no soporta el elemento video.
-            </video>
+            <iframe id="randomVideo" allowfullscreen></iframe>
         </div>
         
-        <!-- Direct Links - Ahora en la misma línea -->
-        <div class="direct-links">
-            <div class="direct-link">
-                <img src="" alt="Direct Link 1" id="directLinkImage1">
-                <div class="play-icon">▶</div>
-            </div>
-            <div class="direct-link">
-                <img src="" alt="Direct Link 2" id="directLinkImage2">
-                <div class="play-icon">▶</div>
-            </div>
-        </div>
-        
-        <!-- Sección: Más Videos -->
-        <h2 class="section-title"><i class="fas fa-film"></i> Más Videos</h2>
-        <div class="video-suggestions" id="moreVideosContainer">
-            <!-- Las miniaturas se generarán dinámicamente -->
-        </div>
-        
-        <!-- Espacio para Banner Nativo de Adsterra -->
-        <div class="ad-container">
-            <span class="ad-label"></span>
-            <!-- Pega aquí el código de tu Banner Nativo de Adsterra -->
-            <div style="background-color: #2a2a2a; padding: 20px; border-radius: 8px; color: #999; text-align: center;">
-                <script async="async" data-cfasync="false" src="//continueallergic.com/70167da92f58b2f1f309a708ed557a0f/invoke.js"></script>
-<div id="container-70167da92f58b2f1f309a708ed557a0f"></div>
-            </div>
-        </div>
-        
-        <!-- Más miniaturas -->
-        <div class="video-suggestions" id="moreVideosContainer2">
-            <!-- Las miniaturas se generarán dinámicamente -->
-        </div>
-    </main>
-    
-    <!-- Modal para mostrar video -->
-    <div class="modal" id="videoModal">
-        <div class="modal-content">
-            <span class="modal-close" id="modalClose">&times;</span>
-            <video class="modal-video" controls id="modalVideo">
-                Tu navegador no soporta el elemento video.
-            </video>
-        </div>
+       
+<div class="banners">
+    <div class="banner" id="banner1" onclick="window.open('https://airplaneprosperretreat.com/a5pzqq0ft4?key=8fe249d66ffe2c187b5976cb02526410', '_blank')">
+        <!-- Imagen aleatoria se insertará aquí via JS -->
     </div>
-    
-    <footer>
-        <div class="container">
-            <a href="#">Política de Privacidad</a> • 
-            <a href="#">Términos de Servicio</a> • 
-            <a href="#">Contacto</a>
-            <p>© 2025 VideosMP4.vercel.app</p>
-        </div>
-    </footer>
+    <div class="banner" id="banner2" onclick="window.open('https://airplaneprosperretreat.com/a5pzqq0ft4?key=8fe249d66ffe2c187b5976cb02526410', '_blank')">
+        <!-- Imagen aleatoria se insertará aquí via JS -->
+    </div>
+</div>
 
-    <!-- Script para funcionalidad responsive y imágenes aleatorias -->
+
+    </div>
+
     <script>
-        // Lista de URLs de imágenes para los direct links
-        const directLinkImages = [
-            "https://cdn.aceimg.com/cc7f65a28.png",
-            "https://cdn.aceimg.com/c67c1b6aa.png",
-            "https://cdn.aceimg.com/3c537ef6f.png",
-            "https://cdn.aceimg.com/a8eed3f55.png",
-            "https://cdn.aceimg.com/337e588fb.png",
-            "https://cdn.aceimg.com/76343fc61.png",
-            "https://cdn.aceimg.com/15a13861c.png",
-            "https://cdn.aceimg.com/864078db9.png",
-            "https://cdn.aceimg.com/13405e6e7.png",
-            "https://cdn.aceimg.com/5009a06e0.png",
-            "https://cdn.aceimg.com/7490d4f9d.png",
-            "https://cdn.aceimg.com/dfe1c7609.png",
-            "https://cdn.aceimg.com/f65d0f3ef.png",
-            "https://cdn.aceimg.com/4d904272f.png",
-            "https://cdn.aceimg.com/460f6b525.png",
-            "https://cdn.aceimg.com/b9b0bcb41.png",
-            "https://cdn.aceimg.com/f764d9f25.png",
-            "https://cdn.aceimg.com/16c6feb0c.png",
-            "https://cdn.aceimg.com/5ae72239f.png",
-            "https://cdn.aceimg.com/f3352c65f.png",
-            "https://cdn.aceimg.com/10d5aa458.png",
-            "https://cdn.aceimg.com/fb7c6cb28.png",
-            "https://cdn.aceimg.com/80e5164d5.png",
-            "https://cdn.aceimg.com/6a81dd359.png",
-            "https://cdn.aceimg.com/bb005a40f.png",
-            "https://cdn.aceimg.com/3a69dfcb7.png",
-            "https://cdn.aceimg.com/d859d514d.png",
-            "https://cdn.aceimg.com/f7e4da93c.png",
-            "https://ia600209.us.archive.org/24/items/imagen-13kwlkrl/Imagen10jeweiwoe.png",
-            "https://ia600209.us.archive.org/24/items/imagen-13kwlkrl/Imagen11kdlkrlkw.png",
-            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen12efpwoepow.png",
-            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen13kwlkrl.png",
-            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen14kfkrpwor.png",
-            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen15kefweoiow.png",
-            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen3efklwk.png",
-            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen4jdkweowie.png",
-            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen6lekrlke.png",
-            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen7jfdwklelw.png",
-            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen8jldwkelk.png",
-            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen9kdlwkeow.png",
-            "https://ia601209.us.archive.org/12/items/imagen-14dkcks/Imagen14dkcks.png",
-            "https://ia601209.us.archive.org/12/items/imagen-14dkcks/Imagen14dkjs.png",
-            "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagen15kdlskl.png",
-            "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagen16ndskl.png",
-            "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagen18fmvk%C3%B1.png",
-            "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagen19nfdsl.png",
-            "https://ia601209.us.archive.org/12/items/imagen-14dkcks/Imagen19njsak.png",
-            "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagensnoeiq.png",
-        ];
-
-        // Array de URLs de videos MP4 para el reproductor principal
-        const videoUrls = [
+        // Lista de videos
+        const videos = [
             "https://cdn.videy.co/k1vCDv4T1.mp4",
             "https://cdn.videy.co/rh5UJO0C1.mp4",
             "https://cdn.videy.co/lI2a82rg1.mp4",
@@ -567,216 +228,90 @@
             "https://cdn.videy.co/sOaD0A5T1.mp4",
             "https://cdn.videy.co/91GK8Jd31.mp4",
             "https://cdn.videy.co/OWZTXSA41.mp4",
-        ];
 
-        // URLs de Adsterra para monetización
-        const adsterraLinks = [
-            "https://continueallergic.com/a5pzqq0ft4?key=8fe249d66ffe2c187b5976cb02526410",
-            "https://continueallergic.com/a5pzqq0ft4?key=8fe249d66ffe2c187b5976cb02526410",
-            "https://continueallergic.com/a5pzqq0ft4?key=8fe249d66ffe2c187b5976cb02526410",
-            "https://continueallergic.com/a5pzqq0ft4?key=8fe249d66ffe2c187b5976cb02526410",
-            "https://continueallergic.com/a5pzqq0ft4?key=8fe249d66ffe2c187b5976cb02526410"
-        ];
-
-        document.addEventListener('DOMContentLoaded', function() {
-            // Menú responsive
-            const navToggle = document.getElementById('navToggle');
-            const mainNav = document.getElementById('mainNav');
-            
-            if (navToggle && mainNav) {
-                navToggle.addEventListener('click', function() {
-                    mainNav.classList.toggle('active');
-                });
-            }
-            
-            // Seleccionar imágenes aleatorias para direct links
-            const image1 = document.getElementById('directLinkImage1');
-            const image2 = document.getElementById('directLinkImage2');
-            
-            if (directLinkImages.length > 0) {
-                // Función para obtener un índice aleatorio único
-                function getRandomIndexes(count, max) {
-                    const indexes = [];
-                    while(indexes.length < count) {
-                        const randomIndex = Math.floor(Math.random() * max);
-                        if (!indexes.includes(randomIndex)) {
-                            indexes.push(randomIndex);
-                        }
-                    }
-                    return indexes;
-                }
-                
-                // Obtener dos índices aleatorios únicos
-                const randomIndexes = getRandomIndexes(2, directLinkImages.length);
-                
-                // Asignar imágenes aleatorias
-                image1.src = directLinkImages[randomIndexes[0]];
-                image2.src = directLinkImages[randomIndexes[1]];
-            }
-            
-            // SELECCIONAR VIDEO ALEATORIO PARA EL REPRODUCTOR PRINCIPAL
-            const videoElement = document.querySelector('video');
-            if (videoUrls.length > 0 && videoElement) {
-                const randomVideoIndex = Math.floor(Math.random() * videoUrls.length);
-                videoElement.src = videoUrls[randomVideoIndex];
-                
-                // También actualizar la fuente dentro del elemento source
-                const sourceElement = videoElement.querySelector('source');
-                if (sourceElement) {
-                    sourceElement.src = videoUrls[randomVideoIndex];
-                    // Recargar el video para aplicar el cambio
-                    videoElement.load();
-                }
-            }
-            
-            // Cargar videos aleatorios en las secciones
-            loadRandomVideos();
-            
-            // Agregar funcionalidad a los direct links
-            const directLinks = document.querySelectorAll('.direct-link');
-            directLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    // Abrir enlace de Adsterra aleatorio
-                    const randomAdIndex = Math.floor(Math.random() * adsterraLinks.length);
-                    window.open(adsterraLinks[randomAdIndex], '_blank');
-                });
-            });
-
-            // Configurar modal de video
-            const modal = document.getElementById('videoModal');
-            const modalVideo = document.getElementById('modalVideo');
-            const modalClose = document.getElementById('modalClose');
-            
-            modalClose.addEventListener('click', function() {
-                modal.style.display = 'none';
-                modalVideo.pause();
-            });
-            
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) {
-                    modal.style.display = 'none';
-                    modalVideo.pause();
-                }
-            });
-        });
         
-        // Función para cargar videos aleatorios
-        function loadRandomVideos() {
-            const moreVideosContainer = document.getElementById('moreVideosContainer');
-            const moreVideosContainer2 = document.getElementById('moreVideosContainer2');
-            
-            // Limpiar contenedores
-            moreVideosContainer.innerHTML = '';
-            moreVideosContainer2.innerHTML = '';
-            
-            // Base de datos de videos con thumbs y urls
-const videoDatabase = [
-    { id: 1, title: "", thumb: "https://ia600209.us.archive.org/24/items/imagen-13kwlkrl/Imagen10jeweiwoe.png", videoUrl: videoUrls[0] },
-    { id: 2, title: "", thumb: "https://ia600209.us.archive.org/24/items/imagen-13kwlkrl/Imagen11kdlkrlkw.png", videoUrl: videoUrls[1] },
-    { id: 3, title: "", thumb: "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen12efpwoepow.png", videoUrl: videoUrls[2] },
-    { id: 4, title: "", thumb: "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen13kwlkrl.png", videoUrl: videoUrls[3] },
-    { id: 5, title: "", thumb: "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen14kfkrpwor.png", videoUrl: videoUrls[4] },
-    { id: 6, title: "", thumb: "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen15kefweoiow.png", videoUrl: videoUrls[5] },
-    { id: 7, title: "", thumb: "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen3efklwk.png", videoUrl: videoUrls[6] },
-    { id: 8, title: "", thumb: "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen4jdkweowie.png", videoUrl: videoUrls[7] },
-    { id: 9, title: "", thumb: "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen6lekrlke.png", videoUrl: videoUrls[8] },
-    { id: 10, title: "", thumb: "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen7jfdwklelw.png", videoUrl: videoUrls[9] },
-    { id: 11, title: "", thumb: "https://cdn.aceimg.com/cc7f65a28.png", videoUrl: videoUrls[10] },
-    { id: 12, title: "", thumb: "https://cdn.aceimg.com/c67c1b6aa.png", videoUrl: videoUrls[11] },
-    { id: 13, title: "", thumb: "https://cdn.aceimg.com/3c537ef6f.png", videoUrl: videoUrls[12] },
-    { id: 14, title: "", thumb: "https://cdn.aceimg.com/a8eed3f55.png", videoUrl: videoUrls[13] },
-    { id: 15, title: "", thumb: "https://cdn.aceimg.com/337e588fb.png", videoUrl: videoUrls[14] },
-    { id: 16, title: "", thumb: "https://cdn.aceimg.com/76343fc61.png", videoUrl: videoUrls[15] },
-    { id: 17, title: "", thumb: "https://cdn.aceimg.com/15a13861c.png", videoUrl: videoUrls[16] },
-    { id: 18, title: "", thumb: "https://cdn.aceimg.com/864078db9.png", videoUrl: videoUrls[17] },
-    { id: 19, title: "", thumb: "https://cdn.aceimg.com/13405e6e7.png", videoUrl: videoUrls[18] },
-    { id: 20, title: "", thumb: "https://cdn.aceimg.com/5009a06e0.png", videoUrl: videoUrls[19] },
-    { id: 21, title: "", thumb: "https://cdn.aceimg.com/7490d4f9d.png", videoUrl: videoUrls[20] },
-    { id: 22, title: "", thumb: "https://cdn.aceimg.com/dfe1c7609.png", videoUrl: videoUrls[21] },
-    { id: 23, title: "", thumb: "https://cdn.aceimg.com/f65d0f3ef.png", videoUrl: videoUrls[22] },
-    { id: 24, title: "", thumb: "https://cdn.aceimg.com/4d904272f.png", videoUrl: videoUrls[23] },
-    { id: 25, title: "", thumb: "https://cdn.aceimg.com/460f6b525.png", videoUrl: videoUrls[24] },
-    { id: 26, title: "", thumb: "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen8jldwkelk.png", videoUrl: videoUrls[25] },
-    { id: 27, title: "", thumb: "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen9kdlwkeow.png", videoUrl: videoUrls[26] },
-    { id: 28, title: "", thumb: "https://ia601209.us.archive.org/12/items/imagen-14dkcks/Imagen14dkcks.png", videoUrl: videoUrls[27] },
-    { id: 29, title: "", thumb: "https://ia601209.us.archive.org/12/items/imagen-14dkcks/Imagen14dkjs.png", videoUrl: videoUrls[28] },
-    { id: 30, title: "", thumb: "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagen15kdlskl.png", videoUrl: videoUrls[29] },
-    { id: 31, title: "", thumb: "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagen16ndskl.png", videoUrl: videoUrls[30] },
-    { id: 32, title: "", thumb: "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagen18fmvk%C3%B1.png", videoUrl: videoUrls[31] },
-    { id: 33, title: "", thumb: "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagen19nfdsl.png", videoUrl: videoUrls[32] },
-    { id: 34, title: "", thumb: "https://ia601209.us.archive.org/12/items/imagen-14dkcks/Imagen19njsak.png", videoUrl: videoUrls[33] },
-    { id: 35, title: "", thumb: "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagensnoeiq.png", videoUrl: videoUrls[34] },
-    { id: 36, title: "", thumb: "https://cdn.aceimg.com/b9b0bcb41.png", videoUrl: videoUrls[35] },
-    { id: 37, title: "", thumb: "https://cdn.aceimg.com/f764d9f25.png", videoUrl: videoUrls[36] },
-    { id: 38, title: "", thumb: "https://cdn.aceimg.com/16c6feb0c.png", videoUrl: videoUrls[37] },
-    { id: 39, title: "", thumb: "https://cdn.aceimg.com/5ae72239f.png", videoUrl: videoUrls[38] },
-    { id: 40, title: "", thumb: "https://cdn.aceimg.com/f3352c65f.png", videoUrl: videoUrls[39] },
-    { id: 41, title: "", thumb: "https://cdn.aceimg.com/10d5aa458.png", videoUrl: videoUrls[40] },
-    { id: 42, title: "", thumb: "https://cdn.aceimg.com/fb7c6cb28.png", videoUrl: videoUrls[41] },
-    { id: 43, title: "", thumb: "https://cdn.aceimg.com/80e5164d5.png", videoUrl: videoUrls[42] },
-    { id: 44, title: "", thumb: "https://cdn.aceimg.com/6a81dd359.png", videoUrl: videoUrls[43] },
-    { id: 45, title: "", thumb: "https://cdn.aceimg.com/bb005a40f.png", videoUrl: videoUrls[44] },
-    { id: 46, title: "", thumb: "https://cdn.aceimg.com/3a69dfcb7.png", videoUrl: videoUrls[45] },
-    { id: 47, title: "", thumb: "https://cdn.aceimg.com/d859d514d.png", videoUrl: videoUrls[46] },
-    { id: 48, title: "", thumb: "https://cdn.aceimg.com/f7e4da93c.png", videoUrl: videoUrls[47] }
-];
+        ];
 
-            
-            // Mezclar aleatoriamente el array de videos
-            const shuffledVideos = [...videoDatabase].sort(() => Math.random() - 0.5);
-            
-            // Dividir en dos grupos
-            const firstHalf = shuffledVideos.slice(0, 4);
-            const secondHalf = shuffledVideos.slice(4, 8);
-            
-            // Agregar primeros videos
-            firstHalf.forEach(video => {
-                const thumbElement = createVideoThumb(video);
-                moreVideosContainer.appendChild(thumbElement);
-            });
-            
-            // Agregar segundos videos
-            secondHalf.forEach(video => {
-                const thumbElement = createVideoThumb(video);
-                moreVideosContainer2.appendChild(thumbElement);
-            });
+        // Lista de imágenes para cada banner (¡cambia por tus URLs!)
+        const bannerImages1 = [
+            "https://ia600209.us.archive.org/24/items/imagen-13kwlkrl/Imagen10jeweiwoe.png",
+            "https://ia600209.us.archive.org/24/items/imagen-13kwlkrl/Imagen11kdlkrlkw.png",
+            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen12efpwoepow.png",
+            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen13kwlkrl.png",
+            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen14kfkrpwor.png",
+            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen15kefweoiow.png",
+            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen3efklwk.png",
+            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen4jdkweowie.png",
+            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen6lekrlke.png",
+            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen7jfdwklelw.png",
+            "https://cdn.aceimg.com/cc7f65a28.png",
+            "https://cdn.aceimg.com/c67c1b6aa.png",
+            "https://cdn.aceimg.com/3c537ef6f.png",
+            "https://cdn.aceimg.com/a8eed3f55.png",
+            "https://cdn.aceimg.com/337e588fb.png",
+            "https://cdn.aceimg.com/76343fc61.png",
+            "https://cdn.aceimg.com/15a13861c.png",
+            "https://cdn.aceimg.com/864078db9.png",
+            "https://cdn.aceimg.com/13405e6e7.png",
+            "https://cdn.aceimg.com/5009a06e0.png",
+            "https://cdn.aceimg.com/7490d4f9d.png",
+            "https://cdn.aceimg.com/dfe1c7609.png",
+            "https://cdn.aceimg.com/f65d0f3ef.png",
+            "https://cdn.aceimg.com/4d904272f.png",
+            "https://cdn.aceimg.com/460f6b525.png",
+
+        ];
+        
+        const bannerImages2 = [
+            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen8jldwkelk.png",
+            "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen9kdlwkeow.png",
+            "https://ia601209.us.archive.org/12/items/imagen-14dkcks/Imagen14dkcks.png",
+            "https://ia601209.us.archive.org/12/items/imagen-14dkcks/Imagen14dkjs.png",
+            "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagen15kdlskl.png",
+            "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagen16ndskl.png",
+            "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagen18fmvk%C3%B1.png",
+            "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagen19nfdsl.png",
+            "https://ia601209.us.archive.org/12/items/imagen-14dkcks/Imagen19njsak.png",
+            "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagensnoeiq.png",
+            "https://cdn.aceimg.com/b9b0bcb41.png",
+            "https://cdn.aceimg.com/f764d9f25.png",
+            "https://cdn.aceimg.com/16c6feb0c.png",
+            "https://cdn.aceimg.com/5ae72239f.png",
+            "https://cdn.aceimg.com/f3352c65f.png",
+            "https://cdn.aceimg.com/10d5aa458.png",
+            "https://cdn.aceimg.com/fb7c6cb28.png",
+            "https://cdn.aceimg.com/80e5164d5.png",
+            "https://cdn.aceimg.com/6a81dd359.png",
+            "https://cdn.aceimg.com/bb005a40f.png",
+            "https://cdn.aceimg.com/3a69dfcb7.png",
+            "https://cdn.aceimg.com/d859d514d.png",
+            "https://cdn.aceimg.com/f7e4da93c.png",
+
+        ];
+
+        // Función para selección aleatoria
+        function getRandomItem(array) {
+            return array[Math.floor(Math.random() * array.length)];
         }
-        
-        // Función para crear miniaturas de video
-        function createVideoThumb(video) {
-            const thumb = document.createElement('div');
-            thumb.className = 'video-thumb';
-            thumb.setAttribute('data-id', video.id);
+
+        // Cargar contenido aleatorio al iniciar
+        document.addEventListener('DOMContentLoaded', function() {
+            // Video aleatorio
+            document.getElementById('randomVideo').src = getRandomItem(videos);
             
-            thumb.innerHTML = `
-                <img class="thumb-img" src="${video.thumb}" alt="${video.title}">
-                <p>${video.title}</p>
+            // Banners aleatorios
+            document.getElementById('banner1').innerHTML = `
+                <img src="${getRandomItem(bannerImages1)}" alt="Banner 1">
             `;
             
-            thumb.addEventListener('click', function() {
-                // SISTEMA DE PORCENTAJES: 70% Adsterra, 30% reproducir video
-                if (Math.random() < 0.7) {
-                    // 70% de probabilidad: Abrir enlace de Adsterra
-                    const randomAdIndex = Math.floor(Math.random() * adsterraLinks.length);
-                    window.open(adsterraLinks[randomAdIndex], '_blank');
-                } else {
-                    // 30% de probabilidad: Reproducir video en modal
-                    const modal = document.getElementById('videoModal');
-                    const modalVideo = document.getElementById('modalVideo');
-                    modalVideo.src = video.videoUrl;
-                    modal.style.display = 'flex';
-                    modalVideo.play();
-                }
-            });
-            
-            return thumb;
-        }
+            document.getElementById('banner2').innerHTML = `
+                <img src="${getRandomItem(bannerImages2)}" alt="Banner 2">
+            `;
+        });
     </script>
-    
-    <!-- Código para Popunder de Adsterra (Reemplaza con tu código) -->
-   <script type='text/javascript' src='//continueallergic.com/36/52/9e/36529e1cdf813e3853fc13c8ff1196cb.js'></script>
-    
-    <!-- Código para Social Bar de Adsterra (Reemplaza con tu código) -->
-    <script type='text/javascript' src='//continueallergic.com/79/96/c5/7996c5393a970f57bfc07ff8aa258a36.js'></script>
+
+<script type='text/javascript' src='//continueallergic.com/79/96/c5/7996c5393a970f57bfc07ff8aa258a36.js'></script>
+
+<script type='text/javascript' src='//continueallergic.com/36/52/9e/36529e1cdf813e3853fc13c8ff1196cb.js'></script>
 </body>
 </html>
