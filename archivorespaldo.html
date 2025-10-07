@@ -386,3 +386,549 @@
 <script type='text/javascript' src='//recommendedcasualtymysterious.com/79/96/c5/7996c5393a970f57bfc07ff8aa258a36.js'></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Videos Premium</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            background: #121212;
+            color: #f0f0f0;
+            line-height: 1.5;
+            overflow-x: hidden;
+            min-height: 100vh;
+            width: 100vw;
+            position: fixed;
+            touch-action: manipulation;
+        }
+        
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            margin: 0;
+        }
+        
+        header {
+            text-align: center;
+            padding: 15px 10px;
+            background: #1a1a1a;
+            flex-shrink: 0;
+            border-bottom: 1px solid #333;
+        }
+        
+        h1 {
+            font-size: 1.4rem;
+            color: #e74c3c;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .warning {
+            background: linear-gradient(to right, #e74c3c, #c0392b);
+            color: white;
+            padding: 12px 10px;
+            text-align: center;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+        
+        .counter {
+            text-align: center;
+            padding: 10px;
+            font-size: 0.9rem;
+            color: #aaa;
+            background: rgba(0, 0, 0, 0.3);
+            flex-shrink: 0;
+        }
+        
+        .video-container {
+            flex: 1;
+            position: relative;
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 0; /* Important for flex item sizing */
+        }
+        
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        
+        .controls {
+            display: flex;
+            padding: 15px 10px;
+            gap: 10px;
+            background: #1a1a1a;
+            flex-shrink: 0;
+        }
+        
+        .btn {
+            background: linear-gradient(to bottom, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            padding: 16px 5px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.2s ease;
+            flex: 1;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            min-height: 50px;
+        }
+        
+        .btn:active {
+            background: linear-gradient(to bottom, #ff5a4a, #d43f2e);
+            transform: translateY(1px);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .ad-container {
+            padding: 15px 10px;
+            text-align: center;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            flex-shrink: 0;
+            border-top: 1px solid #4a5f7a;
+        }
+        
+        .ad-label {
+            font-size: 0.8rem;
+            color: #bbb;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        
+        .ad-content {
+            background: #1e2a3a;
+            padding: 12px;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #3a506b;
+            min-height: 80px;
+        }
+        
+        .ad-title {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            color: #e74c3c;
+        }
+        
+        .ad-description {
+            font-size: 0.8rem;
+            color: #ccc;
+            margin-bottom: 10px;
+        }
+        
+        .ad-button {
+            background: linear-gradient(to bottom, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+        
+        .ad-button:active {
+            background: linear-gradient(to bottom, #3cb0fd, #3498db);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 12px 10px;
+            font-size: 0.7rem;
+            color: #777;
+            background: #1a1a1a;
+            flex-shrink: 0;
+            border-top: 1px solid #333;
+        }
+        
+        /* Landscape orientation adjustments */
+        @media (orientation: landscape) and (max-height: 500px) {
+            header, .warning, .counter, footer {
+                display: none;
+            }
+            
+            .container {
+                flex-direction: row;
+                height: 100vh;
+            }
+            
+            .video-container {
+                flex: 3;
+            }
+            
+            .sidebar {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                max-width: 30%;
+            }
+            
+            .controls {
+                flex-direction: column;
+                padding: 10px;
+            }
+            
+            .btn {
+                padding: 10px 5px;
+                min-height: 40px;
+                font-size: 0.9rem;
+            }
+            
+            .ad-container {
+                flex: 1;
+                padding: 10px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+            
+            .ad-content {
+                min-height: 60px;
+                padding: 8px;
+            }
+            
+            .ad-title {
+                font-size: 0.9rem;
+            }
+            
+            .ad-description {
+                font-size: 0.75rem;
+            }
+        }
+        
+        /* Very small devices */
+        @media (max-height: 600px) {
+            .warning {
+                padding: 8px 10px;
+                font-size: 0.8rem;
+            }
+            
+            .counter {
+                padding: 8px;
+            }
+            
+            .controls {
+                padding: 10px;
+            }
+            
+            .btn {
+                padding: 12px 5px;
+                min-height: 45px;
+                font-size: 0.95rem;
+            }
+            
+            .ad-container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Videos Premium</h1>
+        </header>
+        
+        <div class="warning">
+            ADVERTENCIA: Contenido para adultos. Mayor de 18 años.
+        </div>
+        
+        <div class="counter">
+            Videos vistos: <span id="view-count">0</span>
+        </div>
+        
+        <div class="video-container">
+            <video id="videoPlayer" controls autoplay muted playsinline>
+                Tu navegador no soporta el elemento de video.
+            </video>
+        </div>
+        
+        <div class="controls">
+            <button class="btn" id="prevBtn">ANTERIOR</button>
+            <button class="btn" id="nextBtn">SIGUIENTE</button>
+        </div>
+        
+        
+        
+        <footer>
+            <p>Videos Premium &copy; 2025 - Solo para adultos</p>
+        </footer>
+    </div>
+
+    <script>
+        // Lista de URLs de videos (reemplaza con tus URLs reales)
+        const videoUrls = [
+            "https://cdn.videy.co/k1vCDv4T1.mp4",
+            "https://cdn.videy.co/rh5UJO0C1.mp4",
+            "https://cdn.videy.co/lI2a82rg1.mp4",
+            "https://cdn.videy.co/J6ViSP9e1.mp4",
+            "https://cdn.videy.co/eHsJcjkn1.mp4",
+            "https://cdn.videy.co/TEORI77H1.mp4",
+            "https://cdn.videy.co/fFmCKQAC1.mp4",
+            "https://cdn.videy.co/H66NpxYO1.mp4",
+            "https://cdn.videy.co/cqdyat0o1.mp4",
+            "https://cdn.videy.co/XVVmuGNu1.mp4",
+            "https://cdn.videy.co/0sSPyEzG1.mp4",
+            "https://cdn.videy.co/HDRv8X9D1.mp4",
+            "https://cdn.videy.co/GFqLYzXH1.mp4",
+            "https://cdn.videy.co/gParLJhm1.mp4",
+            "https://cdn.videy.co/WydvTuy81.mp4",
+            "https://cdn.videy.co/w5en6MUf1.mp4",
+            "https://cdn.videy.co/0JFTnKfE1.mp4",
+            "https://cdn.videy.co/RbL3kU7z1.mp4",
+            "https://cdn.videy.co/1vakDs1H1.mp4",
+            "https://cdn.videy.co/TqyBhBiW1.mp4",
+            "https://cdn.videy.co/ocpYNHQw1.mp4",
+            "https://cdn.videy.co/kiQTkMGS1.mp4",
+            "https://cdn.videy.co/s8GORJpy1.mp4",
+            "https://cdn.videy.co/01BXBkAm1.mp4",
+            "https://cdn.videy.co/r2MtFCKa1.mp4",
+            "https://cdn.videy.co/l4FFv8K81.mp4",
+            "https://cdn.videy.co/d3isGfCH1.mp4",
+            "https://cdn.videy.co/grZi1rkR1.mp4",
+            "https://cdn.videy.co/9MX78Tsb1.mp4",
+            "https://cdn.videy.co/WEWMIk9r1.mp4",
+            "https://cdn.videy.co/J7gzB5N41.mp4",
+            "https://cdn.videy.co/AAekfRem1.mp4",
+            "https://cdn.videy.co/6ugLgTu21.mp4",
+            "https://cdn.videy.co/tul1dayk1.mp4",
+            "https://cdn.videy.co/GWPZ1PdO1.mp4",
+            "https://cdn.videy.co/9klOe3S11.mp4",
+            "https://cdn.videy.co/PV3calSn1.mp4",
+            "https://cdn.videy.co/PGbh9oYy1.mp4",
+            "https://cdn.videy.co/nXNFvc2P1.mp4",
+            "https://cdn.videy.co/csmXpzzH1.mp4",
+            "https://cdn.videy.co/oiYls6KA1.mp4",
+            "https://cdn.videy.co/h3UCtHEj1.mp4",
+            "https://cdn.videy.co/9bP7fmmA1.mp4",
+            "https://cdn.videy.co/4D5l0d981.mp4",
+            "https://cdn.videy.co/PglvrVxM1.mp4",
+            "https://cdn.videy.co/xvhbzl5Y1.mp4",
+            "https://cdn.videy.co/ZEawjJTB1.mp4",
+            "https://cdn.videy.co/ky9Tzwh31.mp4",
+            "https://cdn.videy.co/P1P4tRCJ1.mp4",
+            "https://cdn.videy.co/TvCGaJas1.mp4",
+            "https://cdn.videy.co/ZNYLRbU31.mp4",
+            "https://cdn.videy.co/bPFtQyZ11.mp4",
+            "https://cdn.videy.co/tEGqwIxs1.mp4",
+            "https://cdn.videy.co/5fXBRkDf1.mp4",
+            "https://cdn.videy.co/2NTeQ6MH1.mp4",
+            "https://cdn.videy.co/mCsePn3K1.mp4",
+            "https://cdn.videy.co/M4unMOWw1.mp4",
+            "https://cdn.videy.co/JxlvpMmi1.mp4",
+            "https://cdn.videy.co/mJCj5UML1.mp4",
+            "https://cdn.videy.co/4Rcasr4d1.mp4",
+            "https://cdn.videy.co/JPKGq0541.mp4",
+            "https://cdn.videy.co/s0SPrVqA1.mp4",
+            "https://cdn.videy.co/RXMixUEa1.mp4",
+            "https://cdn.videy.co/XL4Xi6kt1.mp4",
+            "https://cdn.videy.co/esiDjxT71.mp4",
+            "https://cdn.videy.co/4ystpZJP1.mp4",
+            "https://cdn.videy.co/315ylHxo1.mp4",
+            "https://cdn.videy.co/FC5qAq0Y1.mp4",
+            "https://cdn.videy.co/tPNjawom1.mp4",
+            "https://cdn.videy.co/pwAEbjmx1.mp4",
+            "https://cdn.videy.co/2FKHYRo01.mp4",
+            "https://cdn.videy.co/4gFGw9Ae1.mp4",
+            "https://cdn.videy.co/bUyP7T2L1.mp4",
+            "https://cdn.videy.co/yIvrYAcG1.mp4",
+            "https://cdn.videy.co/sOaD0A5T1.mp4",
+            "https://cdn.videy.co/91GK8Jd31.mp4",
+            "https://cdn.videy.co/OWZTXSA41.mp4",
+            "https://cdn.videy.co/5hkUQAvM1.mp4",
+            "https://cdn.videy.co/6eFQ9wMm1.mp4",
+            "https://cdn.videy.co/SOBV9mlI1.mp4",
+            "https://cdn.videy.co/qgZkibUZ1.mp4",
+            "https://cdn.videy.co/cyAoXKE41.mp4",
+            "https://cdn.videy.co/BYYch5gL1.mp4",
+            "https://cdn.videy.co/zvzitNVa1.mp4",
+            "https://cdn.videy.co/WlZQ4z351.mp4",
+            "https://cdn.videy.co/yRINUueq1.mp4",
+            "https://cdn.videy.co/48PhCZj91.mp4",
+            "https://cdn.videy.co/OnssLY8U1.mp4",
+            "https://cdn.videy.co/RsZGCVMA1.mp4",
+            "https://cdn.videy.co/mUbnMehu1.mp4",
+            "https://cdn.videy.co/aznD0W4u1.mp4",
+            "https://cdn.videy.co/ZKIux7oB1.mp4",
+            "https://cdn.videy.co/ICZFR8Sn1.mp4",
+            "https://cdn.videy.co/VJq17iYC1.mp4",
+            "https://cdn.videy.co/bNGE8oMd1.mp4",
+            "https://cdn.videy.co/q4tcDCjN1.mp4",
+            "https://cdn.videy.co/xy96KUY91.mp4",
+            "https://cdn.videy.co/UqogplBz1.mp4",
+            "https://cdn.videy.co/lQHtxlRm1.mp4",
+            "https://cdn.videy.co/uZG3KwbO1.mp4",
+            "https://cdn.videy.co/5evaC6041.mp4",
+            "https://cdn.videy.co/KThOVC6D1.mp4",
+            "https://cdn.videy.co/nkzDGRI81.mp4",
+            "https://cdn.videy.co/lDeJzaeX1.mp4",
+            "https://cdn.videy.co/WV1P2MKn1.mp4",
+            "https://cdn.videy.co/uLPkehY61.mp4",
+            "https://cdn.videy.co/TBMETjQQ1.mp4",
+            "https://cdn.videy.co/EwugqzxE1.mp4",
+            "https://cdn.videy.co/NA3mrEH11.mp4",
+            "https://cdn.videy.co/Hh0aJ3n61.mp4",
+            "https://cdn.videy.co/GvbzAUHK1.mp4",
+
+        ];
+        
+        // Elementos del DOM
+        const videoPlayer = document.getElementById('videoPlayer');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const viewCountElement = document.getElementById('view-count');
+        
+        // Variables de estado
+        let currentVideoIndex = 0;
+        let viewCount = 0;
+        
+        // Función para obtener un índice aleatorio al cargar la página
+        function getRandomVideoIndex() {
+            return Math.floor(Math.random() * videoUrls.length);
+        }
+        
+        // Función para cargar un video
+        function loadVideo(index) {
+            // Validar que el índice esté dentro del rango
+            if (index < 0) index = videoUrls.length - 1;
+            if (index >= videoUrls.length) index = 0;
+            
+            currentVideoIndex = index;
+            videoPlayer.src = videoUrls[currentVideoIndex];
+            
+            // Incrementar contador de vistas
+            viewCount++;
+            viewCountElement.textContent = viewCount;
+            
+            // Guardar en localStorage para persistencia
+            localStorage.setItem('videoViewCount', viewCount);
+        }
+        
+        // Función para cargar el siguiente video
+        function nextVideo() {
+            loadVideo(currentVideoIndex + 1);
+        }
+        
+        // Función para cargar el video anterior
+        function prevVideo() {
+            loadVideo(currentVideoIndex - 1);
+        }
+        
+        // Event listeners para los botones
+        prevBtn.addEventListener('click', prevVideo);
+        nextBtn.addEventListener('click', nextVideo);
+        
+        // Event listener para cuando termina un video
+        videoPlayer.addEventListener('ended', nextVideo);
+        
+        // Manejar la orientación de pantalla
+        function handleOrientation() {
+            if (window.matchMedia("(orientation: landscape)").matches && window.innerHeight < 500) {
+                document.body.classList.add('landscape');
+            } else {
+                document.body.classList.remove('landscape');
+            }
+        }
+        
+        // Inicialización al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cargar contador de vistas desde localStorage
+            const savedViewCount = localStorage.getItem('videoViewCount');
+            if (savedViewCount) {
+                viewCount = parseInt(savedViewCount);
+                viewCountElement.textContent = viewCount;
+            }
+            
+            // Cargar un video aleatorio al inicio
+            currentVideoIndex = getRandomVideoIndex();
+            loadVideo(currentVideoIndex);
+            
+            // Configurar detección de orientación
+            handleOrientation();
+            window.addEventListener('resize', handleOrientation);
+            window.addEventListener('orientationchange', handleOrientation);
+            
+            // Prevenir acciones por defecto de gestos táctiles
+            document.addEventListener('touchmove', function(e) {
+                if (e.scale !== 1) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+            
+            // Prevenir zoom con doble tap
+            let lastTap = 0;
+            document.addEventListener('touchend', function(e) {
+                const currentTime = new Date().getTime();
+                const tapLength = currentTime - lastTap;
+                if (tapLength < 500 && tapLength > 0) {
+                    e.preventDefault();
+                }
+                lastTap = currentTime;
+            });
+        });
+        
+        
+    </script>
+
+
+
+</body>
+</html>

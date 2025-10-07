@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Videos Premium</title>
     <style>
         * {
@@ -20,46 +20,43 @@
             overflow-x: hidden;
             min-height: 100vh;
             width: 100vw;
-            position: fixed;
-            touch-action: manipulation;
+            touch-action: pan-y;
         }
         
         .container {
             width: 100vw;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             padding: 0;
             margin: 0;
         }
         
+        .main-content {
+            height: 90vh; /* Reducido para mostrar parte del banner */
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+        
         header {
             text-align: center;
-            padding: 15px 10px;
+            padding: 10px 10px; /* Reducido */
             background: #1a1a1a;
             flex-shrink: 0;
             border-bottom: 1px solid #333;
         }
         
         h1 {
-            font-size: 1.4rem;
+            font-size: 1.2rem; /* Reducido */
             color: #e74c3c;
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
         }
         
-        .warning {
-            background: linear-gradient(to right, #e74c3c, #c0392b);
-            color: white;
-            padding: 12px 10px;
-            text-align: center;
-            font-size: 0.85rem;
-            flex-shrink: 0;
-        }
-        
         .counter {
             text-align: center;
-            padding: 10px;
-            font-size: 0.9rem;
+            padding: 8px 10px; /* Reducido */
+            font-size: 0.8rem; /* Reducido */
             color: #aaa;
             background: rgba(0, 0, 0, 0.3);
             flex-shrink: 0;
@@ -72,7 +69,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 0; /* Important for flex item sizing */
+            min-height: 0;
         }
         
         video {
@@ -84,8 +81,8 @@
         
         .controls {
             display: flex;
-            padding: 15px 10px;
-            gap: 10px;
+            padding: 10px 10px; /* Reducido */
+            gap: 8px; /* Reducido */
             background: #1a1a1a;
             flex-shrink: 0;
         }
@@ -94,15 +91,15 @@
             background: linear-gradient(to bottom, #e74c3c, #c0392b);
             color: white;
             border: none;
-            padding: 16px 5px;
-            border-radius: 8px;
+            padding: 12px 5px; /* Reducido */
+            border-radius: 6px; /* Reducido */
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 0.9rem; /* Reducido */
             font-weight: bold;
             transition: all 0.2s ease;
             flex: 1;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            min-height: 50px;
+            min-height: 44px; /* Reducido */
         }
         
         .btn:active {
@@ -110,65 +107,51 @@
             transform: translateY(1px);
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
         }
-        
-        .ad-container {
+
+        /* CONTENEDOR DEL BANNER - Ahora parcialmente visible */
+        .adsterra-banner {
             padding: 15px 10px;
+            background: #1a1a1a;
             text-align: center;
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
             flex-shrink: 0;
-            border-top: 1px solid #4a5f7a;
-        }
-        
-        .ad-label {
-            font-size: 0.8rem;
-            color: #bbb;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-        }
-        
-        .ad-content {
-            background: #1e2a3a;
-            padding: 12px;
-            border-radius: 6px;
+            border-top: 2px solid #e74c3c; /* Borde llamativo */
+            min-height: 120px; /* Reducido para mostrar solo parte */
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            border: 1px solid #3a506b;
-            min-height: 80px;
+            justify-content: center;
+            position: relative;
         }
-        
-        .ad-title {
-            font-size: 1rem;
-            margin-bottom: 5px;
+
+        .adsterra-banner::before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 4px;
+            background: #e74c3c;
+            border-radius: 2px;
+        }
+
+        .adsterra-banner .banner-container {
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+            opacity: 0.9; /* Ligeramente transparente para indicar que hay más */
+        }
+
+        .banner-title {
             color: #e74c3c;
-        }
-        
-        .ad-description {
-            font-size: 0.8rem;
-            color: #ccc;
-            margin-bottom: 10px;
-        }
-        
-        .ad-button {
-            background: linear-gradient(to bottom, #3498db, #2980b9);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
+            margin-bottom: 8px;
+            font-size: 1rem;
             font-weight: bold;
-            font-size: 0.85rem;
-        }
-        
-        .ad-button:active {
-            background: linear-gradient(to bottom, #3cb0fd, #3498db);
         }
         
         footer {
             text-align: center;
             padding: 12px 10px;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: #777;
             background: #1a1a1a;
             flex-shrink: 0;
@@ -177,13 +160,16 @@
         
         /* Landscape orientation adjustments */
         @media (orientation: landscape) and (max-height: 500px) {
-            header, .warning, .counter, footer {
+            .main-content {
+                height: 100vh;
+            }
+            
+            header, .counter {
                 display: none;
             }
             
-            .container {
+            .main-content {
                 flex-direction: row;
-                height: 100vh;
             }
             
             .video-container {
@@ -199,100 +185,107 @@
             
             .controls {
                 flex-direction: column;
-                padding: 10px;
+                padding: 8px;
+            }
+            
+            .btn {
+                padding: 8px 5px;
+                min-height: 38px;
+                font-size: 0.85rem;
+            }
+
+            .adsterra-banner {
+                padding: 8px;
+                min-height: 100px;
+            }
+        }
+        
+        /* Dispositivos muy pequeños */
+        @media (max-height: 600px) {
+            .main-content {
+                height: 88vh; /* Aún más espacio para video en pantallas pequeñas */
+            }
+            
+            .counter {
+                padding: 6px;
+            }
+            
+            .controls {
+                padding: 8px;
             }
             
             .btn {
                 padding: 10px 5px;
                 min-height: 40px;
-                font-size: 0.9rem;
+                font-size: 0.85rem;
             }
-            
-            .ad-container {
-                flex: 1;
-                padding: 10px;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-            }
-            
-            .ad-content {
-                min-height: 60px;
-                padding: 8px;
-            }
-            
-            .ad-title {
-                font-size: 0.9rem;
-            }
-            
-            .ad-description {
-                font-size: 0.75rem;
+
+            .adsterra-banner {
+                padding: 12px 10px;
+                min-height: 100px;
             }
         }
-        
-        /* Very small devices */
-        @media (max-height: 600px) {
-            .warning {
-                padding: 8px 10px;
-                font-size: 0.8rem;
+
+        /* Para pantallas grandes (tablets) */
+        @media (min-height: 800px) {
+            .main-content {
+                height: 85vh; /* Más espacio para banner en pantallas grandes */
             }
             
-            .counter {
-                padding: 8px;
+            .adsterra-banner {
+                min-height: 150px;
             }
-            
-            .controls {
-                padding: 10px;
-            }
-            
-            .btn {
-                padding: 12px 5px;
-                min-height: 45px;
-                font-size: 0.95rem;
-            }
-            
-            .ad-container {
-                padding: 10px;
-            }
+        }
+
+        /* Efecto sutil para indicar que hay más contenido */
+        .adsterra-banner {
+            background: linear-gradient(to bottom, #1a1a1a, #2a2a2a);
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Videos Premium</h1>
-        </header>
-        
-        <div class="warning">
-            ADVERTENCIA: Contenido para adultos. Mayor de 18 años.
+        <!-- CONTENIDO PRINCIPAL - OCUPA 90% DE LA PANTALLA -->
+        <div class="main-content">
+            <header>
+                <h1>Videos Premium</h1>
+            </header>
+            
+            <div class="counter">
+                Videos vistos: <span id="view-count">0</span>
+            </div>
+            
+            <div class="video-container">
+                <video id="videoPlayer" controls autoplay muted playsinline>
+                    Tu navegador no soporta el elemento de video.
+                </video>
+            </div>
+            
+            <div class="controls">
+                <button class="btn" id="prevBtn">ANTERIOR</button>
+                <button class="btn" id="nextBtn">SIGUIENTE</button>
+            </div>
         </div>
-        
-        <div class="counter">
-            Videos vistos: <span id="view-count">0</span>
-        </div>
-        
-        <div class="video-container">
-            <video id="videoPlayer" controls autoplay muted playsinline>
-                Tu navegador no soporta el elemento de video.
-            </video>
-        </div>
-        
-        <div class="controls">
-            <button class="btn" id="prevBtn">ANTERIOR</button>
-            <button class="btn" id="nextBtn">SIGUIENTE</button>
-        </div>
-        
-        <div class="ad-container">
-            <div class="ad-label">Publicidad</div>
-            <div class="ad-content">
-                <h3 class="ad-title">Contenido Exclusivo</h3>
-                <p class="ad-description">Miles de videos premium disponibles</p>
-                <button class="ad-button">Ver Más</button>
+
+        <!-- BANNER PARCIALMENTE VISIBLE -->
+        <div class="adsterra-banner">
+            <div class="banner-container">
+                <div class="banner-title">💎 Contenido Exclusivo</div>
+                <script type="text/javascript">
+                    atOptions = {
+                        'key' : 'b3f717f07a99e7a89fda4ecb403dff85',
+                        'format' : 'iframe',
+                        'height' : 250,
+                        'width' : 300,
+                        'params' : {}
+                    };
+                </script>
+                <script type="text/javascript" src="//recommendedcasualtymysterious.com/b3f717f07a99e7a89fda4ecb403dff85/invoke.js"></script>
             </div>
         </div>
         
         <footer>
-            <p>Videos Premium &copy; 2023 - Solo para adultos</p>
+            <p>Videos Premium &copy; 2025</p>
         </footer>
     </div>
 
@@ -300,117 +293,7 @@
         // Lista de URLs de videos (reemplaza con tus URLs reales)
         const videoUrls = [
             "https://cdn.videy.co/k1vCDv4T1.mp4",
-            "https://cdn.videy.co/rh5UJO0C1.mp4",
-            "https://cdn.videy.co/lI2a82rg1.mp4",
-            "https://cdn.videy.co/J6ViSP9e1.mp4",
-            "https://cdn.videy.co/eHsJcjkn1.mp4",
-            "https://cdn.videy.co/TEORI77H1.mp4",
-            "https://cdn.videy.co/fFmCKQAC1.mp4",
-            "https://cdn.videy.co/H66NpxYO1.mp4",
-            "https://cdn.videy.co/cqdyat0o1.mp4",
-            "https://cdn.videy.co/XVVmuGNu1.mp4",
-            "https://cdn.videy.co/0sSPyEzG1.mp4",
-            "https://cdn.videy.co/HDRv8X9D1.mp4",
-            "https://cdn.videy.co/GFqLYzXH1.mp4",
-            "https://cdn.videy.co/gParLJhm1.mp4",
-            "https://cdn.videy.co/WydvTuy81.mp4",
-            "https://cdn.videy.co/w5en6MUf1.mp4",
-            "https://cdn.videy.co/0JFTnKfE1.mp4",
-            "https://cdn.videy.co/RbL3kU7z1.mp4",
-            "https://cdn.videy.co/1vakDs1H1.mp4",
-            "https://cdn.videy.co/TqyBhBiW1.mp4",
-            "https://cdn.videy.co/ocpYNHQw1.mp4",
-            "https://cdn.videy.co/kiQTkMGS1.mp4",
-            "https://cdn.videy.co/s8GORJpy1.mp4",
-            "https://cdn.videy.co/01BXBkAm1.mp4",
-            "https://cdn.videy.co/r2MtFCKa1.mp4",
-            "https://cdn.videy.co/l4FFv8K81.mp4",
-            "https://cdn.videy.co/d3isGfCH1.mp4",
-            "https://cdn.videy.co/grZi1rkR1.mp4",
-            "https://cdn.videy.co/9MX78Tsb1.mp4",
-            "https://cdn.videy.co/WEWMIk9r1.mp4",
-            "https://cdn.videy.co/J7gzB5N41.mp4",
-            "https://cdn.videy.co/AAekfRem1.mp4",
-            "https://cdn.videy.co/6ugLgTu21.mp4",
-            "https://cdn.videy.co/tul1dayk1.mp4",
-            "https://cdn.videy.co/GWPZ1PdO1.mp4",
-            "https://cdn.videy.co/9klOe3S11.mp4",
-            "https://cdn.videy.co/PV3calSn1.mp4",
-            "https://cdn.videy.co/PGbh9oYy1.mp4",
-            "https://cdn.videy.co/nXNFvc2P1.mp4",
-            "https://cdn.videy.co/csmXpzzH1.mp4",
-            "https://cdn.videy.co/oiYls6KA1.mp4",
-            "https://cdn.videy.co/h3UCtHEj1.mp4",
-            "https://cdn.videy.co/9bP7fmmA1.mp4",
-            "https://cdn.videy.co/4D5l0d981.mp4",
-            "https://cdn.videy.co/PglvrVxM1.mp4",
-            "https://cdn.videy.co/xvhbzl5Y1.mp4",
-            "https://cdn.videy.co/ZEawjJTB1.mp4",
-            "https://cdn.videy.co/ky9Tzwh31.mp4",
-            "https://cdn.videy.co/P1P4tRCJ1.mp4",
-            "https://cdn.videy.co/TvCGaJas1.mp4",
-            "https://cdn.videy.co/ZNYLRbU31.mp4",
-            "https://cdn.videy.co/bPFtQyZ11.mp4",
-            "https://cdn.videy.co/tEGqwIxs1.mp4",
-            "https://cdn.videy.co/5fXBRkDf1.mp4",
-            "https://cdn.videy.co/2NTeQ6MH1.mp4",
-            "https://cdn.videy.co/mCsePn3K1.mp4",
-            "https://cdn.videy.co/M4unMOWw1.mp4",
-            "https://cdn.videy.co/JxlvpMmi1.mp4",
-            "https://cdn.videy.co/mJCj5UML1.mp4",
-            "https://cdn.videy.co/4Rcasr4d1.mp4",
-            "https://cdn.videy.co/JPKGq0541.mp4",
-            "https://cdn.videy.co/s0SPrVqA1.mp4",
-            "https://cdn.videy.co/RXMixUEa1.mp4",
-            "https://cdn.videy.co/XL4Xi6kt1.mp4",
-            "https://cdn.videy.co/esiDjxT71.mp4",
-            "https://cdn.videy.co/4ystpZJP1.mp4",
-            "https://cdn.videy.co/315ylHxo1.mp4",
-            "https://cdn.videy.co/FC5qAq0Y1.mp4",
-            "https://cdn.videy.co/tPNjawom1.mp4",
-            "https://cdn.videy.co/pwAEbjmx1.mp4",
-            "https://cdn.videy.co/2FKHYRo01.mp4",
-            "https://cdn.videy.co/4gFGw9Ae1.mp4",
-            "https://cdn.videy.co/bUyP7T2L1.mp4",
-            "https://cdn.videy.co/yIvrYAcG1.mp4",
-            "https://cdn.videy.co/sOaD0A5T1.mp4",
-            "https://cdn.videy.co/91GK8Jd31.mp4",
-            "https://cdn.videy.co/OWZTXSA41.mp4",
-            "https://cdn.videy.co/5hkUQAvM1.mp4",
-            "https://cdn.videy.co/6eFQ9wMm1.mp4",
-            "https://cdn.videy.co/SOBV9mlI1.mp4",
-            "https://cdn.videy.co/qgZkibUZ1.mp4",
-            "https://cdn.videy.co/cyAoXKE41.mp4",
-            "https://cdn.videy.co/BYYch5gL1.mp4",
-            "https://cdn.videy.co/zvzitNVa1.mp4",
-            "https://cdn.videy.co/WlZQ4z351.mp4",
-            "https://cdn.videy.co/yRINUueq1.mp4",
-            "https://cdn.videy.co/48PhCZj91.mp4",
-            "https://cdn.videy.co/OnssLY8U1.mp4",
-            "https://cdn.videy.co/RsZGCVMA1.mp4",
-            "https://cdn.videy.co/mUbnMehu1.mp4",
-            "https://cdn.videy.co/aznD0W4u1.mp4",
-            "https://cdn.videy.co/ZKIux7oB1.mp4",
-            "https://cdn.videy.co/ICZFR8Sn1.mp4",
-            "https://cdn.videy.co/VJq17iYC1.mp4",
-            "https://cdn.videy.co/bNGE8oMd1.mp4",
-            "https://cdn.videy.co/q4tcDCjN1.mp4",
-            "https://cdn.videy.co/xy96KUY91.mp4",
-            "https://cdn.videy.co/UqogplBz1.mp4",
-            "https://cdn.videy.co/lQHtxlRm1.mp4",
-            "https://cdn.videy.co/uZG3KwbO1.mp4",
-            "https://cdn.videy.co/5evaC6041.mp4",
-            "https://cdn.videy.co/KThOVC6D1.mp4",
-            "https://cdn.videy.co/nkzDGRI81.mp4",
-            "https://cdn.videy.co/lDeJzaeX1.mp4",
-            "https://cdn.videy.co/WV1P2MKn1.mp4",
-            "https://cdn.videy.co/uLPkehY61.mp4",
-            "https://cdn.videy.co/TBMETjQQ1.mp4",
-            "https://cdn.videy.co/EwugqzxE1.mp4",
-            "https://cdn.videy.co/NA3mrEH11.mp4",
-            "https://cdn.videy.co/Hh0aJ3n61.mp4",
-            "https://cdn.videy.co/GvbzAUHK1.mp4",
-
+            "https://cdn.videy.co/rh5UJO0C1.mp4"
         ];
         
         // Elementos del DOM
@@ -506,9 +389,20 @@
                 }
                 lastTap = currentTime;
             });
+
+            // Efecto sutil al hacer scroll hacia el banner
+            let bannerRevealed = false;
+            window.addEventListener('scroll', function() {
+                const banner = document.querySelector('.adsterra-banner');
+                const bannerRect = banner.getBoundingClientRect();
+                
+                if (bannerRect.top < window.innerHeight * 0.8 && !bannerRevealed) {
+                    banner.style.minHeight = '250px';
+                    banner.style.opacity = '1';
+                    bannerRevealed = true;
+                }
+            });
         });
-        
-        
     </script>
 </body>
 </html>
