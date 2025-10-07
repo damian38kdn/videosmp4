@@ -33,7 +33,7 @@
         }
         
         .main-content {
-            height: 90vh; /* Reducido para mostrar parte del banner */
+            height: 100vh;
             display: flex;
             flex-direction: column;
             flex-shrink: 0;
@@ -41,22 +41,22 @@
         
         header {
             text-align: center;
-            padding: 10px 10px; /* Reducido */
+            padding: 10px 10px;
             background: #1a1a1a;
             flex-shrink: 0;
             border-bottom: 1px solid #333;
         }
         
         h1 {
-            font-size: 1.2rem; /* Reducido */
+            font-size: 1.2rem;
             color: #e74c3c;
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
         }
         
         .counter {
             text-align: center;
-            padding: 8px 10px; /* Reducido */
-            font-size: 0.8rem; /* Reducido */
+            padding: 8px 10px;
+            font-size: 0.8rem;
             color: #aaa;
             background: rgba(0, 0, 0, 0.3);
             flex-shrink: 0;
@@ -81,25 +81,29 @@
         
         .controls {
             display: flex;
-            padding: 10px 10px; /* Reducido */
-            gap: 8px; /* Reducido */
+            padding: 10px 10px;
+            gap: 8px;
             background: #1a1a1a;
             flex-shrink: 0;
+            z-index: 1001;
+            position: relative;
         }
         
         .btn {
             background: linear-gradient(to bottom, #e74c3c, #c0392b);
             color: white;
             border: none;
-            padding: 12px 5px; /* Reducido */
-            border-radius: 6px; /* Reducido */
+            padding: 12px 5px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 0.9rem; /* Reducido */
+            font-size: 0.9rem;
             font-weight: bold;
             transition: all 0.2s ease;
             flex: 1;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            min-height: 44px; /* Reducido */
+            min-height: 44px;
+            z-index: 1002;
+            position: relative;
         }
         
         .btn:active {
@@ -108,46 +112,79 @@
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
         }
 
-        /* CONTENEDOR DEL BANNER - Ahora parcialmente visible */
-        .adsterra-banner {
-            padding: 15px 10px;
-            background: #1a1a1a;
-            text-align: center;
-            flex-shrink: 0;
-            border-top: 2px solid #e74c3c; /* Borde llamativo */
-            min-height: 120px; /* Reducido para mostrar solo parte */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .adsterra-banner::before {
-            content: "";
-            position: absolute;
-            top: -2px;
+        /* BANNER FLOTANTE MEJORADO */
+        .floating-banner {
+            position: fixed;
+            bottom: 20px;
             left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 4px;
-            background: #e74c3c;
-            border-radius: 2px;
+            transform: translateX(-50%) translateY(100px);
+            z-index: 1000;
+            background: #1a1a1a;
+            border: 2px solid #e74c3c;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            transition: all 0.5s ease-in-out;
+            opacity: 0;
+            max-width: 340px;
+            width: 90%;
+            pointer-events: none;
         }
 
-        .adsterra-banner .banner-container {
-            width: 100%;
-            max-width: 300px;
-            margin: 0 auto;
-            opacity: 0.9; /* Ligeramente transparente para indicar que hay más */
+        .floating-banner.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .banner-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #333;
         }
 
         .banner-title {
             color: #e74c3c;
-            margin-bottom: 8px;
             font-size: 1rem;
             font-weight: bold;
         }
-        
+
+        .close-banner {
+            background: none;
+            border: none;
+            color: #aaa;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0 5px;
+            transition: color 0.2s;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close-banner:hover {
+            color: #e74c3c;
+            background: rgba(231, 76, 60, 0.1);
+        }
+
+        .banner-content {
+            text-align: center;
+            pointer-events: auto;
+        }
+
+        .countdown {
+            color: #e74c3c;
+            font-weight: bold;
+            margin-top: 8px;
+            font-size: 0.9rem;
+        }
+
         footer {
             text-align: center;
             padding: 12px 10px;
@@ -158,7 +195,7 @@
             border-top: 1px solid #333;
         }
         
-        /* Landscape orientation adjustments */
+        /* Landscape orientation */
         @media (orientation: landscape) and (max-height: 500px) {
             .main-content {
                 height: 100vh;
@@ -194,58 +231,52 @@
                 font-size: 0.85rem;
             }
 
-            .adsterra-banner {
-                padding: 8px;
-                min-height: 100px;
+            .floating-banner {
+                bottom: 10px;
+                max-width: 280px;
+                padding: 10px;
             }
         }
         
-        /* Dispositivos muy pequeños */
+        /* Dispositivos pequeños */
         @media (max-height: 600px) {
-            .main-content {
-                height: 88vh; /* Aún más espacio para video en pantallas pequeñas */
-            }
-            
-            .counter {
-                padding: 6px;
-            }
-            
-            .controls {
-                padding: 8px;
-            }
-            
-            .btn {
-                padding: 10px 5px;
-                min-height: 40px;
-                font-size: 0.85rem;
-            }
-
-            .adsterra-banner {
-                padding: 12px 10px;
-                min-height: 100px;
+            .floating-banner {
+                bottom: 10px;
+                padding: 10px;
+                max-width: 300px;
             }
         }
 
-        /* Para pantallas grandes (tablets) */
-        @media (min-height: 800px) {
-            .main-content {
-                height: 85vh; /* Más espacio para banner en pantallas grandes */
-            }
-            
-            .adsterra-banner {
-                min-height: 150px;
+        /* Tablets y pantallas grandes */
+        @media (min-width: 768px) {
+            .floating-banner {
+                max-width: 360px;
             }
         }
 
-        /* Efecto sutil para indicar que hay más contenido */
-        .adsterra-banner {
-            background: linear-gradient(to bottom, #1a1a1a, #2a2a2a);
+        /* Mejora para tablets en portrait */
+        @media (min-width: 768px) and (orientation: portrait) {
+            .main-content {
+                height: 90vh;
+            }
+            
+            .floating-banner {
+                bottom: 30px;
+            }
+        }
+
+        /* Prevenir selección de texto */
+        .btn, .close-banner {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- CONTENIDO PRINCIPAL - OCUPA 90% DE LA PANTALLA -->
+        <!-- CONTENIDO PRINCIPAL -->
         <div class="main-content">
             <header>
                 <h1>Videos Premium</h1>
@@ -267,10 +298,14 @@
             </div>
         </div>
 
-        <!-- BANNER PARCIALMENTE VISIBLE -->
-        <div class="adsterra-banner">
-            <div class="banner-container">
+        <!-- BANNER FLOTANTE MEJORADO -->
+        <div class="floating-banner" id="floatingBanner">
+            <div class="banner-header">
                 <div class="banner-title">💎 Contenido Exclusivo</div>
+                <button class="close-banner" id="closeBanner">×</button>
+            </div>
+            <div class="banner-content">
+                <!-- BANNER NORMAL 300x250 DE ADSTERRA -->
                 <script type="text/javascript">
                     atOptions = {
                         'key' : 'b3f717f07a99e7a89fda4ecb403dff85',
@@ -281,6 +316,7 @@
                     };
                 </script>
                 <script type="text/javascript" src="//recommendedcasualtymysterious.com/b3f717f07a99e7a89fda4ecb403dff85/invoke.js"></script>
+                <div class="countdown" id="countdown">Cierra en 30 segundos</div>
             </div>
         </div>
         
@@ -290,8 +326,9 @@
     </div>
 
     <script>
-        // Lista de URLs de videos (reemplaza con tus URLs reales)
-        const videoUrls = [
+        // LISTA COMPLETA DE VIDEOS
+       // LISTA COMPLETA DE VIDEOS
+const videoUrls = [
             "https://cdn.videy.co/k1vCDv4T1.mp4",
             "https://cdn.videy.co/rh5UJO0C1.mp4",
             "https://cdn.videy.co/lI2a82rg1.mp4",
@@ -403,121 +440,189 @@
             "https://cdn.videy.co/NA3mrEH11.mp4",
             "https://cdn.videy.co/Hh0aJ3n61.mp4",
             "https://cdn.videy.co/GvbzAUHK1.mp4",
-        ];
-        
-        // Elementos del DOM
-        const videoPlayer = document.getElementById('videoPlayer');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const viewCountElement = document.getElementById('view-count');
-        
-        // Variables de estado
-        let currentVideoIndex = 0;
-        let viewCount = 0;
-        
-        // Función para obtener un índice aleatorio al cargar la página
-        function getRandomVideoIndex() {
-            return Math.floor(Math.random() * videoUrls.length);
-        }
-        
-        // Función para cargar un video
-        function loadVideo(index) {
-            // Validar que el índice esté dentro del rango
-            if (index < 0) index = videoUrls.length - 1;
-            if (index >= videoUrls.length) index = 0;
-            
-            currentVideoIndex = index;
-            videoPlayer.src = videoUrls[currentVideoIndex];
-            
-            // Incrementar contador de vistas
-            viewCount++;
-            viewCountElement.textContent = viewCount;
-            
-            // Guardar en localStorage para persistencia
-            localStorage.setItem('videoViewCount', viewCount);
-        }
-        
-        // Función para cargar el siguiente video
-        function nextVideo() {
-            loadVideo(currentVideoIndex + 1);
-        }
-        
-        // Función para cargar el video anterior
-        function prevVideo() {
-            loadVideo(currentVideoIndex - 1);
-        }
-        
-        // Event listeners para los botones
-        prevBtn.addEventListener('click', prevVideo);
-        nextBtn.addEventListener('click', nextVideo);
-        
-        // Event listener para cuando termina un video
-        videoPlayer.addEventListener('ended', nextVideo);
-        
-        // Manejar la orientación de pantalla
-        function handleOrientation() {
-            if (window.matchMedia("(orientation: landscape)").matches && window.innerHeight < 500) {
-                document.body.classList.add('landscape');
-            } else {
-                document.body.classList.remove('landscape');
-            }
-        }
-        
-        // Inicialización al cargar la página
-        document.addEventListener('DOMContentLoaded', function() {
-            // Cargar contador de vistas desde localStorage
-            const savedViewCount = localStorage.getItem('videoViewCount');
-            if (savedViewCount) {
-                viewCount = parseInt(savedViewCount);
-                viewCountElement.textContent = viewCount;
-            }
-            
-            // Cargar un video aleatorio al inicio
-            currentVideoIndex = getRandomVideoIndex();
-            loadVideo(currentVideoIndex);
-            
-            // Configurar detección de orientación
-            handleOrientation();
-            window.addEventListener('resize', handleOrientation);
-            window.addEventListener('orientationchange', handleOrientation);
-            
-            // Prevenir acciones por defecto de gestos táctiles
-            document.addEventListener('touchmove', function(e) {
-                if (e.scale !== 1) {
-                    e.preventDefault();
-                }
-            }, { passive: false });
-            
-            // Prevenir zoom con doble tap
-            let lastTap = 0;
-            document.addEventListener('touchend', function(e) {
-                const currentTime = new Date().getTime();
-                const tapLength = currentTime - lastTap;
-                if (tapLength < 500 && tapLength > 0) {
-                    e.preventDefault();
-                }
-                lastTap = currentTime;
-            });
+    // ... (tus videos) ...
+];
 
-            // Efecto sutil al hacer scroll hacia el banner
-            let bannerRevealed = false;
-            window.addEventListener('scroll', function() {
-                const banner = document.querySelector('.adsterra-banner');
-                const bannerRect = banner.getBoundingClientRect();
-                
-                if (bannerRect.top < window.innerHeight * 0.8 && !bannerRevealed) {
-                    banner.style.minHeight = '250px';
-                    banner.style.opacity = '1';
-                    bannerRevealed = true;
-                }
-            });
-        });
+// ELEMENTOS DEL DOM
+const videoPlayer = document.getElementById('videoPlayer');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const viewCountElement = document.getElementById('view-count');
+const floatingBanner = document.getElementById('floatingBanner');
+const closeBanner = document.getElementById('closeBanner');
+const countdownElement = document.getElementById('countdown');
+
+// VARIABLES DE ESTADO - ✅ CORREGIDO
+let currentVideoIndex = 0;
+let viewCount = 0;
+let bannerTimer;
+let countdownTimer;
+let countdownSeconds = 30;
+let bannerShown = false;
+// ❌ ELIMINADO: let videoInteractions = 0;
+
+// FUNCIONES DEL BANNER FLOTANTE
+function showFloatingBanner() {
+    if (bannerShown) return;
+    
+    floatingBanner.classList.add('show');
+    bannerShown = true;
+    
+    countdownSeconds = 30;
+    updateCountdown();
+    
+    countdownTimer = setInterval(() => {
+        countdownSeconds--;
+        updateCountdown();
+        
+        if (countdownSeconds <= 0) {
+            hideFloatingBanner();
+        }
+    }, 1000);
+    
+    bannerTimer = setTimeout(hideFloatingBanner, 30000);
+}
+
+function hideFloatingBanner() {
+    floatingBanner.classList.remove('show');
+    clearTimeout(bannerTimer);
+    clearInterval(countdownTimer);
+    
+    setTimeout(() => {
+        floatingBanner.style.pointerEvents = 'none';
+    }, 100);
+}
+
+function updateCountdown() {
+    countdownElement.textContent = `Cierra en ${countdownSeconds} segundos`;
+}
+
+// FUNCIONES DE VIDEO - ✅ CORREGIDO
+function getRandomVideoIndex() {
+    return Math.floor(Math.random() * videoUrls.length);
+}
+
+function loadVideo(index) {
+    if (index < 0) index = videoUrls.length - 1;
+    if (index >= videoUrls.length) index = 0;
+    
+    currentVideoIndex = index;
+    videoPlayer.src = videoUrls[currentVideoIndex];
+    
+    viewCount++;
+    viewCountElement.textContent = viewCount;
+    localStorage.setItem('videoViewCount', viewCount);
+    
+    // ❌ ELIMINADO: videoInteractions++;
+}
+
+function nextVideo() {
+    loadVideo(currentVideoIndex + 1);
+    // ✅ SOLO cambia el video, NO muestra banner
+}
+
+function prevVideo() {
+    loadVideo(currentVideoIndex - 1);
+}
+
+function handleVideoEnd() {
+    nextVideo();
+}
+
+// MANEJO DE ORIENTACIÓN
+function handleOrientation() {
+    if (window.matchMedia("(orientation: landscape)").matches && window.innerHeight < 500) {
+        document.body.classList.add('landscape');
+    } else {
+        document.body.classList.remove('landscape');
+    }
+}
+
+// PREVENIR GESTOS NO DESEADOS
+function preventZoom(e) {
+    if (e.touches.length > 1) {
+        e.preventDefault();
+    }
+}
+
+function preventDoubleTapZoom(e) {
+    const currentTime = new Date().getTime();
+    const tapLength = currentTime - lastTap;
+    if (tapLength < 500 && tapLength > 0) {
+        e.preventDefault();
+    }
+    lastTap = currentTime;
+}
+
+let lastTap = 0;
+
+// EVENT LISTENERS
+prevBtn.addEventListener('click', prevVideo);
+nextBtn.addEventListener('click', nextVideo);
+closeBanner.addEventListener('click', hideFloatingBanner);
+videoPlayer.addEventListener('ended', handleVideoEnd);
+
+// INICIALIZACIÓN - ✅ CORREGIDO
+document.addEventListener('DOMContentLoaded', function() {
+    const savedViewCount = localStorage.getItem('videoViewCount');
+    if (savedViewCount) {
+        viewCount = parseInt(savedViewCount);
+        viewCountElement.textContent = viewCount;
+    }
+    
+    currentVideoIndex = getRandomVideoIndex();
+    loadVideo(currentVideoIndex);
+    
+    // ✅ CORRECTO: Banner SOLO a los 10 segundos iniciales
+    setTimeout(showFloatingBanner, 10000);
+    
+    handleOrientation();
+    window.addEventListener('resize', handleOrientation);
+    window.addEventListener('orientationchange', handleOrientation);
+    
+    document.addEventListener('touchmove', preventZoom, { passive: false });
+    document.addEventListener('touchend', preventDoubleTapZoom, { passive: false });
+    
+    document.addEventListener('touchmove', function(e) {
+        if (e.scale !== 1) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+
+    videoPlayer.addEventListener('error', function(e) {
+        console.error('Error cargando video:', e);
+        setTimeout(nextVideo, 1000);
+    });
+
+    videoPlayer.addEventListener('loadstart', function() {
+        console.log('Cargando video:', videoUrls[currentVideoIndex]);
+    });
+
+    videoPlayer.addEventListener('loadeddata', function() {
+        console.log('Video cargado correctamente');
+    });
+});
+
+// Manejar visibilidad de la página
+document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+        if (!videoPlayer.paused) {
+            videoPlayer.pause();
+        }
+    }
+});
+
+// Console log para debugging - ✅ CORREGIDO
+console.log('🎬 Videos Premium - Cargado correctamente');
+console.log('📊 Total de videos:', videoUrls.length);
+console.log('⏰ Banner aparecerá en 10 segundos');
+console.log('✅ Banner SOLO al inicio - SEGURO con Adsterra');
     </script>
 
-<script type='text/javascript' src='//recommendedcasualtymysterious.com/ab/a5/03/aba503e62f5579a0597ea6c0ab9335d2.js'></script>
-
-<script type='text/javascript' src='//recommendedcasualtymysterious.com/c7/00/3f/c7003faa0e11ffc12de65bbd2ef918be.js'></script>
-
+    <!-- SCRIPTS DE ADSTERRA -->
+    <script type='text/javascript' src='//recommendedcasualtymysterious.com/ab/a5/03/aba503e62f5579a0597ea6c0ab9335d2.js'></script>
+    
+    <script type='text/javascript' src='//recommendedcasualtymysterious.com/c7/00/3f/c7003faa0e11ffc12de65bbd2ef918be.js'></script>
 
 </body>
 </html>
