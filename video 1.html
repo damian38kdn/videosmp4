@@ -3,65 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Videos para Adultos</title>
+    <title>Premium Content</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            background-color: #1a1a1a;
-            color: #fff;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e6e6e6;
+            line-height: 1.6;
+            padding: 20px;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         
-        header {
-            text-align: center;
-            padding: 10px 0;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #333;
-        }
-        
-        h1 {
-            font-size: 1.8rem;
-            margin-bottom: 5px;
-        }
-        
-        .warning {
-            background-color: #ff3333;
-            color: white;
-            padding: 8px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 0.9rem;
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         
         .video-container {
-            position: relative;
             width: 100%;
-            height: 55vh;
-            margin: 0 auto 15px;
+            max-width: 500px;
+            margin: 0 auto 20px;
             background-color: #000;
-            border-radius: 8px;
+            border-radius: 12px;
             overflow: hidden;
-            flex-shrink: 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            border: 1px solid #333;
+            position: relative;
+        }
+        
+        .autoplay-indicator {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
         
         video {
             width: 100%;
-            height: 100%;
-            object-fit: contain;
+            height: auto;
             display: block;
         }
         
@@ -69,178 +68,294 @@
             display: flex;
             justify-content: center;
             gap: 20px;
-            margin-bottom: 20px;
-            flex-shrink: 0;
+            margin-bottom: 25px;
         }
         
         button {
-            background-color: #ff3333;
+            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
             color: white;
             border: none;
-            padding: 12px 25px;
-            border-radius: 5px;
+            padding: 12px 24px;
+            border-radius: 30px;
             cursor: pointer;
-            font-size: 1rem;
-            font-weight: bold;
-            transition: background-color 0.3s;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            letter-spacing: 0.5px;
         }
         
         button:hover {
-            background-color: #ff5555;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
         }
         
-        .image-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 15px;
-            flex-grow: 1;
-            align-items: center;
+        button:active {
+            transform: translateY(1px);
         }
         
-        .image-link {
-            width: 45%;
-            max-width: 300px;
-            height: 150px;
-            border-radius: 8px;
-            overflow: hidden;
-            transition: transform 0.3s;
-        }
-        
-        .image-link:hover {
-            transform: scale(1.05);
-        }
-        
-        .image-link img {
+        .banner-container {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            max-width: 728px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            border: 1px solid #2d3746;
+            position: relative;
+            overflow: hidden;
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .banner-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+        }
+        
+        .banner-content {
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            width: 100%;
+        }
+        
+        .native-ad-label {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #b8b8b8;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .banner-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .banner-text {
+            font-size: 16px;
+            color: #b8b8b8;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .banner-cta {
+            display: inline-block;
+            background: linear-gradient(to right, #ff416c 0%, #ff4b2b 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(255, 75, 43, 0.3);
+        }
+        
+        .banner-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 75, 43, 0.4);
+        }
+        
+        .premium-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(to right, #ff8a00, #ff2070);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         footer {
             text-align: center;
-            padding: 10px 0;
-            border-top: 1px solid #333;
-            font-size: 0.8rem;
-            color: #888;
-            flex-shrink: 0;
+            margin-top: 30px;
+            padding: 20px;
+            color: #6c757d;
+            font-size: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        /* Responsive design */
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        
+        .footer-links a {
+            color: #8a8a8a;
+            text-decoration: none;
+            font-size: 12px;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #fff;
+        }
+        
+        /* Estilos para el banner nativo */
+        #container-46731f9dec8e0cf5d7c99524a3cc2c9d {
+            width: 100%;
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Placeholder mientras carga el banner */
+        .banner-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .placeholder-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: #6a11cb;
+        }
+        
+        .placeholder-text {
+            color: #b8b8b8;
+            font-size: 14px;
+        }
+        
+        /* Responsive adjustments */
         @media (max-width: 768px) {
-            h1 {
-                font-size: 1.5rem;
-            }
-            
             .video-container {
-                height: 45vh;
+                max-width: 100%;
             }
             
-            .controls {
-                flex-direction: row;
-                align-items: center;
-                gap: 10px;
+            .banner-container {
+                max-width: 100%;
             }
             
             button {
-                width: 45%;
-                padding: 10px 15px;
+                padding: 10px 20px;
+                font-size: 13px;
             }
             
-            .image-links {
-                flex-direction: row;
-                align-items: center;
-                gap: 15px;
+            .banner-title {
+                font-size: 20px;
             }
             
-            .image-link {
-                width: 45%;
-                height: 120px;
-            }
-        }
-        
-        @media (max-height: 700px) {
-            .video-container {
-                height: 40vh;
-            }
-            
-            .image-link {
-                height: 120px;
-            }
-        }
-        
-        @media (max-height: 600px) {
-            .video-container {
-                height: 35vh;
-            }
-            
-            .image-link {
-                height: 100px;
-            }
-            
-            .warning {
-                padding: 5px;
-                font-size: 0.8rem;
-                margin-bottom: 10px;
-            }
-            
-            header {
-                padding: 5px 0;
-                margin-bottom: 5px;
+            .banner-text {
+                font-size: 14px;
             }
         }
         
         @media (max-width: 480px) {
-            .image-links {
+            body {
+                padding: 15px;
+            }
+            
+            .controls {
                 gap: 10px;
             }
             
-            .image-link {
-                width: 48%;
-                height: 100px;
+            button {
+                width: 100%;
+                max-width: 160px;
+                justify-content: center;
+                padding: 10px 15px;
+            }
+            
+            .banner-content {
+                padding: 20px 15px;
+            }
+            
+            .premium-badge {
+                position: relative;
+                top: 0;
+                right: 0;
+                display: inline-block;
+                margin-bottom: 10px;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Videos para Adultos</h1>
-       
-    </header>
-    
-    <div class="warning">
-        ADVERTENCIA: Debes tener al menos 18 años para acceder.
-    </div>
-    
-    <div class="video-container">
-        <video id="videoPlayer" controls autoplay muted playsinline>
-            Tu navegador no soporta el elemento de video.
-        </video>
-    </div>
-    
-    <div class="controls">
-        <button id="prevBtn">Video Anterior</button>
-        <button id="nextBtn">Siguiente Video</button>
-    </div>
-    
-    <div class="image-links">
-        <a href="#" target="_blank" class="image-link" id="imageLink1">
-            <img id="randomImage1" alt="VER">
-        </a>
-        <a href="#" target="_blank" class="image-link" id="imageLink2">
-            <img id="randomImage2" alt="VER">
-        </a>
-    </div>
+    <main>
+        <div class="video-container">
+            <div class="autoplay-indicator">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                </svg>
+                Reproducción automática
+            </div>
+            <video id="videoPlayer" controls autoplay muted playsinline>
+                Tu navegador no soporta la reproducción de videos.
+            </video>
+        </div>
+        
+        <div class="controls">
+            <button id="prevBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                </svg>
+                Anterior
+            </button>
+            <button id="nextBtn">
+                Siguiente
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                </svg>
+            </button>
+        </div>
+        
+        <script async="async" data-cfasync="false" src="//recommendedcasualtymysterious.com/46731f9dec8e0cf5d7c99524a3cc2c9d/invoke.js"></script>
+<div id="container-46731f9dec8e0cf5d7c99524a3cc2c9d"></div>
+    </main>
     
     <footer>
-        <p>© 2025 Sitio para Adultos. Todos los derechos reservados.</p>
-        
+        <p>&copy; 2023 Premium Content. Todos los derechos reservados.</p>
+        <div class="footer-links">
+            <a href="#">Términos de servicio</a>
+            <a href="#">Política de privacidad</a>
+            <a href="#">Contacto</a>
+            <a href="#">Ayuda</a>
+        </div>
     </footer>
-    
+
+    <!-- Script del banner nativo -->
+
     <script>
-        // Lista de URLs de videos de prueba (reemplaza con tus URLs reales)
+        // Array de URLs de videos (reemplaza con tus URLs reales)
         const videoUrls = [
-            "https://cdn.videy.co/k1vCDv4T1.mp4",
+           "https://cdn.videy.co/k1vCDv4T1.mp4",
             "https://cdn.videy.co/rh5UJO0C1.mp4",
             "https://cdn.videy.co/lI2a82rg1.mp4",
             "https://cdn.videy.co/J6ViSP9e1.mp4",
@@ -436,102 +551,21 @@
             "https://cdn.videy.co/3IAR2wyd1.mp4"
         ];
         
-        // Lista de URLs de imágenes (todas redirigen al mismo enlace)
-const imageUrls = [
-    {src: "https://ia600209.us.archive.org/24/items/imagen-13kwlkrl/Imagen10jeweiwoe.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://ia600209.us.archive.org/24/items/imagen-13kwlkrl/Imagen11kdlkrlkw.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen12efpwoepow.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen13kwlkrl.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen14kfkrpwor.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen15kefweoiow.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen3efklwk.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen4jdkweowie.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen6lekrlke.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen7jfdwklelw.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/cc7f65a28.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/c67c1b6aa.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/3c537ef6f.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/a8eed3f55.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/337e588fb.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/76343fc61.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/15a13861c.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/864078db9.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/13405e6e7.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/5009a06e0.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/7490d4f9d.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/dfe1c7609.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/f65d0f3ef.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/4d904272f.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/460f6b525.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/c12eedaea.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/9b8477af5.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/66115769d.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/2fd95a4d3.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/8ef0ab534.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/a83d1619a.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/47316f001.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/675bf928a.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/f646b3032.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/98995de53.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/43908adc4.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/e4e62b5a2.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/d5901f2c8.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/d05bee6b6.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/1c09e64bf.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/12fab0ece.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/69180e9cb.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/93eecfd4b.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen8jldwkelk.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://ia800209.us.archive.org/24/items/imagen-13kwlkrl/Imagen9kdlwkeow.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://ia601209.us.archive.org/12/items/imagen-14dkcks/Imagen14dkcks.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://ia601209.us.archive.org/12/items/imagen-14dkcks/Imagen14dkjs.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagen15kdlskl.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagen16ndskl.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagen18fmvk%C3%B1.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagen19nfdsl.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://ia601209.us.archive.org/12/items/imagen-14dkcks/Imagen19njsak.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://ia801209.us.archive.org/12/items/imagen-14dkcks/Imagensnoeiq.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/b9b0bcb41.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/f764d9f25.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/16c6feb0c.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/5ae72239f.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/f3352c65f.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/10d5aa458.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/fb7c6cb28.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/80e5164d5.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/6a81dd359.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/bb005a40f.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/3a69dfcb7.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/d859d514d.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/f7e4da93c.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/fe3f16f9e.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/714f7fbcb.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/0d86ae4c4.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/31550d0f8.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/514439b35.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/2bf33c4e3.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/49b814f84.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/fe43bfb3e.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"},
-    {src: "https://cdn.aceimg.com/e3a5a233a.png", link: "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"}
-];
-        
-        let currentVideoIndex = 0;
+        // Elementos del DOM
         const videoPlayer = document.getElementById('videoPlayer');
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
-        const randomImage1 = document.getElementById('randomImage1');
-        const randomImage2 = document.getElementById('randomImage2');
-        const imageLink1 = document.getElementById('imageLink1');
-        const imageLink2 = document.getElementById('imageLink2');
         
-        // Función para obtener un índice aleatorio
-        function getRandomIndex(max) {
-            return Math.floor(Math.random() * max);
-        }
+        // Índice del video actual
+        let currentVideoIndex = 0;
         
-        // Función para cargar un video
-        function loadVideo(index) {
-            videoPlayer.src = videoUrls[index];
+        // Función para cargar un video aleatorio al inicio
+        function loadRandomVideo() {
+            // Generar un índice aleatorio
+            currentVideoIndex = Math.floor(Math.random() * videoUrls.length);
+            
+            // Cargar el video
+            videoPlayer.src = videoUrls[currentVideoIndex];
             videoPlayer.load();
             
             // Intentar reproducir automáticamente
@@ -539,70 +573,59 @@ const imageUrls = [
             
             if (playPromise !== undefined) {
                 playPromise.then(_ => {
-                    // Reproducción iniciada automáticamente
-                    console.log("Reproducción automática iniciada");
+                    // Reproducción automática iniciada
+                    console.log('Reproducción automática iniciada');
                 }).catch(error => {
                     // La reproducción automática falló
-                    console.log("La reproducción automática falló: ", error);
-                    // Mostrar controles para que el usuario pueda reproducir manualmente
+                    console.log('La reproducción automática falló:', error);
+                    // Mostrar controles para que el usuario pueda iniciar manualmente
                     videoPlayer.controls = true;
                 });
             }
         }
         
-        // Función para cargar imágenes aleatorias
-        function loadRandomImages() {
-            // Obtener dos índices diferentes
-            let index1 = getRandomIndex(imageUrls.length);
-            let index2 = getRandomIndex(imageUrls.length);
-            
-            // Asegurarse de que los índices sean diferentes
-            while (index2 === index1) {
-                index2 = getRandomIndex(imageUrls.length);
-            }
-            
-            // Cargar las imágenes y establecer los enlaces
-            randomImage1.src = imageUrls[index1].src;
-            imageLink1.href = imageUrls[index1].link;
-            
-            randomImage2.src = imageUrls[index2].src;
-            imageLink2.href = imageUrls[index2].link;
-        }
-        
-        // Cargar un video aleatorio y imágenes aleatorias al inicio
-        window.addEventListener('load', () => {
-            currentVideoIndex = getRandomIndex(videoUrls.length);
-            loadVideo(currentVideoIndex);
-            loadRandomImages();
-        });
-        
-        // Eventos para los botones
-        prevBtn.addEventListener('click', () => {
-            currentVideoIndex = (currentVideoIndex - 1 + videoUrls.length) % videoUrls.length;
-            loadVideo(currentVideoIndex);
-        });
-        
-        nextBtn.addEventListener('click', () => {
+        // Función para cargar el siguiente video
+        function loadNextVideo() {
             currentVideoIndex = (currentVideoIndex + 1) % videoUrls.length;
-            loadVideo(currentVideoIndex);
-        });
-        
-        // Manejar el evento de fin de video
-        videoPlayer.addEventListener('ended', () => {
-            // Reproducir siguiente video automáticamente
-            currentVideoIndex = (currentVideoIndex + 1) % videoUrls.length;
-            loadVideo(currentVideoIndex);
-        });
-        
-        // Intentar reproducir automáticamente cuando el usuario interactúe con la página
-        document.addEventListener('click', function() {
-            if (videoPlayer.paused) {
-                videoPlayer.play().catch(e => {
-                    console.log("No se pudo reproducir después de la interacción: ", e);
+            videoPlayer.src = videoUrls[currentVideoIndex];
+            videoPlayer.load();
+            
+            const playPromise = videoPlayer.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    console.log('La reproducción automática falló:', error);
                 });
             }
+        }
+        
+        // Función para cargar el video anterior
+        function loadPrevVideo() {
+            currentVideoIndex = (currentVideoIndex - 1 + videoUrls.length) % videoUrls.length;
+            videoPlayer.src = videoUrls[currentVideoIndex];
+            videoPlayer.load();
+            
+            const playPromise = videoPlayer.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    console.log('La reproducción automática falló:', error);
+                });
+            }
+        }
+        
+        // Event listeners para los botones
+        nextBtn.addEventListener('click', loadNextVideo);
+        prevBtn.addEventListener('click', loadPrevVideo);
+        
+        // Cargar un video aleatorio al cargar la página
+        window.addEventListener('load', loadRandomVideo);
+        
+        // Manejar el evento de finalización del video
+        videoPlayer.addEventListener('ended', function() {
+            // Reproducir automáticamente el siguiente video cuando termine el actual
+            setTimeout(loadNextVideo, 1000);
         });
     </script>
+
 
 <script type='text/javascript' src='//recommendedcasualtymysterious.com/36/e1/00/36e10022d83ec0ce83d7805cadf1bd07.js'></script>
 
