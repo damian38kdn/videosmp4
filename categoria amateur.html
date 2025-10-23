@@ -843,45 +843,59 @@
                 window.scrollTo(0, 0);
             }
             
-            renderVideos(videos) {
-                if (videos.length === 0) {
-                    this.elements.videoGrid.innerHTML = `
-                        <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: white;">
-                            <h3>No se encontraron videos</h3>
-                            <p>Intenta con otros términos de búsqueda</p>
-                        </div>
-                    `;
-                    return;
-                }
-                
-                this.elements.videoGrid.innerHTML = videos.map(video => `
-                    <div class="video-card" data-video-id="${video.id}">
-                        <div class="video-thumbnail">
-                            <video preload="metadata" muted loop playsinline>
-                                <source src="${video.url}#t=1" type="video/mp4">
-                            </video>
-                            <div class="play-overlay">
-                                <div class="play-icon">▶</div>
-                            </div>
-                        </div>
-                        <div class="video-info">
-                            <h3>${video.title}</h3>
-                            <div class="video-meta">
-                                <span>${video.duration}</span>
-                                <span>${this.formatViews(video.views)} vistas</span>
-                            </div>
-                        </div>
+           renderVideos(videos) {
+    let html = '';
+    const smartlinkURL = "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"; // ⬅️ PEGA TU SMARTLINK AQUÍ
+    
+    videos.forEach((video, index) => {
+        // ✅ AGREGAR SMARTLINK CADA 2 VIDEOS
+        if (index % 2 === 0 && index !== 0) {
+            html += `
+                <!-- SMARTLINK ESTRATÉGICO -->
+                <div class="smartlink-cta" style="grid-column: 1 / -1; text-align: center; margin: 15px 0; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 10px;">
+                    <a href="${smartlinkURL}" 
+                       target="_blank" 
+                       style="background: linear-gradient(135deg, #ff6b00, #ff4081); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: bold; display: inline-block; font-size: 14px; box-shadow: 0 4px 12px rgba(255, 107, 0, 0.3); transition: all 0.3s ease;"
+                       onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 15px rgba(255, 107, 0, 0.5)';"
+                       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(255, 107, 0, 0.3)';">
+                       🎬 VER CONTENIDO EXCLUSIVO HD
+                    </a>
+                </div>
+            `;
+        }
+        
+        // TU CÓDIGO ORIGINAL DEL VIDEO
+        html += `
+            <div class="video-card" data-video-id="${video.id}">
+                <div class="video-thumbnail">
+                    <video preload="metadata" muted loop playsinline>
+                        <source src="${video.url}#t=1" type="video/mp4">
+                    </video>
+                    <div class="play-overlay">
+                        <div class="play-icon">▶</div>
                     </div>
-                `).join('');
-                
-                // Agregar event listeners a los videos
-                document.querySelectorAll('.video-card').forEach(card => {
-                    card.addEventListener('click', () => {
-                        const videoId = parseInt(card.dataset.videoId);
-                        this.openModal(videoId);
-                    });
-                });
-            }
+                </div>
+                <div class="video-info">
+                    <h3>${video.title}</h3>
+                    <div class="video-meta">
+                        <span>${video.duration}</span>
+                        <span>${this.formatViews(video.views)} vistas</span>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+    
+    this.elements.videoGrid.innerHTML = html;
+    
+    // El resto de tu código sigue igual
+    document.querySelectorAll('.video-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const videoId = parseInt(card.dataset.videoId);
+            this.openModal(videoId);
+        });
+    });
+}
             
             openModal(videoId) {
                 const video = this.allVideos.find(v => v.id === videoId);
