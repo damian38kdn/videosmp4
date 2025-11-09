@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descargar Videos | Mobile Optimizado</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --text: #1f2937;
+            --text-light: #6b7280;
+            --background: #ffffff;
+            --border: #e5e7eb;
+            --card-bg: #f8fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: #f9fafb;
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* Header Mobile First */
+        header {
+            background-color: var(--background);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 12px 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            font-size: 24px;
+        }
+
+        /* Hero Section Mobile First */
+        .hero {
+            padding: 40px 0 30px;
+            text-align: center;
+            background-color: var(--background);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero h1 {
+            font-size: 28px;
+            margin-bottom: 12px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .hero p {
+            font-size: 16px;
+            color: var(--text-light);
+            margin: 0 auto 20px;
+            max-width: 100%;
+        }
+
+        .instruction-box {
+            background-color: #eff6ff;
+            border: 1px solid #dbeafe;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .instruction-box p {
+            color: var(--primary);
+            font-weight: 500;
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* Main Content Mobile First */
+        .main-content {
+            padding: 40px 0;
+            flex-grow: 1;
+        }
+
+        .section-title {
+            font-size: 22px;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        /* Video Buttons Grid - Mobile First */
+        .video-buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        .video-button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 16px 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+            text-align: center;
+            min-height: 70px;
+            touch-action: manipulation;
+        }
+
+        .video-button:active {
+            background-color: var(--primary-dark);
+            transform: scale(0.98);
+        }
+
+        .video-number {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .video-label {
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        /* Features Section Mobile First */
+        .features {
+            padding: 40px 0;
+            background-color: var(--background);
+            border-top: 1px solid var(--border);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .feature-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+
+        .feature-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .feature-description {
+            color: var(--text-light);
+            font-size: 13px;
+        }
+
+        /* Footer Mobile First */
+        footer {
+            background-color: var(--background);
+            border-top: 1px solid var(--border);
+            padding: 24px 0;
+            text-align: center;
+            color: var(--text-light);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.2s;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Tablet Styles */
+        @media (min-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            header {
+                padding: 16px 0;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+
+            .hero {
+                padding: 60px 0 40px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+                max-width: 600px;
+            }
+
+            .instruction-box {
+                padding: 18px;
+                max-width: 600px;
+            }
+
+            .instruction-box p {
+                font-size: 15px;
+            }
+
+            .main-content {
+                padding: 50px 0;
+            }
+
+            .section-title {
+                font-size: 26px;
+            }
+
+            .video-buttons-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 15px;
+            }
+
+            .video-button {
+                padding: 18px 10px;
+                min-height: 80px;
+                font-size: 15px;
+            }
+
+            .video-button:hover {
+                background-color: var(--primary-dark);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+            }
+
+            .video-number {
+                font-size: 20px;
+            }
+
+            .video-label {
+                font-size: 12px;
+            }
+
+            .features {
+                padding: 50px 0;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 30px;
+            }
+
+            .feature {
+                padding: 25px;
+            }
+
+            .feature-icon {
+                font-size: 36px;
+            }
+
+            .feature-title {
+                font-size: 17px;
+            }
+
+            footer {
+                padding: 30px 0;
+            }
+        }
+
+        /* Desktop Styles */
+        @media (min-width: 1024px) {
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .video-buttons-grid {
+                grid-template-columns: repeat(6, 1fr);
+                gap: 18px;
+            }
+
+            .video-button {
+                padding: 20px 12px;
+                min-height: 90px;
+                font-size: 16px;
+            }
+
+            .video-number {
+                font-size: 22px;
+            }
+
+            .video-label {
+                font-size: 13px;
+            }
+
+            .feature-icon {
+                font-size: 40px;
+            }
+        }
+
+        /* Large Desktop */
+        @media (min-width: 1200px) {
+            .video-buttons-grid {
+                grid-template-columns: repeat(8, 1fr);
+            }
+        }
+
+        /* Pequeñas mejoras para móviles muy pequeños */
+        @media (max-width: 360px) {
+            .video-buttons-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            .video-button {
+                padding: 14px 6px;
+                min-height: 65px;
+            }
+            
+            .video-number {
+                font-size: 16px;
+            }
+            
+            .video-label {
+                font-size: 10px;
+            }
+        }
+
+        /* Mejoras de accesibilidad */
+        @media (prefers-reduced-motion: reduce) {
+            .video-button {
+                transition: none;
+            }
+        }
+
+        /* Modo oscuro opcional */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --text: #f9fafb;
+                --text-light: #d1d5db;
+                --background: #1f2937;
+                --border: #374151;
+                --card-bg: #374151;
+            }
+            
+            body {
+                background-color: #111827;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <span class="logo-icon">📥</span>
+                    <span>DescargarVideos</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Descargar Videos</h1>
+            <p>Accede a nuestra colección completa de videos disponibles para descarga inmediata</p>
+            <div class="instruction-box">
+                <p>Haz clic en cualquier botón numerado para descargar el video correspondiente</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <h2 class="section-title">Videos Disponibles</h2>
+            <div class="video-buttons-grid" id="videoButtonsContainer">
+                <!-- Los botones se generarán automáticamente con JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Características</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Descarga Rápida</h3>
+                    <p class="feature-description">Videos optimizados para descarga inmediata sin esperas</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🎬</div>
+                    <h3 class="feature-title">Alta Calidad</h3>
+                    <p class="feature-description">Todos los videos disponibles en la mejor calidad posible</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📱</div>
+                    <h3 class="feature-title">Optimizado Móvil</h3>
+                    <p class="feature-description">Diseño perfecto para descargar desde tu teléfono</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="#">Términos</a>
+                    <a href="#">Privacidad</a>
+                    <a href="#">Soporte</a>
+                </div>
+                <p>&copy; 2023 DescargarVideos. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // AQUÍ PEGA TU LISTA COMPLETA DE URLs
+        const videoUrls = [
+            "https://upfiles.com/G7Uej8eK",
+            "https://upfiles.com/4bPH",
+            "https://upfiles.com/vFl6qqq",
+            "https://upfiles.com/902B",
+            "https://upfiles.com/ePIR",
+            "https://upfiles.com/2bg0qvi",
+            "https://upfiles.com/1W49a",
+            "https://upfiles.com/jqjDCo",
+            "https://upfiles.com/hEn1",
+            "https://upfiles.com/rEU8",
+            "https://upfiles.com/c9QU",
+            "https://upfiles.com/j0mEHKpb",
+            "https://upfiles.com/Fxpggzw",
+            "https://upfiles.com/5QkttHHH",
+            "https://upfiles.com/1AtB5Q",
+            "https://upfiles.com/cpeSJfg",
+            "https://upfiles.com/ltauP2G",
+            "https://upfiles.com/Bo0u",
+            "https://upfiles.com/8nas",
+            "https://upfiles.com/1lgQ",
+            "https://upfiles.com/DrJgF",
+            "https://upfiles.com/bMjY",
+            "https://upfiles.com/Vq6bVJD",
+            "https://upfiles.com/O5Lr",
+            "https://upfiles.com/thSmGaf",
+            "https://upfiles.com/bVel",
+            "https://upfiles.com/ARlt3",
+            "https://upfiles.com/aB8bEAQI",
+            "https://upfiles.com/A8yLf",
+            "https://upfiles.com/LjNm1",
+            "https://upfiles.com/TyteLAt",
+            "https://upfiles.com/pmnVlgn",
+            "https://upfiles.com/Jr4Ldd",
+            "https://upfiles.com/4qfJK",
+            "https://upfiles.com/FE98sTC",
+            "https://upfiles.com/GosKdZY",
+            "https://upfiles.com/LUsfme",
+            "https://upfiles.com/OIKj",
+            "https://upfiles.com/EqA34",
+            "https://upfiles.com/Zuxs5QC",
+            "https://upfiles.com/FaCPMW",
+            "https://upfiles.com/yztE",
+            "https://upfiles.com/cnJZVUKg",
+            "https://upfiles.com/GBYeD",
+            "https://upfiles.com/co7Kt",
+            "https://upfiles.com/s10V",
+            "https://upfiles.com/3yqqCWw",
+            "https://upfiles.com/HrTlIx",
+            "https://upfiles.com/EmVHB",
+            "https://upfiles.com/86xP",
+            "https://upfiles.com/P8rF0",
+            "https://upfiles.com/w7DLI",
+            "https://upfiles.com/uxxb",
+            "https://upfiles.com/P0RzEb",
+            "https://upfiles.com/Uyrm",
+            "https://upfiles.com/OXb9Stn",
+            "https://upfiles.com/OHqRfI",
+            "https://upfiles.com/acwqL",
+            "https://upfiles.com/ub7uH",
+            "https://upfiles.com/Xo6I79c",
+            "https://upfiles.com/QYy79",
+            "https://upfiles.com/gFwjbv",
+            "https://upfiles.com/dDSzOR",
+            "https://upfiles.com/iBY256d",
+            "https://upfiles.com/1pGHvS",
+            "https://upfiles.com/CdaD3cK",
+            "https://upfiles.com/5Vo3lE",
+            "https://upfiles.com/hAqrNb",
+            "https://upfiles.com/P3VftFWy",
+            "https://upfiles.com/yqNtjBy",
+            "https://upfiles.com/MQajWj",
+            "https://upfiles.com/EULAO6gr",
+            "https://upfiles.com/y7oJa",
+            "https://upfiles.com/5jLR",
+            "https://upfiles.com/jhiJXXs",
+            "https://upfiles.com/WIrAGhOX",
+            "https://upfiles.com/qTm9",
+            "https://upfiles.com/GT1bDr8",
+            "https://upfiles.com/ARrfE",
+            "https://upfiles.com/YlFqk",                       
+            "https://upfiles.com/agaC5mh",
+            "https://upfiles.com/Sies6ulx",
+            "https://upfiles.com/PyZ2",
+            "https://upfiles.com/1Zb3",
+            "https://upfiles.com/oiLl",
+            "https://upfiles.com/SNtjqKpq",
+            "https://upfiles.com/INEB",
+            "https://upfiles.com/RYv9",
+            "https://upfiles.com/J6ZDp3",
+            "https://upfiles.com/Mt1z",
+            "https://upfiles.com/ZZM1Ya",
+            "https://upfiles.com/MApAt",
+            "https://upfiles.com/zRzA",
+            "https://upfiles.com/NstB4sSw",
+            "https://upfiles.com/pjBCmU94",
+            "https://upfiles.com/NI3lch",
+            "https://upfiles.com/1d3pLF",
+            "https://upfiles.com/oT7JH4r3",
+            "https://upfiles.com/BExgQkJw",
+            "https://upfiles.com/vW2aGHt",
+            "https://upfiles.com/3lCv1r3",
+            "https://upfiles.com/zr40fxj",
+            "https://upfiles.com/fFIGkb",
+            "https://upfiles.com/uhjs",
+            "https://upfiles.com/DrbZ",
+            "https://upfiles.com/iGql8xa",
+            "https://upfiles.com/1QMGRw4Q",
+            "https://upfiles.com/iK0EjrJ",
+            "https://upfiles.com/27vKnDn7",
+            "https://upfiles.com/OBCK",
+            "https://upfiles.com/aVt4",
+            "https://upfiles.com/pLCo0",
+            "https://upfiles.com/qIyFjFy",
+            "https://upfiles.com/5VTmbeN",
+            "https://upfiles.com/0XtD",
+            "https://upfiles.com/Zsi32fc",
+            "https://upfiles.com/PK8upahJ",
+            "https://upfiles.com/KGuTsG",
+            "https://upfiles.com/CSPRfv",
+            "https://upfiles.com/gkGLL2ON",
+    "https://upfiles.com/jYpo",
+    "https://upfiles.com/lBk55jAq",
+    "https://upfiles.com/k5RKn",
+    "https://upfiles.com/FyjtEW",
+    "https://upfiles.com/fpKv1",
+    "https://upfiles.com/TB0P",
+    "https://upfiles.com/vD2oqm",
+    "https://upfiles.com/XLoQ1",
+    "https://upfiles.com/lIGC",
+    "https://upfiles.com/YoAKRi",
+    "https://upfiles.com/HkbA",
+    "https://upfiles.com/pVZjiFCe",
+    "https://upfiles.com/wlzb",
+    "https://upfiles.com/Ernvw4PL",
+    "https://upfiles.com/6vIkw4SB",
+    "https://upfiles.com/QnTVI",
+    "https://upfiles.com/n022Qy",
+    "https://upfiles.com/TuNoF",
+    "https://upfiles.com/qELgk",
+    "https://upfiles.com/YVls",
+    "https://upfiles.com/rLfmimQ",
+    "https://upfiles.com/OgO3qLs",
+    "https://upfiles.com/8H3hy0",
+    "https://upfiles.com/O4tGi1Q",
+    "https://upfiles.com/OaNGH",
+    "https://upfiles.com/TNgl",
+    "https://upfiles.com/ymQRGx6r",
+    "https://upfiles.com/atbjHz",
+    "https://upfiles.com/Bhf7",
+    "https://upfiles.com/qOC2",
+    "https://upfiles.com/lDDW0EN",
+    "https://upfiles.com/Xj1edYa",
+    "https://upfiles.com/ZK1csLA",
+    "https://upfiles.com/urPv",
+    "https://upfiles.com/aREh0",
+    "https://upfiles.com/BHhXaZc",
+    "https://upfiles.com/ewF8EOj",
+    "https://upfiles.com/th3LF8",
+    "https://upfiles.com/Aee7R5J",
+    "https://upfiles.com/Y5y3IX3",
+    "https://upfiles.com/M57MBdYm",
+    "https://upfiles.com/i2JMjPU2",
+    "https://upfiles.com/bWV7c",
+    "https://upfiles.com/v8G4mU4S",
+    "https://upfiles.com/mCcMl",
+    "https://upfiles.com/xVAUqs",
+    "https://upfiles.com/frqeSoR",
+    "https://upfiles.com/3QypB",
+    "https://upfiles.com/peCcMm",
+    "https://upfiles.com/m5bCHj2n",
+    "https://upfiles.com/9Ce8QKT",
+    "https://upfiles.com/6t7Fx2",
+    "https://upfiles.com/Dee0MRl",
+    "https://upfiles.com/d4dooo7",
+    "https://upfiles.com/Dmwqa",
+    "https://upfiles.com/Ys2pGF",
+    "https://upfiles.com/zlIc",
+    "https://upfiles.com/pw5CKV",
+    "https://upfiles.com/fU6evQ3",
+    "https://upfiles.com/defkQ",
+    "https://upfiles.com/FdSGxEK",
+    "https://upfiles.com/cJ2H",
+    "https://upfiles.com/V2fRF",
+    "https://upfiles.com/7BiQPLg",
+    "https://upfiles.com/CQp6Unvi",
+    "https://upfiles.com/qgPyPEmO",
+    "https://upfiles.com/7Vzv",
+    "https://upfiles.com/iWEg6",
+    "https://upfiles.com/Lzcnt",
+    "https://upfiles.com/IFc4e",
+    "https://upfiles.com/QJpE5Bni",
+    "https://upfiles.com/erYgsOU",
+    "https://upfiles.com/PlT6kaf3",
+    "https://upfiles.com/wI3jL3dh",
+    "https://upfiles.com/xq0g",
+    "https://upfiles.com/Oy7qn7xF",
+    "https://upfiles.com/m1DqAn",
+    "https://upfiles.com/XJTWV8",
+    "https://upfiles.com/zhp7QW",
+    "https://upfiles.com/URmvV5tl",
+    "https://upfiles.com/IJ5GUhGp",
+    "https://upfiles.com/m554p5",
+    "https://upfiles.com/ZnGtyxGx",
+    "https://upfiles.com/G32U",
+    "https://upfiles.com/w4B6hq",
+    "https://upfiles.com/jVe0",
+    "https://upfiles.com/te87",
+    "https://upfiles.com/vY85M7X",
+    "https://upfiles.com/BSvwp",
+    "https://upfiles.com/Y5ex",
+    "https://upfiles.com/TGG2X",
+    "https://upfiles.com/TXnhQMdb",
+    "https://upfiles.com/ioCBsL",
+    "https://upfiles.com/9YLLN",
+    "https://upfiles.com/g1bS",
+    "https://upfiles.com/ExoDhmS",
+    "https://upfiles.com/qEI7W",
+    "https://upfiles.com/uZQt6",
+    "https://upfiles.com/lQq5",
+    "https://upfiles.com/J4h90K",
+    "https://upfiles.com/OZS4L4D",
+    "https://upfiles.com/Rz2VGU",
+    "https://upfiles.com/lL1hQ",
+    "https://upfiles.com/PbXq",
+    "https://upfiles.com/lbDtTd",
+    "https://upfiles.com/tnWniij",
+    "https://upfiles.com/4OZki7PX",
+    "https://upfiles.com/UR1uM",
+    "https://upfiles.com/YMF3LAX8",
+    "https://upfiles.com/Alfdlt0K",
+    "https://upfiles.com/x4Ug",
+    "https://upfiles.com/93vonM",
+    "https://upfiles.com/CYgm6uF9",
+    "https://upfiles.com/ndolkAFf",
+    "https://upfiles.com/cLbvncW",
+    "https://upfiles.com/tncwsHlu",
+    "https://upfiles.com/JIE8",
+    "https://upfiles.com/i9UL1",
+    "https://upfiles.com/5I40e",
+    "https://upfiles.com/LEcuR6EE",
+    "https://upfiles.com/3ZofC6S",
+    "https://upfiles.com/X2TX",
+    "https://upfiles.com/UIzmB5",
+    "https://upfiles.com/8JBUno",
+    "https://upfiles.com/G7la4",
+    "https://upfiles.com/8btGx",
+    "https://upfiles.com/zmdKZ",
+    "https://upfiles.com/GzeHxn",
+    "https://upfiles.com/pMx4yhu8",
+    "https://upfiles.com/j0hWteI9",
+    "https://upfiles.com/r81ErD3f",
+    "https://upfiles.com/JSzUTcu",
+    "https://upfiles.com/pdL4rp",
+    "https://upfiles.com/TcCXNXm",
+    "https://upfiles.com/yxx1Ytq",
+    "https://upfiles.com/1altrA",
+    "https://upfiles.com/OZL7",
+    "https://upfiles.com/x6ET",
+    "https://upfiles.com/jJri",
+    "https://upfiles.com/vGjVy7R",
+    "https://upfiles.com/Dgv6",
+    "https://upfiles.com/PfV2",
+    "https://upfiles.com/0HyDu4Qm",
+    "https://upfiles.com/9GLbH",
+    "https://upfiles.com/i3Ut",
+    "https://upfiles.com/7cbK7Df",
+    "https://upfiles.com/sT5Jn",
+    "https://upfiles.com/NsLh",
+    "https://upfiles.com/c8zmwGo",
+    "https://upfiles.com/ZlIIUAib",
+    "https://upfiles.com/FTrHxcr",
+    "https://upfiles.com/6goA",
+    "https://upfiles.com/ZkvKFB",
+    "https://upfiles.com/7t1iIvo",
+    "https://upfiles.com/Ois7UP",
+    "https://upfiles.com/FAjDL",
+    "https://upfiles.com/IAiWD0",
+    "https://upfiles.com/v92VF",
+    "https://upfiles.com/gZmk",
+    "https://upfiles.com/0g0u1z",
+    "https://upfiles.com/l54XJy",
+    "https://upfiles.com/ri8p6B",
+    "https://upfiles.com/lQG3Cc9",
+    "https://upfiles.com/z58mE",
+    "https://upfiles.com/h08DliNJ",
+    "https://upfiles.com/JVbT",
+    "https://upfiles.com/WvmnF",
+    "https://upfiles.com/v1BY",
+    "https://upfiles.com/Gi5Go",
+    "https://upfiles.com/Vuog",
+    "https://upfiles.com/mojkQ6",
+    "https://upfiles.com/AUR4F",
+    "https://upfiles.com/ybfd7pn",
+    "https://upfiles.com/LD7h0p10",
+    "https://upfiles.com/J11Lev",
+    "https://upfiles.com/VJDf",
+    "https://upfiles.com/ehYagFMW",
+    "https://upfiles.com/GUcGuhdu",
+    "https://upfiles.com/8HBpV9s",
+    "https://upfiles.com/ZHea",
+    "https://upfiles.com/Hl0jTt",
+    "https://upfiles.com/uq2NVLO",
+    "https://upfiles.com/jsxkAN",
+    "https://upfiles.com/RrjbDgT",
+    "https://upfiles.com/PAESn6",
+    "https://upfiles.com/3tI6",
+    "https://upfiles.com/oe5r9",
+    "https://upfiles.com/OJ8nFO",
+    "https://upfiles.com/bSbS",
+    "https://upfiles.com/fmplr",
+    "https://upfiles.com/YP8KlJHU",
+    "https://upfiles.com/FR0VyoyU",
+    "https://upfiles.com/1uhFFB",
+    "https://upfiles.com/XteSqj",
+    "https://upfiles.com/PqFR",
+    "https://upfiles.com/JR1KIi",
+    "https://upfiles.com/fOYMCIk",
+    "https://upfiles.com/BT5PpM9",
+    "https://upfiles.com/P1v2t",
+    "https://upfiles.com/4D6Z",
+    "https://upfiles.com/uHGSNZp",
+    "https://upfiles.com/L5xmVoLr",
+    "https://upfiles.com/jAN3JQdj",
+    "https://upfiles.com/f2HT1nRQ",
+    "https://upfiles.com/OSTkLqd",
+    "https://upfiles.com/pn69PKw",
+    "https://upfiles.com/CnxVk",
+    "https://upfiles.com/KM5EP5",
+    "https://upfiles.com/IOXLY",
+    "https://upfiles.com/vy4W",
+    "https://upfiles.com/4bnr",
+    "https://upfiles.com/2vRep84",
+    "https://upfiles.com/sMkKQdIr",
+    "https://upfiles.com/CUcbFz",
+    "https://upfiles.com/jC3hR",
+    "https://upfiles.com/4vDGPqap",
+    "https://upfiles.com/m8kfp8",
+    "https://upfiles.com/J4e7xr",
+    "https://upfiles.com/PiB2L6",
+    "https://upfiles.com/FXESDQ",
+    "https://upfiles.com/tzZJXP",
+    "https://upfiles.com/dilo",
+    "https://upfiles.com/YfbjXCe",
+    "https://upfiles.com/VAcW",
+    "https://upfiles.com/0lKdXWQ",
+    "https://upfiles.com/gHNXFE",
+    "https://upfiles.com/9BcPO4R",
+    "https://upfiles.com/hmec",
+    "https://upfiles.com/TnvfxV0",
+    "https://upfiles.com/b3nr0",
+    "https://upfiles.com/fFVYcgMl",
+    "https://upfiles.com/K8LBukeB",
+    "https://upfiles.com/U2k5qZn",
+    "https://upfiles.com/6Wu5yj",
+    "https://upfiles.com/yQuRt",
+    "https://upfiles.com/zKGPA",
+    "https://upfiles.com/9qsURVz5",
+    "https://upfiles.com/VfHAT",
+    "https://upfiles.com/IcP443",
+    "https://upfiles.com/Xmwlyzg",
+    "https://upfiles.com/Ozc1w",
+    "https://upfiles.com/Tdy7o",
+    "https://upfiles.com/u8IIMW",
+    "https://upfiles.com/k1RPVd24",
+    "https://upfiles.com/LX4yZRH1",
+    "https://upfiles.com/wVv2D",
+    "https://upfiles.com/egAtCs",
+    "https://upfiles.com/lTcoL",
+    "https://upfiles.com/y0CDR",
+    "https://upfiles.com/EL2Ro",
+    "https://upfiles.com/TYvt",
+    "https://upfiles.com/w349si",
+    "https://upfiles.com/rlnX1",
+    "https://upfiles.com/kIKtQs",
+    "https://upfiles.com/Zoush",
+    "https://upfiles.com/TuLyIQ",
+    "https://upfiles.com/yFjm1mu",
+    "https://upfiles.com/BiyQP",
+    "https://upfiles.com/PqHNAEE",
+    "https://upfiles.com/QQM7",
+    "https://upfiles.com/Kwdruo",
+    "https://upfiles.com/OJfS8I",
+    "https://upfiles.com/EmTgV9N",
+    "https://upfiles.com/FNBba",
+    "https://upfiles.com/BnzGazZ",
+    "https://upfiles.com/pb1oZGzG",
+    "https://upfiles.com/jOBgVu",
+    "https://upfiles.com/TeFd",
+    "https://upfiles.com/0SBX6vs",
+    "https://upfiles.com/mKqy", 
+            // AGREGA TANTAS URLs COMO NECESITES...
+        ];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('videoButtonsContainer');
+            
+            // Generar botones automáticamente
+            videoUrls.forEach((url, index) => {
+                const button = document.createElement('a');
+                button.href = url;
+                button.className = 'video-button';
+                button.target = '_blank';
+                button.innerHTML = `
+                    <span class="video-number">${index + 1}</span>
+                    <span class="video-label">Video</span>
+                `;
+                
+                // Mejorar accesibilidad
+                button.setAttribute('aria-label', `Descargar video ${index + 1}`);
+                
+                container.appendChild(button);
+            });
+
+            console.log(`Se han generado ${videoUrls.length} botones de descarga optimizados para móviles`);
+        });
+    </script>
+</body>
+</html>
