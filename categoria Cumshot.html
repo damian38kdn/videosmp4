@@ -1,483 +1,89 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galería de Videos</title>
-    <style>
-        /* Reset y Base */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Videos</title>
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            min-height: 100vh;
-            color: #333;
-            overflow-x: hidden;
-        }
+<style>
+body{
+margin:0;
+background:#000;
+font-family:sans-serif;
+overflow:hidden;
+}
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 15px;
-        }
+/* CONTENEDOR */
+.container{
+display:flex;
+flex-direction:column;
+height:100vh;
+}
 
-        /* Header */
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 15px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-        }
+/* VIDEO (CLAVE AQUÍ) */
+.video-box{
+flex:1;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#000;
+padding-bottom:10px; /* 🔥 espacio para controles */
+}
 
-        .header h1 {
-            color: #2c3e50;
-            margin-bottom: 12px;
-            font-size: 1.8rem;
-        }
+video{
+width:100%;
+max-height:90vh; /* 🔥 evita que tape la barra */
+object-fit:contain;
+}
 
-        .search-container {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            max-width: 350px;
-            margin: 0 auto;
-        }
+/* BOTONES */
+.controls{
+position:absolute;
+top:50%;
+right:10px;
+transform:translateY(-50%);
+display:flex;
+flex-direction:column;
+gap:10px;
+z-index:10;
+}
 
-        #searchInput {
-            flex: 1;
-            padding: 10px 15px;
-            border: 2px solid #ddd;
-            border-radius: 20px;
-            font-size: 14px;
-            outline: none;
-        }
+button{
+background:#ff4081;
+color:white;
+border:none;
+padding:12px;
+border-radius:10px;
+font-size:13px;
+cursor:pointer;
+}
 
-        #searchInput:focus {
-            border-color: #667eea;
-        }
-
-        #searchBtn {
-            padding: 10px 18px;
-            background: #667eea;
-            color: white;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-        }
-
-        /* Paginación */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 6px;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 12px;
-            margin: 15px 0;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            z-index: 100;
-        }
-
-        .pagination-top {
-            top: 0;
-        }
-
-        .pagination-bottom {
-            bottom: 0;
-        }
-
-        .page-number {
-            padding: 8px 14px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            background: white;
-            color: #333;
-            cursor: pointer;
-            font-weight: 600;
-            min-width: 40px;
-            text-align: center;
-            font-size: 14px;
-        }
-
-        .page-number.active {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border-color: #667eea;
-        }
-
-        .page-nav {
-            padding: 8px 16px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .page-nav:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-
-        /* Grid de Videos - 2 columnas en móvil, 3-4 en desktop */
-        .video-grid {
-            display: grid;
-            gap: 12px;
-            padding: 15px 0;
-        }
-
-        /* Móvil: 2 columnas = 6 videos (3 filas) */
-        @media (max-width: 768px) {
-            .video-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        /* Tablet: 3 columnas = 6 videos (2 filas) */
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .video-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        /* Desktop: 4 columnas = 8 videos (2 filas) */
-        @media (min-width: 1025px) {
-            .video-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-
-        .video-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .video-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .video-thumbnail {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-            background: #f8f9fa;
-        }
-
-        /* Proporción 16:9 para las miniaturas */
-        .video-thumbnail::before {
-            content: "";
-            display: block;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
-        }
-
-        .video-thumbnail video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border: none;
-        }
-
-        /* Overlay de play button */
-        .play-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-
-        .play-icon {
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            color: #667eea;
-            transform: scale(0.8);
-            transition: all 0.3s ease;
-        }
-
-        .video-card:hover .play-overlay {
-            opacity: 1;
-        }
-
-        .video-card:hover .play-icon {
-            transform: scale(1);
-        }
-
-        .video-info {
-            padding: 12px;
-        }
-
-        .video-info h3 {
-            font-size: 14px;
-            margin-bottom: 6px;
-            color: #2c3e50;
-            line-height: 1.3;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .video-meta {
-            display: flex;
-            justify-content: space-between;
-            color: #666;
-            font-size: 12px;
-        }
-
-        /* Loading Spinner */
-        .loading-spinner {
-            text-align: center;
-            padding: 30px;
-            display: none;
-        }
-
-        .spinner {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #667eea;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 10px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Modal de Video */
-        .video-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 1000;
-        }
-
-        .modal-content {
-            position: relative;
-            width: 95%;
-            max-width: 900px;
-            max-height: 90vh;
-            margin: 2% auto;
-            background: black;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            color: white;
-            font-size: 30px;
-            font-weight: bold;
-            cursor: pointer;
-            z-index: 1001;
-            background: rgba(0, 0, 0, 0.5);
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #modalVideo {
-            width: 100%;
-            height: auto;
-            max-height: 80vh;
-        }
-
-        #modalTitle {
-            padding: 15px;
-            color: white;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.8);
-            font-size: 16px;
-        }
-
-        /* Responsive Design Mejorado */
-        @media (max-width: 480px) {
-            .container {
-                padding: 10px;
-            }
-            
-            .header {
-                padding: 12px;
-                margin-bottom: 15px;
-            }
-            
-            .header h1 {
-                font-size: 1.5rem;
-            }
-            
-            .video-grid {
-                gap: 8px;
-            }
-            
-            .pagination {
-                padding: 12px 8px;
-                gap: 4px;
-            }
-            
-            .page-number {
-                padding: 6px 10px;
-                min-width: 35px;
-                font-size: 12px;
-            }
-            
-            .page-nav {
-                padding: 6px 12px;
-                font-size: 12px;
-            }
-            
-            .video-info {
-                padding: 10px;
-            }
-            
-            .video-info h3 {
-                font-size: 13px;
-            }
-            
-            .video-meta {
-                font-size: 11px;
-            }
-        }
-
-        /* Estados de carga */
-        .loading .video-grid {
-            opacity: 0.5;
-            pointer-events: none;
-        }
-
-        .loading .loading-spinner {
-            display: block;
-        }
-
-        /* Optimizaciones de rendimiento */
-        .video-thumbnail video {
-            transform: translateZ(0);
-            backface-visibility: hidden;
-        }
-
-        .close-button-container {
-            text-align: center;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.8);
-        }
-
-        #closeModalButton {
-            background: linear-gradient(135deg, #ff416c, #ff4b2b);
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            font-size: 16px;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        #closeModalButton:hover {
-            background: linear-gradient(135deg, #ff4b2b, #ff416c);
-            transform: scale(1.05);
-        }
-    </style>
+.vip{
+background:#ff9800;
+}
+</style>
 </head>
+
 <body>
-    <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <h1>🎬 Cumshot</h1>
-            <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Buscar videos...">
-                <button id="searchBtn">🔍</button>
-            </div>
-        </header>
 
-        <!-- Paginación Superior -->
-        <nav class="pagination pagination-top" id="paginationTop">
-            <!-- Los números de página se generan dinámicamente -->
-        </nav>
+<div class="container">
 
-        <!-- Grid de Videos -->
-        <main class="main-content">
-            <div class="video-grid" id="videoGrid">
-                <!-- Los videos se cargan dinámicamente -->
-            </div>
-            
-            <!-- Loading Spinner -->
-            <div class="loading-spinner" id="loadingSpinner">
-                <div class="spinner"></div>
-                <p>Cargando videos...</p>
-            </div>
-        </main>
+<div class="video-box">
+<video id="video" controls playsinline preload="metadata"></video>
+</div>
 
-        <!-- Paginación Inferior -->
-        <nav class="pagination pagination-bottom" id="paginationBottom">
-            <!-- Los números de página se generan dinámicamente -->
-        </nav>
+<div class="controls">
+<button onclick="anterior()">⏮</button>
+<button onclick="siguiente()">▶</button>
+<button class="vip" onclick="abrirVIP()">🔥</button>
+</div>
 
-        <!-- Modal para Video Completo -->
-        <div class="video-modal" id="videoModal">
-            <div class="modal-content">
-                <span class="close-modal" id="closeModalBtn">&times;</span>
-                <video controls id="modalVideo">
-                    <source src="" type="video/mp4">
-                    Tu navegador no soporta el elemento video.
-                </video>
+</div>
 
-                <!-- Nuevo botón debajo del video -->
-                <div class="close-button-container">
-                    <button id="closeModalButton">Cerrar video ✖️</button>
-                </div>
-                <h3 id="modalTitle"></h3>
-            </div>
-        </div>
-    </div>
+<script>
 
-    <script>
-        // =============================================
-        // LISTA DE TUS VIDEOS MP4 - AGREGA TUS URLs AQUÍ
-        // =============================================
-        const YOUR_VIDEO_URLS = [
-    "https://cdn.videy.co/ZXArfScb1.mp4",
+const videos=[
+"https://cdn.videy.co/ZXArfScb1.mp4",
     "https://cdn.videy.co/qgNzXEia1.mp4",
     "https://cdn.videy.co/0GSZfBDw1.mp4",
     "https://cdn.videy.co/PdHiiQgn1.mp4",
@@ -515,421 +121,45 @@
     "https://cdn.videy.co/jqNtL1IW1.mp4",
 ];
 
+const video=document.getElementById("video");
 
-        class VideoGallery {
-            constructor() {
-                this.currentPage = 1;
-                this.videosPerPage = this.getVideosPerPage();
-                this.allVideos = this.createVideoListFromURLs(YOUR_VIDEO_URLS);
-                this.filteredVideos = [...this.allVideos];
-                this.isMobile = window.innerWidth < 768;
-                
-                this.elements = {
-                    videoGrid: document.getElementById('videoGrid'),
-                    paginationTop: document.getElementById('paginationTop'),
-                    paginationBottom: document.getElementById('paginationBottom'),
-                    loadingSpinner: document.getElementById('loadingSpinner'),
-                    searchInput: document.getElementById('searchInput'),
-                    searchBtn: document.getElementById('searchBtn'),
-                    videoModal: document.getElementById('videoModal'),
-                    modalVideo: document.getElementById('modalVideo'),
-                    modalTitle: document.getElementById('modalTitle'),
-                    closeModalBtn: document.getElementById('closeModalBtn'),
-                    closeModalButton: document.getElementById('closeModalButton')
-                };
-                
-                // CARGAR ESTADO DESDE LOCALSTORAGE
-                this.loadStateFromStorage();
-                this.init();
-            }
-            
-            // Crear lista de videos desde tus URLs
-            createVideoListFromURLs(urls) {
-                const categories = ['', '', '', '', '', '', '', ''];
-                const titles = [
-                    'Noche Inolvidable', 'Pasión Secreta', 'Encuentro Casual', 'Deseo Oculto',
-                    'Fantasia Erótica', 'Seducción Peligrosa', 'Juego de Poder', 'Intimidad Profunda',
-                    'Sueños Prohibidos', 'Tentación Nocturna', 'Placer Extremo', 'Deseo Intenso',
-                    'Aventura Prohibida', 'Profesor Particular', 'Sed de Pasión', 'Encuentro Íntimo',
-                    'Ducha Apasionada', 'Fantasía Interracial', 'Entrenamiento Ardiente', 'Madrastra Pecaminosa',
-                    'La Cazadora', 'Noche de Sexo', 'El Verdugo del Placer', 'Seduciendo en la Oficina',
-                    'Amor Prohibido', 'Confesiones del Dormitorio', 'Juego de Deseo', 'Pasión Nocturna',
-                    'Amante Secreto', 'Besos Robados', 'Locura de Medianoche', 'Tentación Irresistible',
-                    'La Joven Seductora', 'Deseo Salvaje', 'Clandestino Placer', 'Caricias Secretas',
-                    'Mujer Prohibida', 'Pasión al Desnudo', 'Lujuria en la Habitación',
-                    'Ritual de Seducción', 'Sensualidad Explosiva', 'Escándalo Nocturno',
-                    'Pecado Inocente', 'Entre las Sábanas', 'Juego Prohibido', 'La Confesión Ardiente',
-                    'Secretos del Deseo', 'Amor Carnal', 'Sensaciones Prohibidas', 'Relaciones Peligrosas',
-                    'Encanto Secreto', 'Pasión Desatada', 'Tentación Fatal', 'Cita Prohibida',
-                    'Venganza de Pasión', 'Placer Secreto', 'Besos Prohibidos', 'Encuentro Fatal',
-                    'Noche Ardiente', 'Lujuria Oculta', 'Atracción Peligrosa', 'Juegos Nocturnos',
-                    'Deseo Enmascarado', 'Pasión y Mentiras', 'Infiel Seductor', 'Amante Oculta',
-                    'Beso Robado', 'Noche de Locura', 'Caricias Prohibidas', 'Tentación en la Oficina',
-                    'Juego de Seducción', 'Deseos al Límite', 'Fantasía Sin Control', 'Amor Prohibido',
-                    'Juegos de Placer', 'Encuentro Ardiente', 'La Cita Secreta', 'Travesuras Nocturnas',
-                    'Secretos a Medianoche', 'Delirio de Pasión', 'Seducción Imposible', 'Besos al Amanecer',
-                    'Pasión Clandestina', 'Deseo Prohibido', 'Cita Sin Retorno', 'Locura en la Oficina',
-                    'Tentación en la Playa', 'Ritmo de Pasión', 'Alma Sensual', 'Confesiones Nocturnas',
-                    'Calor entre Sabánas', 'Juego de Miradas', 'Encuentro Íntimo', 'Amor Prohibido',
-                    'Fuego Interior', 'Lujuria sin Límites', 'Noche de Deseos', 'Pasión Entre Amigos',
-                    'Sueños Ardientes', 'Atracción Fatal', 'Secreto en la Oscuridad', 'Placer Compartido',
-                    'Caricias Nocturnas', 'Encendiendo Pasiones', 'Deseo Fatal', 'Misterio Sexy',
-                    'Fuego Entre Nosotros', 'Toque Prohibido', 'Dulce Tentación', 'Juegos de Medianoche',
-                    'Amor Clandestino', 'Noche Salvaje', 'Atracción Secreta', 'Pasión y Pecado',
-                    'Susurros Sensuales', 'Luces y Sombras', 'Placer Oculto', 'Besos y Más',
-                    'Sensaciones Ardientes', 'Abismo de Placer', 'Noche de Tentaciones', 'Juegos de Deseo',
-                    'Pasión en Silencio', 'Encuentro Apasionado'
-                ];
-                
-                return urls.map((url, index) => {
-                    const category = categories[index % categories.length];
-                    const title = titles[index % titles.length];
-                    return {
-                        id: index + 1,
-                        title: `${title} - ${category}`,
-                        url: url,
-                        duration: `${Math.floor(Math.random() * 10) + 1}:${Math.floor(Math.random() * 60).toString().padStart(2, '0')}`,
-                        views: Math.floor(Math.random() * 10000) + 1000,
-                        category: category
-                    };
-                });
-            }
-            
-            // CARGAR ESTADO DESDE LOCALSTORAGE
-            loadStateFromStorage() {
-                const savedState = localStorage.getItem('videoGalleryState');
-                if (savedState) {
-                    const state = JSON.parse(savedState);
-                    this.currentPage = state.currentPage || 1;
-                    this.elements.searchInput.value = state.searchTerm || '';
-                    
-                    // Aplicar búsqueda si hay término guardado
-                    if (state.searchTerm) {
-                        this.handleSearch();
-                    }
-                }
-            }
-            
-            // GUARDAR ESTADO EN LOCALSTORAGE
-            saveStateToStorage() {
-                const state = {
-                    currentPage: this.currentPage,
-                    searchTerm: this.elements.searchInput.value
-                };
-                localStorage.setItem('videoGalleryState', JSON.stringify(state));
-            }
-            
-            getVideosPerPage() {
-                // 6 videos en móvil, 8 en desktop
-                return this.isMobile ? 4 : 4;
-            }
-            
-            init() {
-                this.setupEventListeners();
-                this.renderPagination();
-                this.loadPage(this.currentPage);
-            }
-            
-            setupEventListeners() {
-                // Eventos de ventana
-                window.addEventListener('resize', () => {
-                    this.handleResize();
-                });
-                
-                // Eventos de búsqueda
-                this.elements.searchBtn.addEventListener('click', () => {
-                    this.handleSearch();
-                });
-                
-                this.elements.searchInput.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') {
-                        this.handleSearch();
-                    }
-                });
-                
-                // Eventos del modal - CORREGIDOS
-                this.elements.closeModalBtn.addEventListener('click', () => {
-                    this.closeModal();
-                });
-                
-                this.elements.closeModalButton.addEventListener('click', () => {
-                    this.closeModal();
-                });
-                
-                this.elements.videoModal.addEventListener('click', (e) => {
-                    if (e.target === this.elements.videoModal) {
-                        this.closeModal();
-                    }
-                });
-                
-                // Cerrar modal con ESC
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape') {
-                        this.closeModal();
-                    }
-                });
-            }
-            
-            handleResize() {
-                const newIsMobile = window.innerWidth < 768;
-                if (newIsMobile !== this.isMobile) {
-                    this.isMobile = newIsMobile;
-                    this.videosPerPage = this.getVideosPerPage();
-                    this.renderPagination();
-                    this.loadPage(this.currentPage);
-                }
-            }
-            
-            handleSearch() {
-                const searchTerm = this.elements.searchInput.value.toLowerCase().trim();
-                
-                if (searchTerm === '') {
-                    this.filteredVideos = [...this.allVideos];
-                } else {
-                    this.filteredVideos = this.allVideos.filter(video => 
-                        video.title.toLowerCase().includes(searchTerm) ||
-                        video.category.toLowerCase().includes(searchTerm)
-                    );
-                }
-                
-                this.currentPage = 1;
-                this.renderPagination();
-                this.loadPage(1);
-                
-                // GUARDAR ESTADO EN LOCALSTORAGE
-                this.saveStateToStorage();
-            }
-            
-            renderPagination() {
-                const totalPages = Math.ceil(this.filteredVideos.length / this.videosPerPage);
-                const paginationHTML = this.generatePaginationHTML(totalPages);
-                
-                this.elements.paginationTop.innerHTML = paginationHTML;
-                this.elements.paginationBottom.innerHTML = paginationHTML;
-                
-                // Agregar event listeners a los números de página
-                document.querySelectorAll('.page-number').forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        const page = parseInt(e.target.dataset.page);
-                        this.loadPage(page);
-                    });
-                });
-                
-                // Event listeners para navegación anterior/siguiente
-                document.querySelectorAll('.prev-page').forEach(button => {
-                    button.addEventListener('click', () => {
-                        if (this.currentPage > 1) {
-                            this.loadPage(this.currentPage - 1);
-                        }
-                    });
-                });
-                
-                document.querySelectorAll('.next-page').forEach(button => {
-                    button.addEventListener('click', () => {
-                        const totalPages = Math.ceil(this.filteredVideos.length / this.videosPerPage);
-                        if (this.currentPage < totalPages) {
-                            this.loadPage(this.currentPage + 1);
-                        }
-                    });
-                });
-            }
-            
-            generatePaginationHTML(totalPages) {
-                if (totalPages <= 1) return '';
-                
-                let html = '';
-                
-                // Botón anterior
-                html += `
-                    <button class="page-nav prev-page" ${this.currentPage === 1 ? 'disabled' : ''}>
-                        ← Anterior
-                    </button>
-                `;
-                
-                // Números de página
-                const maxVisiblePages = this.isMobile ? 5 : 7;
-                let startPage = Math.max(1, this.currentPage - Math.floor(maxVisiblePages / 2));
-                let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
-                
-                if (endPage - startPage + 1 < maxVisiblePages) {
-                    startPage = Math.max(1, endPage - maxVisiblePages + 1);
-                }
-                
-                // Primera página y elipsis si es necesario
-                if (startPage > 1) {
-                    html += `<button class="page-number" data-page="1">1</button>`;
-                    if (startPage > 2) {
-                        html += `<span style="padding: 0 8px;">...</span>`;
-                    }
-                }
-                
-                // Páginas visibles
-                for (let i = startPage; i <= endPage; i++) {
-                    html += `
-                        <button class="page-number ${i === this.currentPage ? 'active' : ''}" data-page="${i}">
-                            ${i}
-                        </button>
-                    `;
-                }
-                
-                // Última página y elipsis si es necesario
-                if (endPage < totalPages) {
-                    if (endPage < totalPages - 1) {
-                        html += `<span style="padding: 0 8px;">...</span>`;
-                    }
-                    html += `<button class="page-number" data-page="${totalPages}">${totalPages}</button>`;
-                }
-                
-                // Botón siguiente
-                html += `
-                    <button class="page-nav next-page" ${this.currentPage === totalPages ? 'disabled' : ''}>
-                        Siguiente →
-                    </button>
-                `;
-                
-                return html;
-            }
-            
-            async loadPage(page) {
-                this.showLoading();
-                
-                // Simular carga asíncrona
-                await new Promise(resolve => setTimeout(resolve, 200));
-                
-                this.currentPage = page;
-                const startIndex = (page - 1) * this.videosPerPage;
-                const endIndex = startIndex + this.videosPerPage;
-                const pageVideos = this.filteredVideos.slice(startIndex, endIndex);
-                
-                this.renderVideos(pageVideos);
-                this.renderPagination();
-                this.hideLoading();
-                
-                // GUARDAR ESTADO EN LOCALSTORAGE
-                this.saveStateToStorage();
-                
-                // Scroll al top
-                window.scrollTo(0, 0);
-            }
-            
-            renderVideos(videos) {
-    let html = '';
-    const smartlinkURL = "https://recommendedcasualtymysterious.com/hbdnwzarm?key=504d01128535e4643d1041bee5115647"; // ⬅️ PEGA TU SMARTLINK AQUÍ
-    
-    videos.forEach((video, index) => {
-        // ✅ AGREGAR SMARTLINK CADA 2 VIDEOS
-        if (index % 2 === 0 && index !== 0) {
-            html += `
-                <!-- SMARTLINK ESTRATÉGICO -->
-                <div class="smartlink-cta" style="grid-column: 1 / -1; text-align: center; margin: 15px 0; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 10px;">
-                    <a href="${smartlinkURL}" 
-                       target="_blank" 
-                       style="background: linear-gradient(135deg, #ff6b00, #ff4081); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: bold; display: inline-block; font-size: 14px; box-shadow: 0 4px 12px rgba(255, 107, 0, 0.3); transition: all 0.3s ease;"
-                       onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 15px rgba(255, 107, 0, 0.5)';"
-                       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(255, 107, 0, 0.3)';">
-                       🎬 VER CONTENIDO EXCLUSIVO HD
-                    </a>
-                </div>
-            `;
-        }
-        
-        // TU CÓDIGO ORIGINAL DEL VIDEO
-        html += `
-            <div class="video-card" data-video-id="${video.id}">
-                <div class="video-thumbnail">
-                    <video preload="metadata" muted loop playsinline>
-                        <source src="${video.url}#t=1" type="video/mp4">
-                    </video>
-                    <div class="play-overlay">
-                        <div class="play-icon">▶</div>
-                    </div>
-                </div>
-                <div class="video-info">
-                    <h3>${video.title}</h3>
-                    <div class="video-meta">
-                        <span>${video.duration}</span>
-                        <span>${this.formatViews(video.views)} vistas</span>
-                    </div>
-                </div>
-            </div>
-        `;
-    });
-    
-    this.elements.videoGrid.innerHTML = html;
-    
-    // El resto de tu código sigue igual
-    document.querySelectorAll('.video-card').forEach(card => {
-        card.addEventListener('click', () => {
-            const videoId = parseInt(card.dataset.videoId);
-            this.openModal(videoId);
-        });
-    });
+let index=0;
+
+function cargarVideo(){
+video.src=videos[index];
+video.muted=true;
+
+video.play().catch(()=>{});
 }
-            
-            openModal(videoId) {
-                const video = this.allVideos.find(v => v.id === videoId);
-                if (!video) return;
-                
-                this.elements.modalVideo.src = video.url;
-                this.elements.modalTitle.textContent = video.title;
-                this.elements.videoModal.style.display = 'block';
-                
-                // Reproducir automáticamente
-                this.elements.modalVideo.play().catch(e => {
-                    console.log('Reproducción automática bloqueada:', e);
-                });
-            }
-            
-            closeModal() {
-                const modal = this.elements.videoModal;
-                const video = this.elements.modalVideo;
 
-                // Pausar el video y reiniciarlo
-                video.pause();
-                video.currentTime = 0;
+function siguiente(){
+index = (index+1) % videos.length;
+cargarVideo();
+}
 
-                // Ocultar el modal
-                modal.style.display = 'none';
-            }
-            
-            formatViews(views) {
-                if (views >= 1000000) {
-                    return (views / 1000000).toFixed(1) + 'M';
-                } else if (views >= 1000) {
-                    return (views / 1000).toFixed(1) + 'K';
-                }
-                return views.toString();
-            }
-            
-            showLoading() {
-                document.body.classList.add('loading');
-                this.elements.loadingSpinner.style.display = 'block';
-            }
-            
-            hideLoading() {
-                document.body.classList.remove('loading');
-                this.elements.loadingSpinner.style.display = 'none';
-            }
-        }
+function anterior(){
+index = (index-1+videos.length) % videos.length;
+cargarVideo();
+}
 
-        // Inicializar la galería cuando el DOM esté listo
-        document.addEventListener('DOMContentLoaded', () => {
-            new VideoGallery();
-        });
+// desbloquear autoplay
+document.addEventListener("click",()=>{
+video.play();
+},{once:true});
 
-        console.log(`🎥 Galería de Videos Optimizada:
-• Total de videos: ${YOUR_VIDEO_URLS.length}
-• Videos por página: ${window.innerWidth < 768 ? 6 : 8}
-• Miniaturas visibles: SÍ
-• Cuadrícula responsive: SÍ
-• LocalStorage activado: SÍ`);
-    </script>
+// visibilidad
+document.addEventListener("visibilitychange",()=>{
+document.hidden ? video.pause() : video.play();
+});
 
+// iniciar
+cargarVideo();
 
-<script type='text/javascript' src='//recommendedcasualtymysterious.com/36/e1/00/36e10022d83ec0ce83d7805cadf1bd07.js'></script>
+function abrirVIP(){
+window.location.href="https://prodtrousers.com/uf82usd6g?key=ff9b0340ae5cc9a571a3db304283727c";
+}
 
-<script type='text/javascript' src='//recommendedcasualtymysterious.com/01/72/07/01720761c58b2f41b007a846eff43913.js'></script>
-
+</script>
 
 </body>
 </html>
