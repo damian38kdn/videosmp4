@@ -2,201 +2,983 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Videos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="theme-color" content="#ff4081">
+<meta name="description" content="Los mejores videos AMATEUR - Actualizados diariamente - SIN REPETICIONES">
+<title>Amateur Zone | Videos Exclusivos</title>
 
 <style>
-body{
-margin:0;
-background:#000;
-font-family:sans-serif;
-overflow:hidden;
-}
+    * {
+        box-sizing: border-box;
+    }
 
-/* CONTENEDOR */
-.container{
-display:flex;
-flex-direction:column;
-height:100vh;
-}
+    :root {
+        --bg-primary: #0a0a0a;
+        --bg-secondary: #1a1a1a;
+        --bg-card: #222;
+        --text-primary: #ffffff;
+        --text-secondary: #aaa;
+        --accent: #ff4081;
+        --accent-hover: #e91e63;
+        --transition: all 0.3s ease;
+    }
 
-/* VIDEO (CLAVE AQUÍ) */
-.video-box{
-flex:1;
-display:flex;
-align-items:center;
-justify-content:center;
-background:#000;
-padding-bottom:10px; /* 🔥 espacio para controles */
-}
+    body.light {
+        --bg-primary: #f5f5f5;
+        --bg-secondary: #ffffff;
+        --bg-card: #e0e0e0;
+        --text-primary: #1a1a1a;
+        --text-secondary: #666;
+    }
 
-video{
-width:100%;
-max-height:90vh; /* 🔥 evita que tape la barra */
-object-fit:contain;
-}
+    body {
+        margin: 0;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+        transition: var(--transition);
+    }
 
-/* BOTONES */
-.controls{
-position:absolute;
-top:50%;
-right:10px;
-transform:translateY(-50%);
-display:flex;
-flex-direction:column;
-gap:10px;
-z-index:10;
-}
+    .header {
+        background: linear-gradient(135deg, #ff4081, #e91e63);
+        padding: 15px;
+        text-align: center;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
 
-button{
-background:#ff4081;
-color:white;
-border:none;
-padding:12px;
-border-radius:10px;
-font-size:13px;
-cursor:pointer;
-}
+    .header h1 {
+        margin: 0;
+        font-size: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
 
-.vip{
-background:#ff9800;
-}
+    .header p {
+        margin: 5px 0 0;
+        font-size: 0.8rem;
+        opacity: 0.9;
+    }
+
+    .video-nav {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin: 10px auto;
+    }
+
+    .nav-btn {
+        background: var(--accent);
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 50px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: bold;
+        transition: var(--transition);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .nav-btn:hover {
+        background: var(--accent-hover);
+        transform: scale(1.05);
+    }
+
+    .nav-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .main-video {
+        background: #000;
+        position: relative;
+    }
+
+    .video-wrapper {
+        position: relative;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        background: #000;
+    }
+
+    video {
+        width: 100%;
+        height: auto;
+        max-height: 70vh;
+        object-fit: contain;
+        background: black;
+    }
+
+    .progress-bar-container {
+        width: 100%;
+        height: 4px;
+        background: rgba(255,255,255,0.2);
+        cursor: pointer;
+        position: relative;
+    }
+
+    .progress-bar {
+        height: 100%;
+        background: var(--accent);
+        width: 0%;
+        transition: width 0.1s linear;
+    }
+
+    .buffer-bar {
+        height: 100%;
+        background: rgba(255,255,255,0.3);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0%;
+        pointer-events: none;
+    }
+
+    .video-info {
+        padding: 15px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .video-title {
+        font-size: 1.3rem;
+        font-weight: bold;
+        margin: 0 0 5px;
+    }
+
+    .video-stats {
+        display: flex;
+        gap: 15px;
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        flex-wrap: wrap;
+    }
+
+    .custom-controls {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+        padding: 12px;
+        margin: 0 auto;
+        width: fit-content;
+    }
+
+    .custom-controls button {
+        background: var(--bg-card);
+        border: none;
+        color: var(--text-primary);
+        font-size: 14px;
+        padding: 8px 14px;
+        border-radius: 40px;
+        cursor: pointer;
+        transition: var(--transition);
+        font-weight: bold;
+    }
+
+    .custom-controls button:hover {
+        background: var(--accent);
+        transform: translateY(-2px);
+    }
+
+    .watch-progress {
+        background: var(--bg-secondary);
+        padding: 8px 15px;
+        border-radius: 50px;
+        font-size: 12px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin: 5px auto;
+    }
+
+    .progress-dots {
+        display: flex;
+        gap: 3px;
+    }
+
+    .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent);
+        opacity: 0.3;
+    }
+
+    .dot.watched {
+        opacity: 1;
+    }
+
+    .recommended-section {
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 0 15px;
+    }
+
+    .section-title {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .section-title span {
+        background: var(--accent);
+        padding: 2px 8px;
+        border-radius: 20px;
+        font-size: 0.7rem;
+    }
+
+    .videos-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+    }
+
+    .video-card {
+        background: var(--bg-card);
+        border-radius: 12px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+
+    .video-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    }
+
+    .card-thumbnail {
+        background: #000;
+        aspect-ratio: 16/9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        position: relative;
+    }
+
+    .card-duration {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        background: rgba(0,0,0,0.7);
+        padding: 2px 5px;
+        border-radius: 4px;
+        font-size: 0.7rem;
+    }
+
+    .card-info {
+        padding: 10px;
+    }
+
+    .card-title {
+        font-size: 0.85rem;
+        font-weight: bold;
+        margin: 0 0 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .card-views {
+        font-size: 0.7rem;
+        color: var(--text-secondary);
+    }
+
+    .badge-new {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        background: #ff4081;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.6rem;
+        font-weight: bold;
+    }
+
+    .top-videos {
+        background: linear-gradient(135deg, rgba(255,64,129,0.1), rgba(233,30,99,0.05));
+        border-radius: 20px;
+        padding: 15px;
+        margin-top: 20px;
+    }
+
+    .top-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .top-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px;
+        background: var(--bg-card);
+        border-radius: 10px;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+
+    .top-item:hover {
+        background: var(--accent);
+        transform: translateX(5px);
+    }
+
+    .top-rank {
+        font-size: 1.2rem;
+        font-weight: bold;
+        width: 30px;
+        text-align: center;
+    }
+
+    .top-info {
+        flex: 1;
+    }
+
+    .top-title {
+        font-size: 0.85rem;
+        font-weight: bold;
+    }
+
+    .top-views {
+        font-size: 0.7rem;
+        opacity: 0.7;
+    }
+
+    .next-up {
+        background: var(--accent);
+        padding: 10px 15px;
+        border-radius: 50px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin: 10px auto;
+        cursor: pointer;
+        font-size: 0.85rem;
+    }
+
+    .toast {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.9);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 50px;
+        font-size: 12px;
+        z-index: 2000;
+        animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+        from {
+            transform: translateX(-50%) translateY(100px);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .loading {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0,0,0,0.8);
+        padding: 20px;
+        border-radius: 50%;
+        display: none;
+        z-index: 1000;
+    }
+
+    .loading.active {
+        display: block;
+    }
+
+    @media (max-width: 600px) {
+        .custom-controls button {
+            padding: 6px 10px;
+            font-size: 12px;
+        }
+        .videos-grid {
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+        }
+        .video-title {
+            font-size: 1rem;
+        }
+        .nav-btn {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+    }
 </style>
 </head>
-
 <body>
 
-<div class="container">
-
-<div class="video-box">
-<video id="video" controls playsinline preload="metadata"></video>
+<div class="header">
+    <h1>🎥 AMATEUR Zone <span>🔥</span></h1>
+    <p>Los mejores videos AMATEUR - SIN REPETICIONES - Actualizados diariamente</p>
 </div>
 
-<div class="controls">
-<button onclick="anterior()">⏮</button>
-<button onclick="siguiente()">▶</button>
-<button class="vip" onclick="abrirVIP()">🔥</button>
+<div class="main-video">
+    <div class="video-wrapper">
+        <video id="video" playsinline autoplay muted preload="auto">
+            Tu navegador no soporta video HTML5.
+        </video>
+    </div>
+    <div class="progress-bar-container">
+        <div class="buffer-bar" id="bufferBar"></div>
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
 </div>
 
+<div class="video-nav">
+    <button class="nav-btn" id="prevVideoBtn">◀◀ ANTERIOR</button>
+    <button class="nav-btn" id="nextVideoBtn">SIGUIENTE ▶▶</button>
 </div>
+
+<div class="video-info">
+    <div class="video-title" id="videoTitle">Cargando...</div>
+    <div class="video-stats">
+        <span id="videoViews">👁️ -- vistas</span>
+        <span id="videoDuration">⏱️ --</span>
+        <span id="videoPosition">📍 Video --/--</span>
+    </div>
+</div>
+
+<div class="watch-progress" id="watchProgress">
+    📺 Progreso de hoy:
+    <div class="progress-dots" id="progressDots"></div>
+</div>
+
+<div class="custom-controls">
+    <button id="playPauseBtn">⏸️</button>
+    <button id="rewindBtn">⏪ -10s</button>
+    <button id="forwardBtn">⏩ +10s</button>
+    <button id="volDownBtn">🔉</button>
+    <button id="volUpBtn">🔊</button>
+    <button id="unmuteBtn">🔇</button>
+    <button id="fullscreenBtn">⛶</button>
+    <button id="themeBtn">🌙</button>
+    <button id="speedBtn">1x</button>
+</div>
+
+<div class="recommended-section">
+    <div class="section-title">
+        🎯 SIGUIENTE VIDEO (Sin repeticiones)
+        <span>automático</span>
+    </div>
+    <div class="next-up" id="nextUpCard">
+        ⏩ Próximo: <span id="nextTitle">Cargando...</span>
+    </div>
+</div>
+
+<div class="recommended-section">
+    <div class="section-title">
+        🔥 RECOMENDADOS (No vistos)
+    </div>
+    <div class="videos-grid" id="recommendedGrid">
+        <!-- Se llena con JS -->
+    </div>
+</div>
+
+<div class="recommended-section">
+    <div class="top-videos">
+        <div class="section-title">
+            🏆 TOP MÁS VISTOS
+        </div>
+        <div class="top-list" id="topList">
+            <!-- Se llena con JS -->
+        </div>
+    </div>
+</div>
+
+<div class="loading" id="loading">⏳</div>
 
 <script>
+// ==================== VIDEOS AMATEUR ====================
+// 🔴 AQUÍ DEBES AGREGAR TUS PROPIOS VIDEOS AMATEUR 🔴
+// Ejemplo de estructura:
+// { url: "URL_DEL_VIDEO.mp4", title: "Título del video", duration: "12:30", views: 1250000 }
 
-const videos=[
-"https://cdn.videy.co/oCTOL6361.mp4",
-            "https://cdn.videy.co/4z8xeKg71.mp4",
-            "https://cdn.videy.co/9hHMJjE21.mp4",
-            "https://cdn.videy.co/KMI2XTCq1.mp4",
-            "https://cdn.videy.co/frJgDoaJ1.mp4",
-            "https://cdn.videy.co/U6NFuTZo1.mp4",
-            "https://cdn.videy.co/0vitDMgE1.mp4",
-            "https://cdn.videy.co/h3VACLJY1.mp4",
-            "https://cdn.videy.co/Pxina97p1.mp4",
-            "https://cdn.videy.co/bx3W0OGC1.mp4",
-            "https://cdn.videy.co/QoxAvdtp1.mp4",
-            "https://cdn.videy.co/FSxTDAsh1.mp4",
-            "https://cdn.videy.co/egMVTecg1.mp4",
-            "https://cdn.videy.co/tQjX3hFU1.mp4",
-            "https://cdn.videy.co/BQfeF1041.mp4",
-            "https://cdn.videy.co/tMxyr7HW1.mp4",
-            "https://cdn.videy.co/Afz4ER5q1.mp4",
-            "https://cdn.videy.co/O914GTAi1.mp4",
-            "https://cdn.videy.co/zy6GfVtW1.mp4",
-            "https://cdn.videy.co/7XvUV42o1.mp4",
-            "https://cdn.videy.co/lERtMyc21.mp4",
-            "https://cdn.videy.co/nhEYGoJ31.mp4",
-            "https://cdn.videy.co/zqRcTXyH1.mp4",
-            "https://cdn.videy.co/RrnIfpjB1.mp4",
-            "https://cdn.videy.co/UwhLRQEs1.mp4",
-            "https://cdn.videy.co/4A2ADUO61.mp4",
-            "https://cdn.videy.co/tKyTe3PR1.mp4",
-            "https://cdn.videy.co/BPUhAMuq1.mp4",
-            "https://cdn.videy.co/oH5z4q3w1.mp4",
-            "https://cdn.videy.co/xwvecuZ51.mp4",
-            "https://cdn.videy.co/GvagYJmN1.mp4",
-            "https://cdn.videy.co/0hbQcUhx1.mp4",
-            "https://cdn.videy.co/Vs3i8jWs1.mp4",
-            "https://cdn.videy.co/Yba2CvSd1.mp4",
-            "https://cdn.videy.co/YtUvYc0H1.mp4",
-            "https://cdn.videy.co/GtoywG4s1.mp4",
-            "https://cdn.videy.co/dFbGmzex1.mp4",
-            "https://cdn.videy.co/DN3ujn3u1.mp4",
-            "https://cdn.videy.co/4gOfu5sW1.mp4",
-            "https://cdn.videy.co/GxrnhEzQ1.mp4",
-            "https://cdn.videy.co/CH5aGWyj1.mp4",
-            "https://cdn.videy.co/zvsj5BQK1.mp4",
-            "https://cdn.videy.co/ytwXK2iK1.mp4",
-            "https://cdn.videy.co/0DWlghcU1.mp4",
-            "https://cdn.videy.co/fACQyXF01.mp4",
-            "https://cdn.videy.co/sZRRQUBu1.mp4",
-            "https://cdn.videy.co/kSxnvLqN1.mp4",
-            "https://cdn.videy.co/XcFla90d1.mp4",
-            "https://cdn.videy.co/QZNOWl4i1.mp4",
-            "https://cdn.videy.co/8s7FyPSE1.mp4",
-            "https://cdn.videy.co/xh76uNba1.mp4",
-            "https://cdn.videy.co/A9OeToHk1.mp4",
-            "https://cdn.videy.co/zNJBpbjA1.mp4",
-            "https://cdn.videy.co/rQ1rQSUS1.mp4",
-            "https://cdn.videy.co/ugwRsZzG1.mp4",
-            "https://cdn.videy.co/byMdGJjz1.mp4",
-            "https://cdn.videy.co/mkJZuaiy1.mp4",
-            "https://cdn.videy.co/rkGzNiOD1.mp4",
-            "https://cdn.videy.co/5tdqDgzu1.mp4",
-            "https://cdn.videy.co/uhk1Q4Ts1.mp4",
-            "https://cdn.videy.co/829QlzS31.mp4",
-            "https://cdn.videy.co/BD63m8nI1.mp4",
-            "https://cdn.videy.co/0q2w4FyK1.mp4",
-            "https://cdn.videy.co/5177GgrV1.mp4",
-            "https://cdn.videy.co/dU25IbI41.mp4",
-            "https://cdn.videy.co/ydnVVNeI1.mp4",
-            "https://cdn.videy.co/5ReN7ycx1.mp4",
-            "https://cdn.videy.co/DkUkPNRJ1.mp4",
+const videosAmateur = [
+    { url: "https://cdn.videy.co/oCTOL6361.mp4", title: "🎥 Amateur Real - Pareja Hot 1", duration: "15:30", views: 1250000 },
+    { url: "https://cdn.videy.co/4z8xeKg71.mp4", title: "💑 Amateur Casero - Grabación 2", duration: "12:15", views: 980000 },
+    { url: "https://cdn.videy.co/9hHMJjE21.mp4", title: "🔥 Amateur Excitante - Primera Vez 3", duration: "18:20", views: 2100000 },
+    { url: "https://cdn.videy.co/KMI2XTCq1.mp4", title: "🎬 Amateur Sin Censura 4", duration: "22:10", views: 3400000 },
+    { url: "https://cdn.videy.co/frJgDoaJ1.mp4", title: "🎥 Amateur Realidad 5", duration: "11:45", views: 756000 },
+    { url: "https://cdn.videy.co/U6NFuTZo1.mp4", title: "💑 Pareja Amateur 6", duration: "16:30", views: 1500000 },
+    { url: "https://cdn.videy.co/0vitDMgE1.mp4", title: "🔥 Amateur Ardiente 7", duration: "13:20", views: 890000 },
+    { url: "https://cdn.videy.co/h3VACLJY1.mp4", title: "🎬 Amateur Experta 8", duration: "15:40", views: 1100000 },
+    { url: "https://cdn.videy.co/Pxina97p1.mp4", title: "🎥 Encuentro Casual Amateur 9", duration: "19:15", views: 2300000 },
+    { url: "https://cdn.videy.co/bx3W0OGC1.mp4", title: "💑 Amateur Real - La Mejor Experiencia 10", duration: "21:05", views: 3100000 },
+    { url: "https://cdn.videy.co/QoxAvdtp1.mp4", title: "🔥 Amateur Exclusivo 11", duration: "14:50", views: 1800000 },
+    { url: "https://cdn.videy.co/FSxTDAsh1.mp4", title: "🎬 Tarde de Placer Amateur 12", duration: "16:20", views: 1400000 },
+    { url: "https://cdn.videy.co/egMVTecg1.mp4", title: "🎥 Amateur de Lujo 13", duration: "18:30", views: 2200000 },
+    { url: "https://cdn.videy.co/tQjX3hFU1.mp4", title: "💑 Deseo Oculto Amateur 14", duration: "13:45", views: 987000 },
+    { url: "https://cdn.videy.co/BQfeF1041.mp4", title: "🔥 Amateur Sin Censura 15", duration: "20:15", views: 3000000 },
+    { url: "https://cdn.videy.co/tMxyr7HW1.mp4", title: "🎬 Noche Inolvidable Amateur 16", duration: "17:10", views: 1900000 },
+    { url: "https://cdn.videy.co/Afz4ER5q1.mp4", title: "🎥 Amateur Real - Experiencia 17", duration: "11:30", views: 567000 },
+    { url: "https://cdn.videy.co/O914GTAi1.mp4", title: "💑 Encuentro Casual Amateur 18", duration: "14:20", views: 890000 },
+    { url: "https://cdn.videy.co/zy6GfVtW1.mp4", title: "🔥 Amateur Experto en Placer 19", duration: "19:40", views: 2450000 },
+    { url: "https://cdn.videy.co/7XvUV42o1.mp4", title: "🎬 Seducción Natural Amateur 20", duration: "12:55", views: 765000 },
+    { url: "https://cdn.videy.co/lERtMyc21.mp4", title: "🎥 Amateur Ardiente 21", duration: "17:35", views: 2100000 },
+    { url: "https://cdn.videy.co/nhEYGoJ31.mp4", title: "💑 Placer Prohibido Amateur 22", duration: "15:20", views: 1230000 },
+    { url: "https://cdn.videy.co/zqRcTXyH1.mp4", title: "🔥 Amateur Perfecto 23", duration: "22:30", views: 4100000 },
+    { url: "https://cdn.videy.co/RrnIfpjB1.mp4", title: "🎬 Amateur de Ensueño 24", duration: "14:05", views: 1560000 },
+    { url: "https://cdn.videy.co/UwhLRQEs1.mp4", title: "🎥 Tentación Amateur 25", duration: "16:45", views: 1890000 },
+    { url: "https://cdn.videy.co/4A2ADUO61.mp4", title: "💑 Secretos Amateur 26", duration: "18:15", views: 2340000 },
+    { url: "https://cdn.videy.co/tKyTe3PR1.mp4", title: "🔥 Amateur Caliente 27", duration: "13:30", views: 890000 },
+    { url: "https://cdn.videy.co/BPUhAMuq1.mp4", title: "🎬 Placer Amateur - Lo Mejor 28", duration: "20:50", views: 2780000 },
+    { url: "https://cdn.videy.co/oH5z4q3w1.mp4", title: "🎥 Amateur VIP 29", duration: "15:15", views: 1670000 },
+    { url: "https://cdn.videy.co/xwvecuZ51.mp4", title: "💑 Amateur Hot - Parte 2 30", duration: "19:20", views: 2980000 },
+    { url: "https://cdn.videy.co/GvagYJmN1.mp4", title: "🔥 Amateur Fantasía 31", duration: "21:40", views: 3450000 },
+    { url: "https://cdn.videy.co/0hbQcUhx1.mp4", title: "🎬 Amateur - No Te Lo Pierdas 32", duration: "14:55", views: 1430000 },
+    { url: "https://cdn.videy.co/Vs3i8jWs1.mp4", title: "🎥 La Mejor Amateur 33", duration: "17:25", views: 2100000 },
+    { url: "https://cdn.videy.co/Yba2CvSd1.mp4", title: "💑 Amateur Realidad 34", duration: "16:10", views: 1750000 },
+    { url: "https://cdn.videy.co/YtUvYc0H1.mp4", title: "🔥 Amateur Sin Límites 35", duration: "23:15", views: 3900000 },
+    { url: "https://cdn.videy.co/GtoywG4s1.mp4", title: "🎬 Amateur Excitante 36", duration: "12:40", views: 890000 },
+    { url: "https://cdn.videy.co/dFbGmzex1.mp4", title: "🎥 Pareja Amateur 37", duration: "18:50", views: 2100000 },
+    { url: "https://cdn.videy.co/DN3ujn3u1.mp4", title: "💑 Amateur Casero 38", duration: "14:35", views: 1230000 },
+    { url: "https://cdn.videy.co/4gOfu5sW1.mp4", title: "🔥 Amateur Premium 39", duration: "20:25", views: 2870000 },
+    { url: "https://cdn.videy.co/GxrnhEzQ1.mp4", title: "🎬 Amateur - Primera Vez 40", duration: "11:15", views: 678000 },
+    { url: "https://cdn.videy.co/CH5aGWyj1.mp4", title: "🎥 Amateur Real - Sin Censura 41", duration: "17:45", views: 1980000 },
+    { url: "https://cdn.videy.co/zvsj5BQK1.mp4", title: "💑 Encuentro Amateur 42", duration: "15:30", views: 1450000 },
+    { url: "https://cdn.videy.co/ytwXK2iK1.mp4", title: "🔥 Amateur Ardiente 43", duration: "22:15", views: 3670000 },
+    { url: "https://cdn.videy.co/0DWlghcU1.mp4", title: "🎬 Amateur Exclusivo 44", duration: "13:55", views: 890000 },
+    { url: "https://cdn.videy.co/fACQyXF01.mp4", title: "🎥 Placer Amateur 45", duration: "19:30", views: 2340000 },
+    { url: "https://cdn.videy.co/sZRRQUBu1.mp4", title: "💑 Amateur Hot 46", duration: "16:40", views: 1670000 },
+    { url: "https://cdn.videy.co/kSxnvLqN1.mp4", title: "🔥 Amateur Realidad 47", duration: "14:25", views: 1120000 },
+    { url: "https://cdn.videy.co/XcFla90d1.mp4", title: "🎬 Amateur - La Mejor 48", duration: "21:15", views: 2980000 },
+    { url: "https://cdn.videy.co/QZNOWl4i1.mp4", title: "🎥 Amateur Sin Límites 49", duration: "18:35", views: 2230000 },
+    { url: "https://cdn.videy.co/8s7FyPSE1.mp4", title: "💑 Pareja Amateur 50", duration: "12:25", views: 765000 },
+    { url: "https://cdn.videy.co/xh76uNba1.mp4", title: "🔥 Amateur Experto 51", duration: "20:45", views: 3120000 },
+    { url: "https://cdn.videy.co/A9OeToHk1.mp4", title: "🎬 Amateur - Sueño 52", duration: "15:55", views: 1540000 },
+    { url: "https://cdn.videy.co/zNJBpbjA1.mp4", title: "🎥 Amateur Caliente 53", duration: "17:20", views: 1890000 },
+    { url: "https://cdn.videy.co/rQ1rQSUS1.mp4", title: "💑 Amateur Prohibido 54", duration: "23:30", views: 4560000 },
+    { url: "https://cdn.videy.co/ugwRsZzG1.mp4", title: "🔥 Amateur VIP 55", duration: "14:15", views: 1230000 },
+    { url: "https://cdn.videy.co/byMdGJjz1.mp4", title: "🎬 Amateur Real 56", duration: "19:45", views: 2670000 },
+    { url: "https://cdn.videy.co/mkJZuaiy1.mp4", title: "🎥 Amateur Excitante 57", duration: "16:15", views: 1780000 },
+    { url: "https://cdn.videy.co/rkGzNiOD1.mp4", title: "💑 Amateur - Sin Censura 58", duration: "22:40", views: 3890000 },
+    { url: "https://cdn.videy.co/5tdqDgzu1.mp4", title: "🔥 Amateur Ardiente 59", duration: "13:40", views: 890000 },
+    { url: "https://cdn.videy.co/uhk1Q4Ts1.mp4", title: "🎬 Amateur de Lujo 60", duration: "18:55", views: 2340000 },
+    { url: "https://cdn.videy.co/829QlzS31.mp4", title: "🎥 Amateur - Fantasía 61", duration: "15:10", views: 1450000 },
+    { url: "https://cdn.videy.co/BD63m8nI1.mp4", title: "💑 Amateur Hot 62", duration: "20:35", views: 2980000 },
+    { url: "https://cdn.videy.co/0q2w4FyK1.mp4", title: "🔥 Amateur Premium 63", duration: "17:50", views: 2100000 },
+    { url: "https://cdn.videy.co/5177GgrV1.mp4", title: "🎬 Amateur Realidad 64", duration: "14:45", views: 1320000 },
+    { url: "https://cdn.videy.co/dU25IbI41.mp4", title: "🎥 Amateur - Placer 65", duration: "21:25", views: 3450000 },
+    { url: "https://cdn.videy.co/ydnVVNeI1.mp4", title: "💑 Amateur Exclusivo 66", duration: "16:55", views: 1870000 },
+    { url: "https://cdn.videy.co/5ReN7ycx1.mp4", title: "🔥 Amateur - Lo Mejor 67", duration: "19:10", views: 2560000 },
+    { url: "https://cdn.videy.co/DkUkPNRJ1.mp4", title: "🎬 Amateur Supremo 68", duration: "23:15", views: 5120000 }
 ];
 
-const video=document.getElementById("video");
+// ==================== SISTEMA ANTIRREPETICIÓN ====================
+let watchedVideos = JSON.parse(sessionStorage.getItem("watchedVideosAmateur")) || [];
+let currentVideoIndex = 0;
+let watchHistory = [];
+let currentSpeed = 1;
+let isDarkTheme = true;
 
-let index=0;
-
-function cargarVideo(){
-video.src=videos[index];
-video.muted=true;
-
-video.play().catch(()=>{});
+function getUnwatchedVideo() {
+    if (watchedVideos.length >= videosAmateur.length) {
+        showToast("🎉 ¡Felicidades! Viste todos los videos. Reiniciando ciclo...", 3000);
+        watchedVideos = [];
+        sessionStorage.setItem("watchedVideosAmateur", JSON.stringify(watchedVideos));
+    }
+    
+    const unwatched = videosAmateur.filter((_, index) => !watchedVideos.includes(index));
+    
+    if (unwatched.length === 0) {
+        watchedVideos = [];
+        sessionStorage.setItem("watchedVideosAmateur", JSON.stringify(watchedVideos));
+        return getUnwatchedVideo();
+    }
+    
+    const randomIndex = Math.floor(Math.random() * unwatched.length);
+    const selectedVideo = unwatched[randomIndex];
+    const originalIndex = videosAmateur.findIndex(v => v.url === selectedVideo.url);
+    
+    return originalIndex;
 }
 
-function siguiente(){
-index = (index+1) % videos.length;
-cargarVideo();
+function markAsWatched(index) {
+    if (!watchedVideos.includes(index)) {
+        watchedVideos.push(index);
+        sessionStorage.setItem("watchedVideosAmateur", JSON.stringify(watchedVideos));
+        updateProgressDots();
+    }
 }
 
-function anterior(){
-index = (index-1+videos.length) % videos.length;
-cargarVideo();
+function updateProgressDots() {
+    const container = document.getElementById("progressDots");
+    if (!container) return;
+    
+    const total = videosAmateur.length;
+    const watched = watchedVideos.length;
+    const maxDots = 20;
+    const step = Math.ceil(total / maxDots);
+    
+    let dotsHtml = '';
+    for (let i = 0; i < total; i += step) {
+        const isWatched = watchedVideos.includes(i);
+        dotsHtml += `<div class="dot ${isWatched ? 'watched' : ''}"></div>`;
+    }
+    container.innerHTML = dotsHtml;
+    
+    const videoPos = document.getElementById("videoPosition");
+    if (videoPos) {
+        videoPos.textContent = `📍 Vistos: ${watched}/${total}`;
+    }
 }
 
-// desbloquear autoplay
-document.addEventListener("click",()=>{
-video.play();
-},{once:true});
+function showToast(message, duration = 2000) {
+    const toast = document.createElement("div");
+    toast.className = "toast";
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), duration);
+}
 
-// visibilidad
-document.addEventListener("visibilitychange",()=>{
-document.hidden ? video.pause() : video.play();
+function showLoading(show) {
+    const loading = document.getElementById("loading");
+    if (show) {
+        loading.classList.add("active");
+    } else {
+        loading.classList.remove("active");
+    }
+}
+
+function formatNumber(num) {
+    if (num >= 1000000) return (num / 1000000).toFixed(1) + "M";
+    if (num >= 1000) return (num / 1000).toFixed(1) + "K";
+    return num.toString();
+}
+
+function updateVideoInfo(index) {
+    const video = videosAmateur[index];
+    document.getElementById("videoTitle").textContent = video.title;
+    document.getElementById("videoViews").textContent = `👁️ ${formatNumber(video.views)} vistas`;
+    document.getElementById("videoDuration").textContent = `⏱️ ${video.duration}`;
+}
+
+function loadVideo(index, autoplay = true) {
+    if (index < 0) index = 0;
+    if (index >= videosAmateur.length) index = 0;
+    
+    currentVideoIndex = index;
+    const videoData = videosAmateur[currentVideoIndex];
+    
+    showLoading(true);
+    const video = document.getElementById("video");
+    video.src = videoData.url;
+    video.load();
+    
+    if (autoplay) {
+        video.play().catch(e => {
+            showToast("🎬 Haz clic en play para comenzar", 2000);
+        });
+    }
+    
+    video.addEventListener('canplay', () => {
+        showLoading(false);
+        markAsWatched(currentVideoIndex);
+        incrementViews(currentVideoIndex);
+        addToHistory(currentVideoIndex);
+        updateNextVideo();
+        updateRecommended();
+        updateTopList();
+        updateButtonsState();
+    }, { once: true });
+    
+    updateVideoInfo(currentVideoIndex);
+}
+
+function loadNextVideo() {
+    const newIndex = getUnwatchedVideo();
+    loadVideo(newIndex, true);
+    showToast(`⏩ Siguiente: ${videosAmateur[newIndex].title}`, 1500);
+}
+
+function loadPreviousVideo() {
+    if (watchHistory.length > 1) {
+        const previousIndex = watchHistory[watchHistory.length - 2];
+        loadVideo(previousIndex, true);
+        showToast(`◀◀ Anterior: ${videosAmateur[previousIndex].title}`, 1500);
+    } else {
+        showToast("⚠️ No hay video anterior en el historial", 1500);
+    }
+}
+
+function incrementViews(index) {
+    videosAmateur[index].views += 1;
+    localStorage.setItem("amateurViews", JSON.stringify(videosAmateur.map(v => v.views)));
+    updateVideoInfo(index);
+    updateTopList();
+}
+
+function addToHistory(index) {
+    if (watchHistory[watchHistory.length - 1] !== index) {
+        watchHistory.push(index);
+        if (watchHistory.length > 20) watchHistory.shift();
+        localStorage.setItem("amateurHistory", JSON.stringify(watchHistory));
+    }
+}
+
+function updateNextVideo() {
+    const nextIndex = getUnwatchedVideo();
+    document.getElementById("nextTitle").textContent = videosAmateur[nextIndex].title;
+}
+
+function updateRecommended() {
+    const unwatched = videosAmateur
+        .map((v, i) => ({ ...v, originalIndex: i }))
+        .filter(v => !watchedVideos.includes(v.originalIndex) && v.originalIndex !== currentVideoIndex)
+        .sort((a, b) => b.views - a.views)
+        .slice(0, 8);
+    
+    const recommendations = unwatched.length >= 4 ? unwatched : 
+        [...unwatched, ...videosAmateur
+            .map((v, i) => ({ ...v, originalIndex: i }))
+            .filter(v => v.originalIndex !== currentVideoIndex)
+            .sort((a, b) => b.views - a.views)
+            .slice(0, 8 - unwatched.length)];
+    
+    const grid = document.getElementById("recommendedGrid");
+    if (grid) {
+        grid.innerHTML = recommendations.map(video => `
+            <div class="video-card" onclick="loadVideo(${video.originalIndex}, true)">
+                <div class="card-thumbnail">
+                    🎬
+                    <div class="card-duration">${video.duration}</div>
+                    ${!watchedVideos.includes(video.originalIndex) ? '<div class="badge-new">NUEVO</div>' : ''}
+                </div>
+                <div class="card-info">
+                    <div class="card-title">${video.title}</div>
+                    <div class="card-views">👁️ ${formatNumber(video.views)}</div>
+                </div>
+            </div>
+        `).join('');
+    }
+}
+
+function updateTopList() {
+    const top = [...videosAmateur]
+        .map((v, i) => ({ ...v, originalIndex: i }))
+        .sort((a, b) => b.views - a.views)
+        .slice(0, 5);
+    
+    const topListEl = document.getElementById("topList");
+    if (topListEl) {
+        topListEl.innerHTML = top.map((video, idx) => `
+            <div class="top-item" onclick="loadVideo(${video.originalIndex}, true)">
+                <div class="top-rank">${idx === 0 ? '👑' : idx + 1}</div>
+                <div class="top-info">
+                    <div class="top-title">${video.title}</div>
+                    <div class="top-views">👁️ ${formatNumber(video.views)} vistas</div>
+                </div>
+            </div>
+        `).join('');
+    }
+}
+
+function updateButtonsState() {
+    const prevBtn = document.getElementById("prevVideoBtn");
+    if (prevBtn) {
+        prevBtn.disabled = watchHistory.length <= 1;
+    }
+}
+
+// ==================== EVENTOS DEL VIDEO ====================
+const video = document.getElementById("video");
+const playPauseBtn = document.getElementById("playPauseBtn");
+const rewindBtn = document.getElementById("rewindBtn");
+const forwardBtn = document.getElementById("forwardBtn");
+const volUpBtn = document.getElementById("volUpBtn");
+const volDownBtn = document.getElementById("volDownBtn");
+const unmuteBtn = document.getElementById("unmuteBtn");
+const fullscreenBtn = document.getElementById("fullscreenBtn");
+const themeBtn = document.getElementById("themeBtn");
+const speedBtn = document.getElementById("speedBtn");
+const progressBar = document.getElementById("progressBar");
+const bufferBar = document.getElementById("bufferBar");
+
+function updateProgress() {
+    if (video.duration) {
+        const percent = (video.currentTime / video.duration) * 100;
+        if (progressBar) progressBar.style.width = `${percent}%`;
+    }
+}
+
+function updateBuffer() {
+    if (video.buffered.length > 0 && video.duration) {
+        const bufferedEnd = video.buffered.end(video.buffered.length - 1);
+        const percent = (bufferedEnd / video.duration) * 100;
+        if (bufferBar) bufferBar.style.width = `${percent}%`;
+    }
+}
+
+video.addEventListener('timeupdate', updateProgress);
+video.addEventListener('progress', updateBuffer);
+video.addEventListener('waiting', () => showLoading(true));
+video.addEventListener('playing', () => showLoading(false));
+video.addEventListener('ended', () => {
+    showToast("🎬 Video finalizado - Reproduciendo siguiente...", 2000);
+    loadNextVideo();
 });
 
-// iniciar
-cargarVideo();
-
-function abrirVIP(){
-window.location.href="https://prodtrousers.com/uf82usd6g?key=ff9b0340ae5cc9a571a3db304283727c";
+const progressContainer = document.querySelector('.progress-bar-container');
+if (progressContainer) {
+    progressContainer.addEventListener('click', (e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const pos = (e.clientX - rect.left) / rect.width;
+        video.currentTime = pos * video.duration;
+    });
 }
 
+document.getElementById("prevVideoBtn")?.addEventListener('click', () => loadPreviousVideo());
+document.getElementById("nextVideoBtn")?.addEventListener('click', () => loadNextVideo());
+document.getElementById("nextUpCard")?.addEventListener('click', () => loadNextVideo());
+
+// ==================== CONTROLES ====================
+playPauseBtn?.addEventListener('click', () => {
+    if (video.paused) {
+        video.play();
+        playPauseBtn.textContent = '⏸️';
+    } else {
+        video.pause();
+        playPauseBtn.textContent = '▶️';
+    }
+});
+
+rewindBtn?.addEventListener('click', () => {
+    video.currentTime = Math.max(0, video.currentTime - 10);
+    showToast(`⏪ -10s`);
+});
+
+forwardBtn?.addEventListener('click', () => {
+    video.currentTime = Math.min(video.duration, video.currentTime + 10);
+    showToast(`⏩ +10s`);
+});
+
+volUpBtn?.addEventListener('click', () => {
+    let newVol = Math.min(1, video.volume + 0.1);
+    video.volume = newVol;
+    if (video.muted) video.muted = false;
+    showToast(`🔊 ${Math.round(newVol * 100)}%`);
+});
+
+volDownBtn?.addEventListener('click', () => {
+    let newVol = Math.max(0, video.volume - 0.1);
+    video.volume = newVol;
+    if (video.muted) video.muted = false;
+    showToast(`🔉 ${Math.round(newVol * 100)}%`);
+});
+
+unmuteBtn?.addEventListener('click', () => {
+    video.muted = !video.muted;
+    unmuteBtn.textContent = video.muted ? '🔇' : '🔊';
+    showToast(video.muted ? "🔇 Silenciado" : "🔊 Sonido activado");
+});
+
+fullscreenBtn?.addEventListener('click', () => {
+    if (!document.fullscreenElement) {
+        video.requestFullscreen();
+    } else {
+        document.exitFullscreen();
+    }
+});
+
+themeBtn?.addEventListener('click', () => {
+    isDarkTheme = !isDarkTheme;
+    if (isDarkTheme) {
+        document.body.classList.remove('light');
+        themeBtn.textContent = '🌙';
+    } else {
+        document.body.classList.add('light');
+        themeBtn.textContent = '☀️';
+    }
+    localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
+});
+
+speedBtn?.addEventListener('click', () => {
+    const speeds = [0.5, 0.75, 1, 1.25, 1.5, 2];
+    const currentIndex = speeds.indexOf(currentSpeed);
+    currentSpeed = speeds[(currentIndex + 1) % speeds.length];
+    video.playbackRate = currentSpeed;
+    speedBtn.textContent = `${currentSpeed}x`;
+    showToast(`⚡ Velocidad: ${currentSpeed}x`);
+});
+
+// ==================== TECLAS RÁPIDAS ====================
+document.addEventListener('keydown', (e) => {
+    switch(e.key) {
+        case ' ': case 'Space':
+            e.preventDefault();
+            video.paused ? video.play() : video.pause();
+            break;
+        case 'ArrowLeft': video.currentTime -= 5; showToast(`⏪ -5s`); break;
+        case 'ArrowRight': video.currentTime += 5; showToast(`⏩ +5s`); break;
+        case 'ArrowUp': video.volume = Math.min(1, video.volume + 0.1); showToast(`🔊 ${Math.round(video.volume * 100)}%`); break;
+        case 'ArrowDown': video.volume = Math.max(0, video.volume - 0.1); showToast(`🔉 ${Math.round(video.volume * 100)}%`); break;
+        case 'm': case 'M': video.muted = !video.muted; break;
+        case 'f': case 'F': document.fullscreenElement ? document.exitFullscreen() : video.requestFullscreen(); break;
+        case 'n': case 'N': loadNextVideo(); break;
+        case 'p': case 'P': loadPreviousVideo(); break;
+    }
+});
+
+// ==================== INICIALIZACIÓN ====================
+function init() {
+    const savedViews = localStorage.getItem("amateurViews");
+    if (savedViews) {
+        const views = JSON.parse(savedViews);
+        videosAmateur.forEach((v, i) => { if (views[i]) v.views = views[i]; });
+    }
+    
+    const savedHistory = localStorage.getItem("amateurHistory");
+    if (savedHistory) {
+        watchHistory = JSON.parse(savedHistory);
+    }
+    
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        isDarkTheme = false;
+        document.body.classList.add('light');
+        themeBtn.textContent = '☀️';
+    }
+    
+    const startIndex = getUnwatchedVideo();
+    loadVideo(startIndex, true);
+    updateProgressDots();
+    
+    showToast("🎥 Amateur Zone - Videos NUEVOS siempre - SIN REPETICIONES!", 4000);
+}
+
+window.loadVideo = loadVideo;
+window.loadNextVideo = loadNextVideo;
+window.loadPreviousVideo = loadPreviousVideo;
+
+init();
 </script>
 
-
-<script src="https://prodtrousers.com/36/e1/00/36e10022d83ec0ce83d7805cadf1bd07.js"></script>
 <script src="https://prodtrousers.com/01/72/07/01720761c58b2f41b007a846eff43913.js"></script>
-
+<script src="https://prodtrousers.com/36/e1/00/36e10022d83ec0ce83d7805cadf1bd07.js"></script>
 
 
 </body>

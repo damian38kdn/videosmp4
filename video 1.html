@@ -2,69 +2,323 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contenido</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="description" content="Reproductor de video optimizado con controles avanzados">
+<title>Reproductor Ultra Optimizado</title>
 
 <style>
-body{
-margin:0;
-background:#111;
-color:white;
-font-family:sans-serif;
-text-align:center;
-}
+    * {
+        box-sizing: border-box;
+        user-select: none;
+    }
 
-.video-container{
-height:65vh;
-background:#000;
-}
+    :root {
+        --bg-primary: #0a0a0a;
+        --bg-secondary: #1a1a1a;
+        --bg-card: #222;
+        --text-primary: #ffffff;
+        --text-secondary: #aaa;
+        --accent: #ff4081;
+        --accent-hover: #e91e63;
+        --success: #4caf50;
+        --warning: #ff9800;
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-video{
-width:100%;
-height:100%;
-object-fit:cover;
-}
+    /* Tema claro */
+    body.light {
+        --bg-primary: #f5f5f5;
+        --bg-secondary: #ffffff;
+        --bg-card: #e0e0e0;
+        --text-primary: #1a1a1a;
+        --text-secondary: #666;
+    }
 
-.content{
-padding:10px;
-}
+    body {
+        margin: 0;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+        text-align: center;
+        transition: var(--transition);
+    }
 
-button{
-background:#ff4081;
-border:none;
-color:white;
-padding:8px 12px;
-margin:5px;
-border-radius:6px;
-cursor:pointer;
-font-size:12px;
-}
+    /* Video container */
+    .video-wrapper {
+        background: #000;
+        position: relative;
+        width: 100%;
+        height: auto;
+        min-height: 55vh;
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    video {
+        width: 100%;
+        height: auto;
+        max-height: 70vh;
+        object-fit: contain;
+        background: black;
+    }
+
+    /* Barra de progreso personalizada */
+    .progress-bar-container {
+        width: 100%;
+        height: 4px;
+        background: rgba(255,255,255,0.2);
+        cursor: pointer;
+        position: relative;
+    }
+
+    .progress-bar {
+        height: 100%;
+        background: var(--accent);
+        width: 0%;
+        transition: width 0.1s linear;
+    }
+
+    .buffer-bar {
+        height: 100%;
+        background: rgba(255,255,255,0.3);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0%;
+        pointer-events: none;
+    }
+
+    /* Controles */
+    .custom-controls {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+        background: var(--bg-secondary);
+        padding: 12px;
+        border-radius: 50px;
+        margin: 12px auto;
+        width: fit-content;
+        max-width: 95%;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .custom-controls button {
+        background: var(--bg-card);
+        border: none;
+        color: var(--text-primary);
+        font-size: 14px;
+        padding: 8px 14px;
+        border-radius: 40px;
+        cursor: pointer;
+        transition: var(--transition);
+        font-weight: bold;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .custom-controls button:hover {
+        background: var(--accent);
+        transform: translateY(-2px);
+    }
+
+    /* Categorías */
+    .categories-container {
+        background: var(--bg-secondary);
+        padding: 15px 10px;
+        margin: 10px;
+        border-radius: 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .categories-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .cat-btn {
+        background: var(--accent);
+        border: none;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 40px;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: bold;
+        transition: var(--transition);
+        min-width: 80px;
+    }
+
+    .cat-btn:hover {
+        background: var(--accent-hover);
+        transform: translateY(-2px);
+    }
+
+    .vip-btn {
+        background: linear-gradient(135deg, #ffd700, #ff8c00);
+        color: #1a1a1a;
+    }
+
+    /* Historial */
+    .history-container {
+        background: var(--bg-secondary);
+        padding: 10px;
+        margin: 10px;
+        border-radius: 15px;
+        font-size: 12px;
+    }
+
+    .history-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 8px;
+    }
+
+    .history-item {
+        background: var(--bg-card);
+        padding: 5px 12px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 11px;
+        transition: var(--transition);
+    }
+
+    .history-item:hover {
+        background: var(--accent);
+        transform: scale(1.05);
+    }
+
+    /* Stats */
+    .stats {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin: 10px;
+        font-size: 11px;
+        color: var(--text-secondary);
+    }
+
+    /* Loading indicator */
+    .loading-indicator {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0,0,0,0.8);
+        padding: 20px;
+        border-radius: 50%;
+        display: none;
+        z-index: 1000;
+    }
+
+    .loading-indicator.active {
+        display: block;
+    }
+
+    /* Toast notifications */
+    .toast {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.9);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 50px;
+        font-size: 12px;
+        z-index: 2000;
+        animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+        from {
+            transform: translateX(-50%) translateY(100px);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .custom-controls button {
+            padding: 6px 10px;
+            font-size: 12px;
+        }
+        .cat-btn {
+            padding: 6px 12px;
+            font-size: 11px;
+            min-width: 65px;
+        }
+    }
 </style>
 </head>
-
 <body>
 
-<div class="video-container">
-<video id="video" autoplay muted loop playsinline></video>
+<div class="video-wrapper">
+    <video id="video" loop playsinline autoplay muted preload="auto">
+        Tu navegador no soporta video HTML5.
+    </video>
 </div>
 
-<div class="content">
+<div class="progress-bar-container">
+    <div class="buffer-bar" id="bufferBar"></div>
+    <div class="progress-bar" id="progressBar"></div>
+</div>
 
-<button onclick="abrir('categorias MILF.html')">MILF</button>
-<button onclick="abrir('categoria Creampie.html')">Creampie</button>
-<button onclick="abrir('categoria Ebano.html')">Ébano</button>
-<button onclick="abrir('categoria amateur.html')">Amateur</button>
-<button onclick="abrir('categoria Japonés.html')">Japonés</button>
-<button onclick="abrir('categoria Cumshot.html')">Cumshot</button>
-<button onclick="abrirVIP()">🔥 VIP</button>
+<div class="custom-controls">
+    <button id="playPauseBtn" title="Play/Pause (Espacio)">⏸️</button>
+    <button id="rewindBtn" title="Retroceder 10s (←)">⏪ -10s</button>
+    <button id="forwardBtn" title="Avanzar 10s (→)">⏩ +10s</button>
+    <button id="volDownBtn" title="Bajar volumen (↓)">🔉</button>
+    <button id="volUpBtn" title="Subir volumen (↑)">🔊</button>
+    <button id="unmuteBtn" title="Silenciar/Activar sonido (M)">🔇</button>
+    <button id="fullscreenBtn" title="Pantalla completa (F)">⛶</button>
+    <button id="themeBtn" title="Cambiar tema (T)">🌙</button>
+    <button id="speedBtn" title="Velocidad">1x</button>
+</div>
 
+<div class="stats">
+    <span id="visitCounter">👁️ Visitas: --</span>
+    <span id="videoCounter">🎬 Video: --</span>
+    <span id="batteryStatus" style="display:none;">🔋 --</span>
+</div>
+
+<div class="categories-container">
+    <div class="categories-grid">
+        <button class="cat-btn" data-url="categorias MILF.html">🔥 MILF</button>
+        <button class="cat-btn" data-url="categoria Creampie.html">💦 Creampie</button>
+        <button class="cat-btn" data-url="categoria Ebano.html">🖤 Ébano</button>
+        <button class="cat-btn" data-url="categoria amateur.html">🎥 Amateur</button>
+        <button class="cat-btn" data-url="categoria Japonés.html">🇯🇵 Japonés</button>
+        <button class="cat-btn" data-url="categoria Cumshot.html">💧 Cumshot</button>
+        <button class="cat-btn vip-btn" data-vip="true">👑 VIP</button>
+    </div>
+</div>
+
+<div class="history-container" id="historyContainer" style="display: none;">
+    📜 Últimos vistos:
+    <div class="history-list" id="historyList"></div>
+</div>
+
+<div class="loading-indicator" id="loadingIndicator">
+    ⏳ Cargando...
 </div>
 
 <script>
-
-// 🔥 VIDEOS
-const videos=[
-"https://cdn.videy.co/k1vCDv4T1.mp4",
+// ==================== CONFIGURACIÓN ====================
+const videosList = [
+    "https://cdn.videy.co/k1vCDv4T1.mp4",
             "https://cdn.videy.co/rh5UJO0C1.mp4",
             "https://cdn.videy.co/lI2a82rg1.mp4",
             "https://cdn.videy.co/J6ViSP9e1.mp4",
@@ -466,28 +720,342 @@ const videos=[
             "https://cdn.videy.co/kRJzHw0I1.mp4",
 ];
 
-// elegir uno random
-const video=document.getElementById("video");
-video.src=videos[Math.floor(Math.random()*videos.length)];
+// Elementos DOM
+const video = document.getElementById("video");
+const playPauseBtn = document.getElementById("playPauseBtn");
+const rewindBtn = document.getElementById("rewindBtn");
+const forwardBtn = document.getElementById("forwardBtn");
+const volUpBtn = document.getElementById("volUpBtn");
+const volDownBtn = document.getElementById("volDownBtn");
+const unmuteBtn = document.getElementById("unmuteBtn");
+const fullscreenBtn = document.getElementById("fullscreenBtn");
+const themeBtn = document.getElementById("themeBtn");
+const speedBtn = document.getElementById("speedBtn");
+const progressBar = document.getElementById("progressBar");
+const bufferBar = document.getElementById("bufferBar");
+const visitCounter = document.getElementById("visitCounter");
+const videoCounter = document.getElementById("videoCounter");
+const loadingIndicator = document.getElementById("loadingIndicator");
+const historyContainer = document.getElementById("historyContainer");
+const historyList = document.getElementById("historyList");
+const batteryStatus = document.getElementById("batteryStatus");
 
-// abrir normal
-function abrir(url){
-window.open(url,"_blank");
+// Variables
+let currentSpeed = 1;
+let watchHistory = [];
+let currentVideoIndex = 0;
+
+// ==================== FUNCIONES DE UTILIDAD ====================
+function showToast(message, duration = 2000) {
+    const toast = document.createElement("div");
+    toast.className = "toast";
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), duration);
 }
 
-// VIP (tu link)
-function abrirVIP(){
-setTimeout(()=>{
-window.location.href="https://prodtrousers.com/uf82usd6g?key=ff9b0340ae5cc9a571a3db304283727c";
-},1500);
+function showLoading(show) {
+    if (show) {
+        loadingIndicator.classList.add("active");
+    } else {
+        loadingIndicator.classList.remove("active");
+    }
 }
 
+// Contador de visitas
+function updateVisitCounter() {
+    let visits = localStorage.getItem("visits");
+    if (visits === null) {
+        visits = 1;
+    } else {
+        visits = parseInt(visits) + 1;
+    }
+    localStorage.setItem("visits", visits);
+    visitCounter.textContent = `👁️ Visitas: ${visits}`;
+}
+
+// Historial de videos
+function addToHistory(videoSrc) {
+    const videoName = videoSrc.split('/').pop().substring(0, 30);
+    if (!watchHistory.includes(videoSrc)) {
+        watchHistory.unshift(videoSrc);
+        if (watchHistory.length > 5) watchHistory.pop();
+        localStorage.setItem("watchHistory", JSON.stringify(watchHistory));
+        updateHistoryDisplay();
+    }
+}
+
+function updateHistoryDisplay() {
+    if (watchHistory.length > 0) {
+        historyContainer.style.display = "block";
+        historyList.innerHTML = watchHistory.map(src => {
+            const shortName = src.split('/').pop().substring(0, 20);
+            return `<div class="history-item" data-src="${src}">🎬 ${shortName}</div>`;
+        }).join('');
+        
+        document.querySelectorAll('.history-item').forEach(item => {
+            item.addEventListener('click', () => loadVideo(item.dataset.src, true));
+        });
+    }
+}
+
+// Cargar historial guardado
+function loadHistory() {
+    const saved = localStorage.getItem("watchHistory");
+    if (saved) {
+        watchHistory = JSON.parse(saved);
+        updateHistoryDisplay();
+    }
+}
+
+// Cargar video
+function loadVideo(src, autoplay = true) {
+    if (!src) return;
+    showLoading(true);
+    
+    video.src = src;
+    video.load();
+    
+    if (autoplay) {
+        video.play().catch(e => {
+            showToast("⚠️ Autoplay bloqueado. Haz clic en play.", 2000);
+        });
+    }
+    
+    video.addEventListener('canplay', () => {
+        showLoading(false);
+        addToHistory(src);
+        currentVideoIndex = videosList.indexOf(src);
+        updateVideoCounter();
+    }, { once: true });
+}
+
+// Video aleatorio
+function loadRandomVideo() {
+    const randomIndex = Math.floor(Math.random() * videosList.length);
+    loadVideo(videosList[randomIndex], true);
+}
+
+function updateVideoCounter() {
+    videoCounter.textContent = `🎬 Video ${currentVideoIndex + 1}/${videosList.length}`;
+}
+
+// Actualizar barra de progreso
+function updateProgress() {
+    if (video.duration) {
+        const percent = (video.currentTime / video.duration) * 100;
+        progressBar.style.width = `${percent}%`;
+    }
+}
+
+function updateBuffer() {
+    if (video.buffered.length > 0) {
+        const bufferedEnd = video.buffered.end(video.buffered.length - 1);
+        const percent = (bufferedEnd / video.duration) * 100;
+        bufferBar.style.width = `${percent}%`;
+    }
+}
+
+// ==================== EVENTOS DEL VIDEO ====================
+video.addEventListener('timeupdate', updateProgress);
+video.addEventListener('progress', updateBuffer);
+video.addEventListener('waiting', () => showLoading(true));
+video.addEventListener('playing', () => showLoading(false));
+video.addEventListener('ended', () => {
+    showToast("🏁 Video finalizado. Cargando siguiente...");
+    loadRandomVideo();
+});
+
+// Hacer clic en la barra de progreso para buscar
+document.querySelector('.progress-bar-container').addEventListener('click', (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const pos = (e.clientX - rect.left) / rect.width;
+    video.currentTime = pos * video.duration;
+});
+
+// ==================== CONTROLES ====================
+playPauseBtn.addEventListener('click', () => {
+    if (video.paused) {
+        video.play();
+        playPauseBtn.textContent = '⏸️';
+    } else {
+        video.pause();
+        playPauseBtn.textContent = '▶️';
+    }
+});
+
+rewindBtn.addEventListener('click', () => {
+    video.currentTime = Math.max(0, video.currentTime - 10);
+    showToast(`⏪ Retrocedido a ${Math.floor(video.currentTime)}s`);
+});
+
+forwardBtn.addEventListener('click', () => {
+    video.currentTime = Math.min(video.duration, video.currentTime + 10);
+    showToast(`⏩ Avanzado a ${Math.floor(video.currentTime)}s`);
+});
+
+volUpBtn.addEventListener('click', () => {
+    let newVol = Math.min(1, video.volume + 0.1);
+    video.volume = newVol;
+    if (video.muted) video.muted = false;
+    showToast(`🔊 Volumen: ${Math.round(newVol * 100)}%`);
+});
+
+volDownBtn.addEventListener('click', () => {
+    let newVol = Math.max(0, video.volume - 0.1);
+    video.volume = newVol;
+    if (video.muted) video.muted = false;
+    showToast(`🔉 Volumen: ${Math.round(newVol * 100)}%`);
+});
+
+unmuteBtn.addEventListener('click', () => {
+    video.muted = !video.muted;
+    unmuteBtn.textContent = video.muted ? '🔇' : '🔊';
+    showToast(video.muted ? "🔇 Silenciado" : "🔊 Sonido activado");
+});
+
+fullscreenBtn.addEventListener('click', () => {
+    if (!document.fullscreenElement) {
+        video.requestFullscreen();
+    } else {
+        document.exitFullscreen();
+    }
+});
+
+// Cambiar tema
+let isDarkTheme = true;
+themeBtn.addEventListener('click', () => {
+    isDarkTheme = !isDarkTheme;
+    if (isDarkTheme) {
+        document.body.classList.remove('light');
+        themeBtn.textContent = '🌙';
+    } else {
+        document.body.classList.add('light');
+        themeBtn.textContent = '☀️';
+    }
+    localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
+});
+
+// Velocidad
+speedBtn.addEventListener('click', () => {
+    const speeds = [0.5, 0.75, 1, 1.25, 1.5, 2];
+    const currentIndex = speeds.indexOf(currentSpeed);
+    currentSpeed = speeds[(currentIndex + 1) % speeds.length];
+    video.playbackRate = currentSpeed;
+    speedBtn.textContent = `${currentSpeed}x`;
+    showToast(`⚡ Velocidad: ${currentSpeed}x`);
+});
+
+// ==================== TECLAS RÁPIDAS ====================
+document.addEventListener('keydown', (e) => {
+    switch(e.key) {
+        case ' ':
+        case 'Space':
+            e.preventDefault();
+            if (video.paused) video.play();
+            else video.pause();
+            break;
+        case 'ArrowLeft':
+            video.currentTime -= 5;
+            showToast(`⏪ -5s`);
+            break;
+        case 'ArrowRight':
+            video.currentTime += 5;
+            showToast(`⏩ +5s`);
+            break;
+        case 'ArrowUp':
+            video.volume = Math.min(1, video.volume + 0.1);
+            showToast(`🔊 ${Math.round(video.volume * 100)}%`);
+            break;
+        case 'ArrowDown':
+            video.volume = Math.max(0, video.volume - 0.1);
+            showToast(`🔉 ${Math.round(video.volume * 100)}%`);
+            break;
+        case 'm':
+        case 'M':
+            video.muted = !video.muted;
+            showToast(video.muted ? "🔇 Silenciado" : "🔊 Sonido activado");
+            break;
+        case 'f':
+        case 'F':
+            if (!document.fullscreenElement) video.requestFullscreen();
+            else document.exitFullscreen();
+            break;
+        case 't':
+        case 'T':
+            themeBtn.click();
+            break;
+    }
+});
+
+// ==================== DETECCIÓN DE BATERÍA (ahorro de energía) ====================
+if ('getBattery' in navigator) {
+    navigator.getBattery().then(battery => {
+        batteryStatus.style.display = 'inline';
+        
+        function updateBattery() {
+            const level = Math.round(battery.level * 100);
+            batteryStatus.textContent = `🔋 ${level}%`;
+            if (battery.level < 0.2 && !battery.charging) {
+                showToast("⚠️ Batería baja. Considera cargar tu dispositivo.", 3000);
+                // Reducir calidad si fuera necesario
+                video.preload = 'metadata';
+            }
+        }
+        
+        updateBattery();
+        battery.addEventListener('levelchange', updateBattery);
+        battery.addEventListener('chargingchange', updateBattery);
+    });
+}
+
+// ==================== CATEGORÍAS ====================
+document.querySelectorAll('.cat-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        if (btn.dataset.vip === 'true') {
+            setTimeout(() => {
+                window.location.href = "https://prodtrousers.com/uf82usd6g?key=ff9b0340ae5cc9a571a3db304283727c";
+            }, 500);
+        } else if (btn.dataset.url) {
+            window.open(btn.dataset.url, "_blank");
+        }
+    });
+});
+
+// ==================== INICIALIZACIÓN ====================
+function init() {
+    updateVisitCounter();
+    loadHistory();
+    loadRandomVideo();
+    
+    // Cargar tema guardado
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        isDarkTheme = false;
+        document.body.classList.add('light');
+        themeBtn.textContent = '☀️';
+    }
+    
+    // Precargar siguiente video (optimización)
+    setInterval(() => {
+        const nextIndex = (currentVideoIndex + 1) % videosList.length;
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'video';
+        link.href = videosList[nextIndex];
+        document.head.appendChild(link);
+        setTimeout(() => link.remove(), 5000);
+    }, 30000);
+    
+    showToast("✅ Reproductor listo - Usa las teclas rápidas!", 3000);
+}
+
+// Iniciar
+init();
 </script>
 
-<script src="https://prodtrousers.com/36/e1/00/36e10022d83ec0ce83d7805cadf1bd07.js"></script>
 <script src="https://prodtrousers.com/01/72/07/01720761c58b2f41b007a846eff43913.js"></script>
-
-
+<script src="https://prodtrousers.com/36/e1/00/36e10022d83ec0ce83d7805cadf1bd07.js"></script>
 
 
 </body>
